@@ -16,7 +16,7 @@ function showProducts(products) {
                  <div class="card-body">
                    <h5 class="card-title">${product.name}  USD${product.cost}</h5>
                    <p class="card-text">${product.description}</p>
-                   <p class="soldCount">Sold Count ${product.soldCount}</p>
+                   <p class="soldCount">Vendidos ${product.soldCount}</p>
                    <a href="#" class="btn btn-primary">Ver Detalles</a>
                  </div>
                </div>
