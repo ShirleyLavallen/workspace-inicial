@@ -1,3 +1,19 @@
+<<<<<<< HEAD
+//verificación del login
+
+document.addEventListener("DOMContentLoaded", function () {
+    const userSes = getSessionData("username");
+  
+    if (!userSes) {
+      alert("Por favor, registrate");
+      window.location.href = "login.html";
+    }
+  });
+  
+  function getSessionData(usrname) {
+    return sessionStorage.getItem(usrname);
+  } 
+=======
 const DATA_URL = "https://japceibal.github.io/emercado-api/cats_products/101.json";
 
 const container = document.getElementById("products-list");
@@ -33,3 +49,4 @@ fetch(DATA_URL)
   .catch(error => {
     console.error("Error:", error);
   });
+>>>>>>> 69661962fd0dbf7c2e871b8065a02e252f62cdce
