@@ -15,6 +15,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function setSessionData(username) {
-  sessionStorage.setItem("username", username);
+  localStorage.setItem("username", username);
 }
  

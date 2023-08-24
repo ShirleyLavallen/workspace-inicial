@@ -57,5 +57,5 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function getSessionData(usrname) {
-  return sessionStorage.getItem(usrname);
+  return localStorage.getItem(usrname);
 } 
