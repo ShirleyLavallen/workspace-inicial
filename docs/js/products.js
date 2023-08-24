@@ -1,4 +1,4 @@
-const DATA_URL = "https://japceibal.github.io/emercado-api/cats_products/101.json";
+const DATA_URL = "https://japceibal.github.io/emercado-api/cats_products/";
 
 const container = document.getElementById("products-list");
 const categoryTitle = document.getElementById('category-title')
@@ -24,19 +24,31 @@ function showProducts(products) {
     }
 }
 
-fetch(DATA_URL)
-  .then(response => response.json())
-  .then(data => {
-    showCategoryName(data.catName); 
-    showProducts(data.products);
-  })
-  .catch(error => {
-    console.error("Error:", error);
-  });
+function showEmptyCategoryMessage(){
+  container.innerHTML = '<h4>No hay productos en esta categoría</h4>';
+}
+
+function getCategoryId(){
+  return localStorage.getItem('catID');
+}
 
 //verificación del login
 document.addEventListener("DOMContentLoaded", function () {
   const userSes = getSessionData("username");
+  const catId = getCategoryId();
+  fetch(DATA_URL + catId +'.json' )
+  .then(response => response.json())
+  .then(data => {
+    showCategoryName(data.catName); 
+    if(data.products.length > 0){
+      showProducts(data.products);
+      return true;
+    }
+    showEmptyCategoryMessage();
+  })
+  .catch(error => {
+    console.error("Error:", error);
+  });
 
   if (!userSes) {
     alert("Por favor, registrate");
