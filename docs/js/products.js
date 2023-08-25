@@ -36,6 +36,7 @@ function getCategoryId(){
 document.addEventListener("DOMContentLoaded", function () {
   const userSes = getSessionData("username");
   const catId = getCategoryId();
+
   fetch(DATA_URL + catId +'.json' )
   .then(response => response.json())
   .then(data => {
@@ -59,3 +60,12 @@ document.addEventListener("DOMContentLoaded", function () {
 function getSessionData(usrname) {
   return localStorage.getItem(usrname);
 } 
+
+  
+document.addEventListener("DOMContentLoaded", () => {
+    
+  const container = document.getElementById("dataUsuario");
+  const usuario = localStorage.getItem("username");
+  
+    container.textContent = usuario;
+})
