@@ -25,5 +25,16 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function getSessionData(usrname) {
-  return sessionStorage.getItem(usrname);
+  return localStorage.getItem(usrname);
 } 
+
+//Usuario en la esquina superior derecha
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  
+  const container = document.getElementById("dataUsuario");
+  const usuario = localStorage.getItem("username");
+  
+    container.textContent = usuario;
+})
