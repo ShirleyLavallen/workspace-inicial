@@ -1,4 +1,4 @@
-const DATA_URL = "https://japceibal.github.io/emercado-api/cats_products/101.json";
+const DATA_URL = "https://japceibal.github.io/emercado-api/cats_products/";
 
 const container = document.getElementById("products-list");
 const categoryTitle = document.getElementById('category-title')
@@ -37,23 +37,17 @@ function showProducts(products) {
     }
   }
   container.innerHTML = htmlContentToAppend;
-} 
+}
 
+function showEmptyCategoryMessage(){
+  container.innerHTML = '<h4>No hay productos en esta categoría</h4>';
+}
 
-fetch(DATA_URL)
-  .then(response => response.json())
-  .then(data => {
-    currentProductsArray = data.products; // Guarda los productos en la variable
-    showCategoryName(data.catName); 
-    showProducts(); // Llama a la función para mostrar los productos
-  })
-  .catch(error => {
-    console.error("Error:", error);
-  });
+function getCategoryId(){
+  return localStorage.getItem('catID');
+}
 
-// ...
-
-  document.getElementById("clearRangeFilter").addEventListener("click", function(){
+document.getElementById("clearRangeFilter").addEventListener("click", function(){
     document.getElementById("rangeFilterPriceMin").value = "";
     document.getElementById("rangeFilterPriceMax").value = "";
 
@@ -63,27 +57,27 @@ fetch(DATA_URL)
     showProducts();
 });
 
-  document.getElementById("rangeFilterPrice").addEventListener("click", function(){
-    //Obtengo el mínimo y máximo de los intervalos para filtrar por cantidad
-    //de productos por categoría.
-    minPrice = document.getElementById("rangeFilterPriceMin").value;
-    maxPrice = document.getElementById("rangeFilterPriceMax").value;
+document.getElementById("rangeFilterPrice").addEventListener("click", function(){
+  //Obtengo el mínimo y máximo de los intervalos para filtrar por cantidad
+  //de productos por categoría.
+  minPrice = document.getElementById("rangeFilterPriceMin").value;
+  maxPrice = document.getElementById("rangeFilterPriceMax").value;
 
-    if ((minPrice != undefined) && (minPrice != "") && (parseInt(minPrice)) >= 0){
-        minPrice = parseInt(minPrice);
-    }
-    else{
-        minPrice = undefined;
-    }
+  if ((minPrice != undefined) && (minPrice != "") && (parseInt(minPrice)) >= 0){
+      minPrice = parseInt(minPrice);
+  }
+  else{
+      minPrice = undefined;
+  }
 
-    if ((maxPrice != undefined) && (maxPrice != "") && (parseInt(maxPrice)) >= 0){
-        maxPrice = parseInt(maxPrice);
-    }
-    else{
-        maxPrice = undefined;
-    }
+  if ((maxPrice != undefined) && (maxPrice != "") && (parseInt(maxPrice)) >= 0){
+      maxPrice = parseInt(maxPrice);
+  }
+  else{
+      maxPrice = undefined;
+  }
 
-    showProducts();
+  showProducts();
 });
 
 
@@ -91,6 +85,20 @@ fetch(DATA_URL)
 //verificación del login
 document.addEventListener("DOMContentLoaded", function () {
   const userSes = getSessionData("username");
+  const catId = getCategoryId();
+  fetch(DATA_URL + catId +'.json' )
+  .then(response => response.json())
+  .then(data => {
+    showCategoryName(data.catName); 
+    if(data.products.length > 0){
+      showProducts(data.products);
+      return true;
+    }
+    showEmptyCategoryMessage();
+  })
+  .catch(error => {
+    console.error("Error:", error);
+  });
 
   if (!userSes) {
     alert("Por favor, registrate");
@@ -99,5 +107,5 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function getSessionData(usrname) {
-  return sessionStorage.getItem(usrname);
+  return localStorage.getItem(usrname);
 } 
