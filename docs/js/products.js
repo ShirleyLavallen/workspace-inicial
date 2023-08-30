@@ -15,7 +15,7 @@ function showCategoryName(name){
     categoryTitle.innerText = name;
 }
 
-function showProducts(products) {
+function showProducts() {
   let htmlContentToAppend = "";
   for (let i = 0; i < currentProductsArray.length; i++) {
     let product = currentProductsArray[i];
@@ -27,7 +27,7 @@ function showProducts(products) {
            <div class="card">
              <img src="${product.image}" class="card-img-top" alt="Foto ${product.name}">
              <div class="card-body">
-               <h5 class="card-title">${product.name}  USD${product.cost}</h5>
+               <h5 class="card-title">${product.name}  USD ${product.cost}</h5>
                <p class="card-text">${product.description}</p>
                <p class="soldCount">Vendidos ${product.soldCount}</p>
                <a href="#" class="btn btn-primary">Ver Detalles</a>
@@ -36,6 +36,7 @@ function showProducts(products) {
         </div>`;
     }
   }
+  console.log(htmlContentToAppend);
   container.innerHTML = htmlContentToAppend;
 }
 
@@ -91,7 +92,8 @@ document.addEventListener("DOMContentLoaded", function () {
   .then(data => {
     showCategoryName(data.catName); 
     if(data.products.length > 0){
-      showProducts(data.products);
+      currentProductsArray = data.products;
+      showProducts();
       return true;
     }
     showEmptyCategoryMessage();
