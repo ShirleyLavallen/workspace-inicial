@@ -97,17 +97,18 @@ document.addEventListener("DOMContentLoaded", function () {
       COPY_ARRAY = data.products;
       showProducts();
       // busqueda de productos
-      searchInput.addEventListener("keydown", (e) => {
-        if (e.key === "Enter") {
-            const searchTerm = searchInput.value.trim().toLowerCase();
+      searchInput.addEventListener("input", () => {
+        const searchTerm = searchInput.value.toLowerCase();
     
-            if (!searchTerm) {
+        if (!searchTerm) {
+              currentProductsArray = COPY_ARRAY;
               return showProducts();
-            }
+
+        }else{
 
             const filteredProducts = currentProductsArray.filter(product =>
-                product.name.toLowerCase().split(" ").includes(searchTerm) ||
-                product.description.toLowerCase().split(" ").includes(searchTerm)
+                product.name.toLowerCase().includes(searchTerm) ||
+                product.description.toLowerCase().includes(searchTerm)
             );
     
             if (filteredProducts.length > 0) {
