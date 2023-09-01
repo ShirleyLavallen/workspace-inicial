@@ -198,3 +198,9 @@ a.custom-card:hover {
   color: #5c5c5c;
   min-height: 64vh; 
 }
+
+/* css del buscador de productos */
+
+#searchV {
+  width: 17em;
+}
