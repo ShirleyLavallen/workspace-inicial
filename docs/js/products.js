@@ -2,6 +2,7 @@ const DATA_URL = "https://japceibal.github.io/emercado-api/cats_products/";
 
 const container = document.getElementById("products-list");
 const categoryTitle = document.getElementById('category-title')
+const searchInput = document.getElementById("searchV");
 
 const ORDER_ASC_BY_NAME = "AZ";
 const ORDER_DESC_BY_NAME = "ZA";
@@ -10,6 +11,8 @@ let currentProductsArray = [];
 let currentSortCriteria = undefined;
 let minPrice = undefined;
 let maxPrice = undefined;
+let FILTERED_ARRAY = [];
+let COPY_ARRAY = [];
 
 function showCategoryName(name){
     categoryTitle.innerText = name;
@@ -81,8 +84,6 @@ document.getElementById("rangeFilterPrice").addEventListener("click", function()
   showProducts();
 });
 
-
-
 //verificación del login
 document.addEventListener("DOMContentLoaded", function () {
   const userSes = getSessionData("username");
@@ -93,7 +94,32 @@ document.addEventListener("DOMContentLoaded", function () {
     showCategoryName(data.catName); 
     if(data.products.length > 0){
       currentProductsArray = data.products;
+      COPY_ARRAY = data.products;
       showProducts();
+      // busqueda de productos
+      searchInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+            const searchTerm = searchInput.value.trim().toLowerCase();
+    
+            if (!searchTerm) {
+              return showProducts();
+            }
+
+            const filteredProducts = currentProductsArray.filter(product =>
+                product.name.toLowerCase().split(" ").includes(searchTerm) ||
+                product.description.toLowerCase().split(" ").includes(searchTerm)
+            );
+    
+            if (filteredProducts.length > 0) {
+              currentProductsArray = filteredProducts;
+              showProducts();
+            } else {
+              currentProductsArray = COPY_ARRAY;
+              container.innerHTML = 
+              `<div class= notFound> <p>No se encontraron resultados</p> </div>`;
+            }
+        }
+    });
       return true;
     }
     showEmptyCategoryMessage();

@@ -188,3 +188,13 @@ a.custom-card:hover {
 .checked {
   color: orange;
 }
+
+/* css del producto no encontrado */
+.notFound {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  font-size:2vw;
+  color: #5c5c5c;
+  min-height: 64vh; 
+}
