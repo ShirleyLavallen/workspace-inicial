@@ -199,3 +199,14 @@ document.addEventListener("DOMContentLoaded", function(e){
   sortAndShowProducts(ORDER_BY_PROD_COUNT);
   });
 })
+
+//Usuario en la esquina superior derecha
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  
+  const container = document.getElementById("dataUsuario");
+  const usuario = localStorage.getItem("username");
+  
+    container.textContent = usuario;
+})
