@@ -6,7 +6,7 @@
 main {
   background-image: url("https://w0.peakpx.com/wallpaper/172/325/HD-wallpaper-hut-house-landscape-minimal-morning-hut-mountains-minimalism-minimalist-artist-artwork-digital-art-artstation.jpg");
   background-size:cover;
- min-height: calc(100vh - 210px);
+  min-height: calc(100vh - 210px);
   padding: 3em;
   padding-bottom: 5em;
 }

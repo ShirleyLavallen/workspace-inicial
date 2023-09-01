@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", function () {
               currentProductsArray = COPY_ARRAY;
               container.innerHTML = 
               `<div class= notFound> <p>No se encontraron resultados</p> </div>`;
-            }
+          }
         }
     });
       return true;
