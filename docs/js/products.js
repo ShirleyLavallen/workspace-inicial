@@ -33,7 +33,7 @@ function showProducts() {
                <h5 class="card-title">${product.name}  USD ${product.cost}</h5>
                <p class="card-text">${product.description}</p>
                <p class="soldCount">Vendidos ${product.soldCount}</p>
-               <a href="#" class="btn btn-primary">Ver Detalles</a>
+               <a href="#" class="btn btn-primary"  onclick="selectProduct('${product.id}')">Ver Detalles</a>
              </div>
            </div>
         </div>`;
@@ -211,3 +211,9 @@ document.addEventListener("DOMContentLoaded", () => {
   
     container.textContent = usuario;
 })
+
+//Se guarda la id de los productos
+function selectProduct(Id){
+  localStorage.setItem('selectedProduct', Id);
+  window.location.href= 'product-info.html'
+}
