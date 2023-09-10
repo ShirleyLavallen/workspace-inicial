@@ -81,4 +81,31 @@ document.addEventListener("DOMContentLoaded", function() {
     .catch(error => {
         console.error("Error:", error);
     });
+
+
+
+
+    // fetch a json de los comentarios de los productos
+
+    const URL_COMENTARIOS  = "https://japceibal.github.io/emercado-api/products_comments/";
+
+    fetch(URL_COMENTARIOS + productId + ".json")
+    .then(response => response.json())
+    .then(comment => { 
+      
+
+      // recorrer cada cometario de la lista 
+
+      for (const i of comment) {
+      
+      let producto = i.product;
+      let description = i.description;
+      let dateTime = i.dateTime;
+      let username = i.user;
+      let score = i.score;
+      
+      // console.log (producto,description,dateTime,username,score);
+      }
+    })
+
 })
