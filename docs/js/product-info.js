@@ -87,8 +87,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // fetch a json de los comentarios de los productos
 
-    const URL_COMENTARIOS  = "https://japceibal.github.io/emercado-api/products_comments/";
-
+    
     fetch(URL_COMENTARIOS + productId + ".json")
     .then(response => response.json())
     .then(comment => { 
