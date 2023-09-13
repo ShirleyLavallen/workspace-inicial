@@ -204,3 +204,9 @@ a.custom-card:hover {
 #searchV {
   width: 20em;
 }
+
+/* css publicar comentario*/
+
+#commentInput {
+  width: 600px;
+}
