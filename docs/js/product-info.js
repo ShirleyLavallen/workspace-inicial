@@ -94,7 +94,9 @@ document.addEventListener("DOMContentLoaded", function() {
       
  })
 
- const currentCommentsArray = [];
+
+     
+
 
  function showComments(comments) {
   let htmlCommentsToAppend = "";
@@ -106,7 +108,6 @@ document.addEventListener("DOMContentLoaded", function() {
       let dateTime = comment.dateTime;
       let username = comment.user;
       let score = comment.score;
-    
         
     htmlCommentsToAppend += `
     <section style="background-color: #f7f6f6;">
@@ -146,3 +147,77 @@ document.addEventListener("DOMContentLoaded", function() {
   } 
   commentsContainer.innerHTML = htmlCommentsToAppend;
 }
+
+
+function getCurrentDateTime(){
+  const date = new Date();
+  return date.toLocaleString();
+}
+
+//Agregar nuevo comentario simulado
+document.addEventListener("DOMContentLoaded", 
+  function newComment() {
+
+    let actualUsername = localStorage.getItem("username");
+    let newCommDescription = document.getElementById("commentInput").value;
+    let dateTime = getCurrentDateTime();
+    let newCommScore = document.getElementById("puntaje").value;
+
+  if (newCommDescription.length > 0) {
+    
+    const nuevoComentario = document.createElement("div");
+    nuevoComentario.classList.add("comentario"); 
+    nuevoComentario.innerHTML = `
+    <section style="background-color: #f7f6f6;">
+    <div class="container my-5 py-5 text-dark">
+     <div class="row d-flex justify-content-center">
+      <div class="col-md-12 col-lg-10 col-xl-8"
+
+       <div class="card mb-3">
+         <div class="card-body">
+           <div class="d-flex flex-start">
+             <div class="w-100">
+               <div class="d-flex justify-content-between align-items-center mb-3">
+                 <h6 class="text-primary fw-bold mb-0">
+                   ${actualUsername}
+                   <span class="text-dark ms-2">${newCommDescription}
+                 </h6>
+                 <p class="mb-0">${dateTime}</p>
+               </div>
+               <div class="d-flex justify-content-between align-items-center">
+                 <p class="small mb-0" style="color: #aaa;">
+                   <a href="#!" class="link-grey">Remover</a> •
+                   <a href="#!" class="link-grey">Editar</a> •
+                   <a href="#!" class="link-grey">Traducir</a>
+                 </p>
+                 <div class="d-flex flex-row">
+                   ${newCommScore}<i class="fas fa-star text-warning me-2"></i>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+      </div>
+    </div>
+   </div>
+  </section>`; 
+
+    // Agrega el nuevo comentario al container
+    const commentContainer = document.getElementById("container"); 
+    commentContainer.appendChild(nuevoComentario); 
+
+    // Limpia el contenido de descripcion
+    commentInput.value = ""; 
+  }
+
+  document.getElementById("enviar").addEventListener("click", function(){
+    newComment(comment);
+    }); 
+
+  document.getElementById("commentInput").addEventListener('keyup', function(event) {
+    if (event.key === 'Enter') {
+      newComment(comment);
+    }
+     }); 
+})

@@ -210,3 +210,27 @@ a.custom-card:hover {
 #commentInput {
   width: 600px;
 }
+
+.button {
+  background-color: #212529;
+  color: white;
+  border-radius: 2em;
+  height: 43px;
+  width: 90px;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #f09100;
+  border-color: #f09100;
+  color: white;
+  border-radius: 2em;
+}
+
+#puntaje {
+  border-radius: 2em;
+}
+
+#commentInput {
+  border-radius: 1em;
+}
