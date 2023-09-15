@@ -52,15 +52,6 @@ document.addEventListener("DOMContentLoaded", function() {
       
  })
 
- function editForm(form){
-  const newComment = form.querySelector('textarea').value;
-  //Id del comentario
-  const idComment = form.querySelector('input[name="id"]').value;
-  
-  document.getElementById('comment-'+idComment).innerText = newComment;
-  hideEditCommentForm(form);
- }
-
  /** Cuerpo del comentarios  **/
      
  function bodyComment(id, username, description, dateTime, score){
@@ -123,11 +114,6 @@ document.addEventListener("DOMContentLoaded", function() {
   commentsContainer.innerHTML = htmlCommentsToAppend;
  }
 
- function getCurrentDateTime(){
-  const date = new Date();
-  return date.toLocaleString();
- }
-
   function deleteComment(element) {
     //Busco el parent section
     const section = element.closest('section');
@@ -149,6 +135,15 @@ document.addEventListener("DOMContentLoaded", function() {
   form.classList.add('d-none');
 }
 
+function editForm(form){
+  const newComment = form.querySelector('textarea').value;
+  //Id del comentario
+  const idComment = form.querySelector('input[name="id"]').value;
+  
+  document.getElementById('comment-'+idComment).innerText = newComment;
+  hideEditCommentForm(form);
+ }
+
  /** calificacion con estrellas  **/
 
  function scoreStars(score) {
@@ -162,7 +157,11 @@ document.addEventListener("DOMContentLoaded", function() {
   }
   return starsHtml
  }
-
+ 
+ function getCurrentDateTime(){
+  const date = new Date();
+  return date.toLocaleString();
+ }
  //Agregar nuevo comentario simulado
 
  document.addEventListener("DOMContentLoaded", 
