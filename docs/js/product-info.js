@@ -7,53 +7,20 @@ function getProductId(){
 document.addEventListener("DOMContentLoaded", function() {
     const productId = getProductId();
 
-
-
-
     fetch(PRODUCT_INFO_URL + productId + ".json")
     .then(response => response.json())
     .then(product => {
         if (product) {
-          const container = document.getElementById('container');
-          let htmlContentToAppend = `
-            <br>
-            <h1>${product.name}</h1>
-            <br>
-            <hr>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item d-flex justify-content-between align-items-start">
-                <div class="ms-2 me-auto">
-                  <div class="fw-bold">Precio</div>
-                  USD ${product.cost}
-                </div>
-              </li>
-              <li class="list-group-item d-flex justify-content-between align-items-start">
-                <div class="ms-2 me-auto">
-                  <div class="fw-bold">Descripción</div>
-                  ${product.description}
-                </div>
-              </li>
-              <li class="list-group-item d-flex justify-content-between align-items-start">
-                <div class="ms-2 me-auto">
-                  <div class="fw-bold">Categoría</div>
-                  ${product.category}
-                </div>
-              </li>
-              <li class="list-group-item d-flex justify-content-between align-items-start">
-                <div class="ms-2 me-auto">
-                  <div class="fw-bold">Cantidad de vendidos</div>
-                  ${product.soldCount}
-                </div>
-              </li>
-              <li class="list-group-item d-flex justify-content-between align-items-start">
-                <div class="ms-2 me-auto">
-                  <div class="fw-bold">Imágenes ilustrativas</div>
-                  <div class="card">
-                    <div class="card-body">
-                      <div class="row">
-            `;
+          document.getElementById("nameProduct").innerText = product.name;
+          document.getElementById("precioProduct").innerText = 'USD ' + product.cost;
+          document.getElementById("descriptionProduct").innerText = product.description;
+          document.getElementById("categoryProduct").innerText = product.category;
+          document.getElementById("soldProduct").innerText = product.soldCount;
           
           // Itera a través de las imágenes y agrega cada una al HTML
+
+          const container = document.getElementById('imagen');
+          let htmlContentToAppend = ""; 
           for (let i = 0; i < product.images.length; i++) {
             const imageUrl = product.images[i];
             htmlContentToAppend += `
@@ -64,15 +31,6 @@ document.addEventListener("DOMContentLoaded", function() {
               </div>
             `;
           }
-          
-          htmlContentToAppend += `
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          `;
           
           container.innerHTML = htmlContentToAppend;
         } else {
@@ -90,72 +48,142 @@ document.addEventListener("DOMContentLoaded", function() {
     .then(comments => {
 
       showComments(comments);
+      const removeButtons = document.querySelectorAll('.remove');
+      const editButtons = document.querySelectorAll('.edit');
+      removeButtons.forEach(element => {
+        element.addEventListener('click', function(ev){
+          deleteComment(ev.target);
+        });
+      });
+      editButtons.forEach(element => {
+        element.addEventListener('click', function(ev){
+          showEditCommentForm(ev.target);
+        });
+      });
+      const editForms = document.querySelectorAll('.edit-comment');
+      editForms.forEach(element => {
+        element.addEventListener('submit', function(ev){
+          //Evitar que el submit actualice la pagina
+          ev.preventDefault();
+          const form = ev.target;
+          //Valor del nuevo comentario
+          const newComment = form.querySelector('textarea').value;
+          //Id del comentario
+          const idComment = form.querySelector('input[name="id"]').value;
+          
+          document.getElementById('comment-'+idComment).innerText = newComment;
+          hideEditCommentForm(form);
+        });
+      });
     })
       
  })
 
-
+ /** Cuerpo del comentarios  **/
      
-
+ function bodyComment(id, username, description, dateTime, score){
+  let stars = scoreStars(score);
+  return `<section class="section">
+    <div class="container my-2 py-2 text-dark">
+     <div class="row d-flex justify-content-center">
+      <div class="col-md-12 col-lg-10 col-xl-10"
+       <div class="card mb-2">
+         <div class="card-body">
+           <div class="d-flex flex-start">
+             <div class="w-100">
+               <div class="d-flex justify-content-between align-items-center mb-3">
+                 <h6 class="text-primary fw-bold mb-0">
+                   ${username}
+                   <span class="text-dark ms-2" id="comment-${id}">${description}</span>
+                   <form class="d-none edit-comment">
+                    <textarea class="form-control" name="comentario">${description}</textarea>
+                    <input type="hidden" name="id" value="${id}">
+                      <button class="button" type="submit">
+                      Guardar
+                      </button>
+                   </form>
+                 </h6>
+                 <p class="mb-0">${dateTime}</p>
+               </div>
+               <div class="d-flex justify-content-between align-items-center">
+                 <p class="small mb-0" style="color: #aaa;">
+                   <a class="link-grey remove">Eliminar</a> •
+                   <a class="link-grey edit">Editar</a> 
+                 </p>
+                 <div class="d-flex flex-row">
+                   ${stars}
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+      </div>
+     </div>
+    </div>
+  </section>`;
+ }
 
  function showComments(comments) {
   let htmlCommentsToAppend = "";
   for (let i = 0; i < comments.length; i++) {
     let comment = comments[i];
-      
+      let id = i;
       let producto = comment.product;
       let description = comment.description;
       let dateTime = comment.dateTime;
       let username = comment.user;
       let score = comment.score;
         
-    htmlCommentsToAppend += `
-    <section style="background-color: #f7f6f6;">
-      <div class="container my-5 py-5 text-dark">
-       <div class="row d-flex justify-content-center">
-        <div class="col-md-12 col-lg-10 col-xl-8"
-
-         <div class="card mb-3">
-           <div class="card-body">
-             <div class="d-flex flex-start">
-               <div class="w-100">
-                 <div class="d-flex justify-content-between align-items-center mb-3">
-                   <h6 class="text-primary fw-bold mb-0">
-                     ${username}
-                     <span class="text-dark ms-2">${description}
-                   </h6>
-                   <p class="mb-0">${dateTime}</p>
-                 </div>
-                 <div class="d-flex justify-content-between align-items-center">
-                   <p class="small mb-0" style="color: #aaa;">
-                     <a href="#!" class="link-grey">Remover</a> •
-                     <a href="#!" class="link-grey">Editar</a> •
-                     <a href="#!" class="link-grey">Traducir</a>
-                   </p>
-                   <div class="d-flex flex-row">
-                     ${score}<i class="fas fa-star text-warning me-2"></i>
-                   </div>
-                 </div>
-               </div>
-             </div>
-           </div>
-         </div>
-        </div>
-      </div>
-     </div>
-    </section>`; 
+    htmlCommentsToAppend += bodyComment(id, username, description, dateTime, score);
+    
   } 
   commentsContainer.innerHTML = htmlCommentsToAppend;
-}
+ }
 
-
-function getCurrentDateTime(){
+ function getCurrentDateTime(){
   const date = new Date();
   return date.toLocaleString();
+ }
+
+  function deleteComment(element) {
+    //Busco el parent section
+    const section = element.closest('section');
+    //Elimino la section completa
+    section.remove();
+  }
+
+ function showEditCommentForm(element) {
+    //Busco el parent section
+    const section = element.closest('section');
+    const form = section.querySelector('.edit-comment');
+    form.classList.remove('d-none');
+ }
+
+ function hideEditCommentForm(element) {
+  //Busco el parent section
+  const section = element.closest('section');
+  const form = section.querySelector('.edit-comment');
+  form.classList.add('d-none');
 }
 
-//Agregar nuevo comentario simulado
-document.addEventListener("DOMContentLoaded", 
+ /** calificacion con estrellas  **/
+
+ function scoreStars(score) {
+  let starsHtml = "";
+  for(let i=1; i<=5; i++){
+    if(i<=score){
+      starsHtml += `<i class="fas fa-star text-warning me-2"></i>`
+    }else{
+      starsHtml += `<i class="far fa-star me-2"></i>`
+    }
+  }
+  return starsHtml
+ }
+
+ //Agregar nuevo comentario simulado
+
+ document.addEventListener("DOMContentLoaded", 
   function newComment() {
 
     let actualUsername = localStorage.getItem("username");
@@ -164,44 +192,10 @@ document.addEventListener("DOMContentLoaded",
     let newCommScore = document.getElementById("puntaje").value;
 
   if (newCommDescription.length > 0) {
-    
+    const id = document.querySelectorAll('section.section').length;//Obteniendo la cantidad de comentarios actuales 
     const nuevoComentario = document.createElement("div");
     nuevoComentario.classList.add("comentario"); 
-    nuevoComentario.innerHTML = `
-    <section style="background-color: #f7f6f6;">
-    <div class="container my-5 py-5 text-dark">
-     <div class="row d-flex justify-content-center">
-      <div class="col-md-12 col-lg-10 col-xl-8"
-
-       <div class="card mb-3">
-         <div class="card-body">
-           <div class="d-flex flex-start">
-             <div class="w-100">
-               <div class="d-flex justify-content-between align-items-center mb-3">
-                 <h6 class="text-primary fw-bold mb-0">
-                   ${actualUsername}
-                   <span class="text-dark ms-2">${newCommDescription}
-                 </h6>
-                 <p class="mb-0">${dateTime}</p>
-               </div>
-               <div class="d-flex justify-content-between align-items-center">
-                 <p class="small mb-0" style="color: #aaa;">
-                   <a href="#!" class="link-grey">Remover</a> •
-                   <a href="#!" class="link-grey">Editar</a> •
-                   <a href="#!" class="link-grey">Traducir</a>
-                 </p>
-                 <div class="d-flex flex-row">
-                   ${newCommScore}<i class="fas fa-star text-warning me-2"></i>
-                 </div>
-               </div>
-             </div>
-           </div>
-         </div>
-       </div>
-      </div>
-    </div>
-   </div>
-  </section>`; 
+    nuevoComentario.innerHTML = bodyComment(id, actualUsername, newCommDescription , dateTime, newCommScore); 
 
     // Agrega el nuevo comentario al container
     const commentContainer = document.getElementById("container"); 
@@ -220,4 +214,7 @@ document.addEventListener("DOMContentLoaded",
       newComment(comment);
     }
      }); 
+
+  
 })
+
