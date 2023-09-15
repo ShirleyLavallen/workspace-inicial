@@ -48,36 +48,18 @@ document.addEventListener("DOMContentLoaded", function() {
     .then(comments => {
 
       showComments(comments);
-      const removeButtons = document.querySelectorAll('.remove');
-      const editButtons = document.querySelectorAll('.edit');
-      removeButtons.forEach(element => {
-        element.addEventListener('click', function(ev){
-          deleteComment(ev.target);
-        });
-      });
-      editButtons.forEach(element => {
-        element.addEventListener('click', function(ev){
-          showEditCommentForm(ev.target);
-        });
-      });
-      const editForms = document.querySelectorAll('.edit-comment');
-      editForms.forEach(element => {
-        element.addEventListener('submit', function(ev){
-          //Evitar que el submit actualice la pagina
-          ev.preventDefault();
-          const form = ev.target;
-          //Valor del nuevo comentario
-          const newComment = form.querySelector('textarea').value;
-          //Id del comentario
-          const idComment = form.querySelector('input[name="id"]').value;
-          
-          document.getElementById('comment-'+idComment).innerText = newComment;
-          hideEditCommentForm(form);
-        });
-      });
     })
       
  })
+
+ function editForm(form){
+  const newComment = form.querySelector('textarea').value;
+  //Id del comentario
+  const idComment = form.querySelector('input[name="id"]').value;
+  
+  document.getElementById('comment-'+idComment).innerText = newComment;
+  hideEditCommentForm(form);
+ }
 
  /** Cuerpo del comentarios  **/
      
@@ -86,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function() {
   return `<section class="section">
     <div class="container my-2 py-2 text-dark">
      <div class="row d-flex justify-content-center">
-      <div class="col-md-12 col-lg-10 col-xl-10"
+      <div class="col-md-12 col-lg-10 col-xl-12"
        <div class="card mb-2">
          <div class="card-body">
            <div class="d-flex flex-start">
@@ -95,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function() {
                  <h6 class="text-primary fw-bold mb-0">
                    ${username}
                    <span class="text-dark ms-2" id="comment-${id}">${description}</span>
-                   <form class="d-none edit-comment">
+                   <form class="d-none edit-comment" onsubmit="editForm(this)">
                     <textarea class="form-control" name="comentario">${description}</textarea>
                     <input type="hidden" name="id" value="${id}">
                       <button class="button" type="submit">
@@ -107,8 +89,8 @@ document.addEventListener("DOMContentLoaded", function() {
                </div>
                <div class="d-flex justify-content-between align-items-center">
                  <p class="small mb-0" style="color: #aaa;">
-                   <a class="link-grey remove">Eliminar</a> •
-                   <a class="link-grey edit">Editar</a> 
+                   <a class="link-grey remove" onclick="deleteComment(this);">Eliminar</a> •
+                   <a class="link-grey edit" onclick="showEditCommentForm(this);">Editar</a> 
                  </p>
                  <div class="d-flex flex-row">
                    ${stars}
@@ -198,7 +180,7 @@ document.addEventListener("DOMContentLoaded", function() {
     nuevoComentario.innerHTML = bodyComment(id, actualUsername, newCommDescription , dateTime, newCommScore); 
 
     // Agrega el nuevo comentario al container
-    const commentContainer = document.getElementById("container"); 
+    const commentContainer = document.getElementById("comment"); 
     commentContainer.appendChild(nuevoComentario); 
 
     // Limpia el contenido de descripcion
