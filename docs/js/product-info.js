@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function() {
                  <h6 class="text-primary fw-bold mb-0">
                    ${username}
                    <span class="text-dark ms-2" id="comment-${id}">${description}</span>
-                   <form class="d-none edit-comment" onsubmit="editForm(this)">
+                   <form class="d-none edit-comment" onsubmit="editForm(this, event)">
                     <textarea class="form-control" name="comentario">${description}</textarea>
                     <input type="hidden" name="id" value="${id}">
                       <button class="button" type="submit">
@@ -135,7 +135,8 @@ document.addEventListener("DOMContentLoaded", function() {
   form.classList.add('d-none');
 }
 
-function editForm(form){
+function editForm(form, event){
+  event.preventDefault();
   const newComment = form.querySelector('textarea').value;
   //Id del comentario
   const idComment = form.querySelector('input[name="id"]').value;
@@ -157,7 +158,7 @@ function editForm(form){
   }
   return starsHtml
  }
- 
+
  function getCurrentDateTime(){
   const date = new Date();
   return date.toLocaleString();
