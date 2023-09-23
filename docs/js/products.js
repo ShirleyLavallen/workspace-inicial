@@ -217,3 +217,7 @@ function selectProduct(Id){
   localStorage.setItem('selectedProduct', Id);
   window.location.href= 'product-info.html'
 }
+let cerrar = document.getElementById("cerrarsesion"); //borrar usuario al cerrar sesion
+cerrar.addEventListener("click", function () {
+  localStorage.removeItem("username"); 
+});

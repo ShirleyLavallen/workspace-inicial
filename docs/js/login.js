@@ -18,3 +18,7 @@ function setSessionData(username) {
   localStorage.setItem("username", username);
 }
  
+let cerrar = document.getElementById("cerrarsesion"); //borrar usuario al cerrar sesion
+cerrar.addEventListener("click", function () {
+  localStorage.removeItem("username"); 
+});
