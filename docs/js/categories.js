@@ -169,3 +169,8 @@ document.addEventListener("DOMContentLoaded", function () {
     
       container.textContent = usuario;
   })
+  
+  let cerrar = document.getElementById("cerrarsesion"); //borrar usuario al cerrar sesion
+  cerrar.addEventListener("click", function () {
+    localStorage.removeItem("username"); 
+  });
