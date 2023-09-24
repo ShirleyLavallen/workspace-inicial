@@ -180,14 +180,14 @@ function editForm(form, event){
 
   
 })
-//nombre de usuario
-document.addEventListener("DOMContentLoaded", () => {
-    
+//nombre de usuario 
+//borré el addEventListener (DOM) -alexis
+
   const container = document.getElementById("dataUsuario");
   const usuario = localStorage.getItem("username");
   
     container.textContent = usuario;
-})
+
 let cerrar = document.getElementById("cerrarsesion"); //borrar usuario al cerrar sesion
 cerrar.addEventListener("click", function () {
   localStorage.removeItem("username"); 
@@ -248,5 +248,5 @@ containerCard.innerHTML = htmlRelatedToAppend;
 });
 function relatedProducts(Id){
   localStorage.setItem('selectedProduct', Id);
-  window.location.href = `product-info.html?productId=${Id}`;
+  window.location.href = `product-info.html?productId=${Id}`; 
 }
