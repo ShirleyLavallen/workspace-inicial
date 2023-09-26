@@ -44,9 +44,10 @@ cerrar.addEventListener("click", function () {
   localStorage.removeItem("username"); 
 });
 
-//Modo Noche
+  //Modo Noche
 
-function enableDarkMode() {
-  let main_body=document.body;
-  main_body.classList.toggle("dark-mode");
-}
+  function enableDarkMode() {
+    var element=document.body;
+  element.dataset.bsTheme =
+  element.dataset.bsTheme == "light" ? "dark" : "light";
+  }

@@ -211,3 +211,11 @@ let cerrar = document.getElementById("cerrarsesion"); //borrar usuario al cerrar
 cerrar.addEventListener("click", function () {
   localStorage.removeItem("username"); 
 });
+
+  //Modo Noche
+
+  function enableDarkMode() {
+    var element=document.body;
+  element.dataset.bsTheme =
+  element.dataset.bsTheme == "light" ? "dark" : "light";
+  }
