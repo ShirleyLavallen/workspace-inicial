@@ -43,3 +43,10 @@ let cerrar = document.getElementById("cerrarsesion"); //borrar usuario al cerrar
 cerrar.addEventListener("click", function () {
   localStorage.removeItem("username"); 
 });
+
+//Modo Noche
+
+function enableDarkMode() {
+  let main_body=document.body;
+  main_body.classList.toggle("dark-mode");
+}
