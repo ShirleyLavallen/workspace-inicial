@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
       showComments(comments);
     })
-
+  });
 
 
  /** Cuerpo del comentarios  **/
@@ -180,8 +180,7 @@ function editForm(form, event){
 
   
 })
-//nombre de usuario 
-//borré el addEventListener (DOM) -alexis
+document.addEventListener("DOMContentLoaded", () => {
 
   const container = document.getElementById("dataUsuario");
   const usuario = localStorage.getItem("username");
@@ -191,6 +190,7 @@ function editForm(form, event){
 let cerrar = document.getElementById("cerrarsesion"); //borrar usuario al cerrar sesion
 cerrar.addEventListener("click", function () {
   localStorage.removeItem("username"); 
+})
 });
 
 //lo he movido del fetch
@@ -244,7 +244,7 @@ for (let i = 0; i < product.relatedProducts.length; i++) {
 }
 containerCard.innerHTML = htmlRelatedToAppend;
 }
-});
+
 function relatedProducts(Id){
   localStorage.setItem('selectedProduct', Id);
   window.location.href = `product-info.html?productId=${Id}`; 
