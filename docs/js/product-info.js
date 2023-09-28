@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
       showComments(comments);
     })
-  });
+
 
 
  /** Cuerpo del comentarios  **/
@@ -180,7 +180,8 @@ function editForm(form, event){
 
   
 })
-document.addEventListener("DOMContentLoaded", () => {
+//nombre de usuario 
+//borré el addEventListener (DOM) -alexis
 
   const container = document.getElementById("dataUsuario");
   const usuario = localStorage.getItem("username");
@@ -190,7 +191,6 @@ document.addEventListener("DOMContentLoaded", () => {
 let cerrar = document.getElementById("cerrarsesion"); //borrar usuario al cerrar sesion
 cerrar.addEventListener("click", function () {
   localStorage.removeItem("username"); 
-})
 });
 
 //lo he movido del fetch
@@ -203,23 +203,25 @@ function productsDetails(product){
 
   // Itera a través de las imágenes y agrega cada una al HTML
 
-  const container = document.getElementById('imagen');
+  const container = document.getElementById('carousel');
   let htmlContentToAppend = ""; 
   for (let i = 0; i < product.images.length; i++) {
     const imageUrl = product.images[i];
+    const activeClass = i === 0 ? "active" : "" ;
     htmlContentToAppend += `
-      <div class="col-3 mb-2">
-        <div class="card">
-          <img src="${imageUrl}" class="card-img-top" alt="Foto ${product.name}">
+        <div class="carousel-item ${activeClass}">
+          <img src="${imageUrl}" class="d-flex w-100" alt="Foto ${product.name}">
         </div>
-      </div>
+     
     `;
   }
 
   container.innerHTML = htmlContentToAppend;
 }
+//carrusel
 
-//relacionados 
+
+  //relacionados 
 async function showRelated (product){
 const containerCard = document.getElementById('relatedCard');
 
@@ -244,7 +246,7 @@ for (let i = 0; i < product.relatedProducts.length; i++) {
 }
 containerCard.innerHTML = htmlRelatedToAppend;
 }
-
+});
 function relatedProducts(Id){
   localStorage.setItem('selectedProduct', Id);
   window.location.href = `product-info.html?productId=${Id}`; 
