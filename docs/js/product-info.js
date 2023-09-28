@@ -209,9 +209,9 @@ function productsDetails(product){
     const imageUrl = product.images[i];
     htmlContentToAppend += `
       <div class="col-3 mb-2">
-      <div class="card">
-        <img src="${imageUrl}" class="card-img-top" alt="Foto ${product.name}">
-      </div>
+        <div class="card">
+          <img src="${imageUrl}" class="card-img-top" alt="Foto ${product.name}">
+        </div>
       </div>
     `;
   }
@@ -230,17 +230,16 @@ for (let i = 0; i < product.relatedProducts.length; i++) {
   const relatedName = product.relatedProducts[i].name;
 
   htmlRelatedToAppend += `
-  <div class="col-3 mb-2">
+   <div class="col-md-3">
     <div class="card" >
-    <a onclick="relatedProducts('${relatedId}')">
-      <div>
-      <img src="${imageRelated}" class="card-img-top" alt="Foto ${relatedName}">
-      <p>${relatedName}</p>
+      <a onclick="relatedProducts('${relatedId}')">
+        <div>
+          <img src="${imageRelated}" class="card-img-top" alt="Foto ${relatedName}">
+          <p>${relatedName}</p>
+        </div>
       </a>
     </div>
-    </div>
-    </div>
-    
+   </div>
   `;
 }
 containerCard.innerHTML = htmlRelatedToAppend;
