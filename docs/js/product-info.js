@@ -10,29 +10,10 @@ document.addEventListener("DOMContentLoaded", function() {
     fetch(PRODUCT_INFO_URL + productId + ".json")
     .then(response => response.json())
     .then(product => {
-        if (product) {
-          document.getElementById("nameProduct").innerText = product.name;
-          document.getElementById("precioProduct").innerText = 'USD ' + product.cost;
-          document.getElementById("descriptionProduct").innerText = product.description;
-          document.getElementById("categoryProduct").innerText = product.category;
-          document.getElementById("soldProduct").innerText = product.soldCount;
-          
-          // Itera a través de las imágenes y agrega cada una al HTML
+      if (product) {
+          productsDetails(product);
 
-          const container = document.getElementById('imagen');
-          let htmlContentToAppend = ""; 
-          for (let i = 0; i < product.images.length; i++) {
-            const imageUrl = product.images[i];
-            htmlContentToAppend += `
-              <div class="col-3 mb-2">
-              <div class="card">
-                <img src="${imageUrl}" class="card-img-top" alt="Foto ${product.name}">
-              </div>
-              </div>
-            `;
-          }
-          
-          container.innerHTML = htmlContentToAppend;
+          showRelated (product);
         } else {
           console.error('Producto no encontrado');
         }
@@ -49,8 +30,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
       showComments(comments);
     })
-      
- })
+
+
 
  /** Cuerpo del comentarios  **/
      
@@ -199,15 +180,72 @@ function editForm(form, event){
 
   
 })
-//nombre de usuario
-document.addEventListener("DOMContentLoaded", () => {
-    
+//nombre de usuario 
+//borré el addEventListener (DOM) -alexis
+
   const container = document.getElementById("dataUsuario");
   const usuario = localStorage.getItem("username");
   
     container.textContent = usuario;
-})
+
 let cerrar = document.getElementById("cerrarsesion"); //borrar usuario al cerrar sesion
 cerrar.addEventListener("click", function () {
   localStorage.removeItem("username"); 
 });
+
+//lo he movido del fetch
+function productsDetails(product){
+  document.getElementById("nameProduct").innerText = product.name;
+  document.getElementById("precioProduct").innerText = 'USD ' + product.cost;
+  document.getElementById("descriptionProduct").innerText = product.description;
+  document.getElementById("categoryProduct").innerText = product.category;
+  document.getElementById("soldProduct").innerText = product.soldCount;
+
+  // Itera a través de las imágenes y agrega cada una al HTML
+
+  const container = document.getElementById('imagen');
+  let htmlContentToAppend = ""; 
+  for (let i = 0; i < product.images.length; i++) {
+    const imageUrl = product.images[i];
+    htmlContentToAppend += `
+      <div class="col-3 mb-2">
+        <div class="card">
+          <img src="${imageUrl}" class="card-img-top" alt="Foto ${product.name}">
+        </div>
+      </div>
+    `;
+  }
+
+  container.innerHTML = htmlContentToAppend;
+}
+
+//relacionados 
+async function showRelated (product){
+const containerCard = document.getElementById('relatedCard');
+
+let htmlRelatedToAppend = "";
+for (let i = 0; i < product.relatedProducts.length; i++) {
+  const imageRelated = product.relatedProducts[i].image;
+  const relatedId = product.relatedProducts[i].id;
+  const relatedName = product.relatedProducts[i].name;
+
+  htmlRelatedToAppend += `
+   <div class="col-md-3">
+    <div class="card" >
+      <a onclick="relatedProducts('${relatedId}')">
+        <div>
+          <img src="${imageRelated}" class="card-img-top" alt="Foto ${relatedName}">
+          <p>${relatedName}</p>
+        </div>
+      </a>
+    </div>
+   </div>
+  `;
+}
+containerCard.innerHTML = htmlRelatedToAppend;
+}
+});
+function relatedProducts(Id){
+  localStorage.setItem('selectedProduct', Id);
+  window.location.href = `product-info.html?productId=${Id}`; 
+}
