@@ -1,60 +1,60 @@
 const commentsContainer = document.getElementById("comment")
 
-function getProductId(){
-    return localStorage.getItem('selectedProduct');
-  }
-  
-document.addEventListener("DOMContentLoaded", function() {
-    const productId = getProductId();
+function getProductId() {
+  return localStorage.getItem('selectedProduct');
+}
 
-    fetch(PRODUCT_INFO_URL + productId + ".json")
+document.addEventListener("DOMContentLoaded", function () {
+  const productId = getProductId();
+
+  fetch(PRODUCT_INFO_URL + productId + ".json")
     .then(response => response.json())
     .then(product => {
-        if (product) {
-          document.getElementById("nameProduct").innerText = product.name;
-          document.getElementById("precioProduct").innerText = 'USD ' + product.cost;
-          document.getElementById("descriptionProduct").innerText = product.description;
-          document.getElementById("categoryProduct").innerText = product.category;
-          document.getElementById("soldProduct").innerText = product.soldCount;
-          
-          // Itera a través de las imágenes y agrega cada una al HTML
+      if (product) {
+        document.getElementById("nameProduct").innerText = product.name;
+        document.getElementById("precioProduct").innerText = 'USD ' + product.cost;
+        document.getElementById("descriptionProduct").innerText = product.description;
+        document.getElementById("categoryProduct").innerText = product.category;
+        document.getElementById("soldProduct").innerText = product.soldCount;
 
-          const container = document.getElementById('imagen');
-          let htmlContentToAppend = ""; 
-          for (let i = 0; i < product.images.length; i++) {
-            const imageUrl = product.images[i];
-            htmlContentToAppend += `
+        // Itera a través de las imágenes y agrega cada una al HTML
+
+        const container = document.getElementById('imagen');
+        let htmlContentToAppend = "";
+        for (let i = 0; i < product.images.length; i++) {
+          const imageUrl = product.images[i];
+          htmlContentToAppend += `
               <div class="col-3 mb-2">
               <div class="card">
                 <img src="${imageUrl}" class="card-img-top" alt="Foto ${product.name}">
               </div>
               </div>
             `;
-          }
-          
-          container.innerHTML = htmlContentToAppend;
-        } else {
-          console.error('Producto no encontrado');
         }
-      }) 
+
+        container.innerHTML = htmlContentToAppend;
+      } else {
+        console.error('Producto no encontrado');
+      }
+    })
     .catch(error => {
-        console.error("Error:", error);
+      console.error("Error:", error);
     });
 
-    // fetch a json de los comentarios de los productos
+  // fetch a json de los comentarios de los productos
 
-    fetch(URL_COMENTARIOS + productId + ".json")
+  fetch(URL_COMENTARIOS + productId + ".json")
     .then(response => response.json())
     .then(comments => {
 
       showComments(comments);
     })
-      
- })
 
- /** Cuerpo del comentarios  **/
-     
- function bodyComment(id, username, description, dateTime, score){
+})
+
+/** Cuerpo del comentarios  **/
+
+function bodyComment(id, username, description, dateTime, score) {
   let stars = scoreStars(score);
   return `<section class="section">
     <div class="container my-2 py-2 text-dark">
@@ -95,77 +95,77 @@ document.addEventListener("DOMContentLoaded", function() {
      </div>
     </div>
   </section>`;
- }
+}
 
- function showComments(comments) {
+function showComments(comments) {
   let htmlCommentsToAppend = "";
   for (let i = 0; i < comments.length; i++) {
     let comment = comments[i];
-      let id = i;
-      let producto = comment.product;
-      let description = comment.description;
-      let dateTime = comment.dateTime;
-      let username = comment.user;
-      let score = comment.score;
-        
+    let id = i;
+    let producto = comment.product;
+    let description = comment.description;
+    let dateTime = comment.dateTime;
+    let username = comment.user;
+    let score = comment.score;
+
     htmlCommentsToAppend += bodyComment(id, username, description, dateTime, score);
-    
-  } 
-  commentsContainer.innerHTML = htmlCommentsToAppend;
- }
 
-  function deleteComment(element) {
-    //Busco el parent section
-    const section = element.closest('section');
-    //Elimino la section completa
-    section.remove();
   }
+  commentsContainer.innerHTML = htmlCommentsToAppend;
+}
 
- function showEditCommentForm(element) {
-    //Busco el parent section
-    const section = element.closest('section');
-    const form = section.querySelector('.edit-comment');
-    form.classList.remove('d-none');
- }
+function deleteComment(element) {
+  //Busco el parent section
+  const section = element.closest('section');
+  //Elimino la section completa
+  section.remove();
+}
 
- function hideEditCommentForm(element) {
+function showEditCommentForm(element) {
+  //Busco el parent section
+  const section = element.closest('section');
+  const form = section.querySelector('.edit-comment');
+  form.classList.remove('d-none');
+}
+
+function hideEditCommentForm(element) {
   //Busco el parent section
   const section = element.closest('section');
   const form = section.querySelector('.edit-comment');
   form.classList.add('d-none');
 }
 
-function editForm(form, event){
+function editForm(form, event) {
   event.preventDefault();
   const newComment = form.querySelector('textarea').value;
   //Id del comentario
   const idComment = form.querySelector('input[name="id"]').value;
-  
-  document.getElementById('comment-'+idComment).innerText = newComment;
+
+  document.getElementById('comment-' + idComment).innerText = newComment;
   hideEditCommentForm(form);
- }
+}
 
- /** calificacion con estrellas  **/
+/** calificacion con estrellas  **/
 
- function scoreStars(score) {
+function scoreStars(score) {
   let starsHtml = "";
-  for(let i=1; i<=5; i++){
-    if(i<=score){
+  for (let i = 1; i <= 5; i++) {
+    if (i <= score) {
       starsHtml += `<i class="fas fa-star text-warning me-2"></i>`
-    }else{
+    } else {
       starsHtml += `<i class="far fa-star me-2"></i>`
     }
   }
   return starsHtml
- }
+}
 
- function getCurrentDateTime(){
+function getCurrentDateTime() {
   const date = new Date();
   return date.toLocaleString();
- }
- //Agregar nuevo comentario simulado
+}
+//Agregar nuevo comentario simulado
 
- document.addEventListener("DOMContentLoaded", 
+document.addEventListener("DOMContentLoaded",
   function newComment() {
 
     let actualUsername = localStorage.getItem("username");
@@ -173,49 +173,59 @@ function editForm(form, event){
     let dateTime = getCurrentDateTime();
     let newCommScore = document.getElementById("puntaje").value;
 
-  if (newCommDescription.length > 0) {
-    const id = document.querySelectorAll('section.section').length;//Obteniendo la cantidad de comentarios actuales 
-    const nuevoComentario = document.createElement("div");
-    nuevoComentario.classList.add("comentario"); 
-    nuevoComentario.innerHTML = bodyComment(id, actualUsername, newCommDescription , dateTime, newCommScore); 
+    if (newCommDescription.length > 0) {
+      const id = document.querySelectorAll('section.section').length;//Obteniendo la cantidad de comentarios actuales 
+      const nuevoComentario = document.createElement("div");
+      nuevoComentario.classList.add("comentario");
+      nuevoComentario.innerHTML = bodyComment(id, actualUsername, newCommDescription, dateTime, newCommScore);
 
-    // Agrega el nuevo comentario al container
-    const commentContainer = document.getElementById("comment"); 
-    commentContainer.appendChild(nuevoComentario); 
+      // Agrega el nuevo comentario al container
+      const commentContainer = document.getElementById("comment");
+      commentContainer.appendChild(nuevoComentario);
 
-    // Limpia el contenido de descripcion
-    commentInput.value = ""; 
-  }
-
-  document.getElementById("enviar").addEventListener("click", function(){
-    newComment(comment);
-    }); 
-
-  document.getElementById("commentInput").addEventListener('keyup', function(event) {
-    if (event.key === 'Enter') {
-      newComment(comment);
+      // Limpia el contenido de descripcion
+      commentInput.value = "";
     }
-     }); 
 
-  
-})
+    document.getElementById("enviar").addEventListener("click", function () {
+      newComment(comment);
+    });
+
+    document.getElementById("commentInput").addEventListener('keyup', function (event) {
+      if (event.key === 'Enter') {
+        newComment(comment);
+      }
+    });
+
+
+  })
 //nombre de usuario
 document.addEventListener("DOMContentLoaded", () => {
-    
+
   const container = document.getElementById("dataUsuario");
   const usuario = localStorage.getItem("username");
-  
-    container.textContent = usuario;
+
+  container.textContent = usuario;
 })
 let cerrar = document.getElementById("cerrarsesion"); //borrar usuario al cerrar sesion
 cerrar.addEventListener("click", function () {
-  localStorage.removeItem("username"); 
+  localStorage.removeItem("username");
 });
 
-  //Modo Noche
+//Modo Noche
 
-  function enableDarkMode() {
-    var element=document.body;
-  element.dataset.bsTheme =
-  element.dataset.bsTheme == "light" ? "dark" : "light";
+function enableDarkMode() {
+  var element = document.body;
+  element.dataset.bsTheme = element.dataset.bsTheme == "light" ? "dark" : "light";
+
+  localStorage.setItem('theme', element.dataset.bsTheme);
+}
+
+function loadThemeFromLocalStorage() {  // Función para cargar el tema desde localStorage
+  var theme = localStorage.getItem('theme');
+  if (theme === "dark") {
+    enableDarkMode();
   }
+}
+
+window.addEventListener('DOMContentLoaded', loadThemeFromLocalStorage);  // Cargar el tema desde localStorage al cargar la página
