@@ -48,7 +48,7 @@ function bodyComment(id, username, description, dateTime, score) {
                <div class="d-flex justify-content-between align-items-center mb-3">
                  <h6 class="text-primary fw-bold mb-0">
                    ${username}
-                   <span class="text-dark ms-2" id="comment-${id}">${description}</span>
+                   <span class="text-secondary ms-2" id="comment-${id}">${description}</span>
                    <form class="d-none edit-comment" onsubmit="editForm(this, event)">
                     <textarea class="form-control" name="comentario">${description}</textarea>
                     <input type="hidden" name="id" value="${id}">
