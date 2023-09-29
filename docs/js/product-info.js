@@ -181,7 +181,6 @@ document.addEventListener("DOMContentLoaded",
   
 })
 //nombre de usuario 
-//borré el addEventListener (DOM) -alexis
 document.addEventListener("DOMContentLoaded", () => {
 
   const container = document.getElementById("dataUsuario");
@@ -205,7 +204,7 @@ function productsDetails(product){
 
   // Itera a través de las imágenes y agrega cada una al HTML
 
-  const container = document.getElementById('carousel');
+  const container = document.getElementById('carousel'); //carrusel
   let htmlContentToAppend = ""; 
   for (let i = 0; i < product.images.length; i++) {
     const imageUrl = product.images[i];
@@ -220,8 +219,6 @@ function productsDetails(product){
 
   container.innerHTML = htmlContentToAppend;
 }
-//carrusel
-
 
   //relacionados 
 async function showRelated (product){
