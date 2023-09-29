@@ -180,11 +180,15 @@ function enableDarkMode() {
     localStorage.setItem('theme', element.dataset.bsTheme);
 }
 
-function loadThemeFromLocalStorage() {  // Función para cargar el tema desde localStorage
+// Función para cargar el tema desde localStorage
+
+function loadThemeFromLocalStorage() {  
     var theme = localStorage.getItem('theme');
     if (theme === "dark") {
-        enableDarkMode();
+      enableDarkMode();
     }
-}
-
-window.addEventListener('DOMContentLoaded', loadThemeFromLocalStorage);  // Cargar el tema desde localStorage al cargar la página
+  }
+  
+  // Cargar el tema desde localStorage al cargar la página
+  
+  window.addEventListener('DOMContentLoaded', loadThemeFromLocalStorage);  

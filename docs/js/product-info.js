@@ -11,32 +11,13 @@ document.addEventListener("DOMContentLoaded", function () {
     .then(response => response.json())
     .then(product => {
       if (product) {
-        document.getElementById("nameProduct").innerText = product.name;
-        document.getElementById("precioProduct").innerText = 'USD ' + product.cost;
-        document.getElementById("descriptionProduct").innerText = product.description;
-        document.getElementById("categoryProduct").innerText = product.category;
-        document.getElementById("soldProduct").innerText = product.soldCount;
+          productsDetails(product);
 
-        // Itera a través de las imágenes y agrega cada una al HTML
-
-        const container = document.getElementById('imagen');
-        let htmlContentToAppend = "";
-        for (let i = 0; i < product.images.length; i++) {
-          const imageUrl = product.images[i];
-          htmlContentToAppend += `
-              <div class="col-3 mb-2">
-              <div class="card">
-                <img src="${imageUrl}" class="card-img-top" alt="Foto ${product.name}">
-              </div>
-              </div>
-            `;
+          showRelated (product);
+        } else {
+          console.error('Producto no encontrado');
         }
-
-        container.innerHTML = htmlContentToAppend;
-      } else {
-        console.error('Producto no encontrado');
-      }
-    })
+      }) 
     .catch(error => {
       console.error("Error:", error);
     });
@@ -50,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
       showComments(comments);
     })
 
-})
+
 
 /** Cuerpo del comentarios  **/
 
@@ -197,20 +178,79 @@ document.addEventListener("DOMContentLoaded",
       }
     });
 
-
-  })
-//nombre de usuario
-document.addEventListener("DOMContentLoaded", () => {
+  
+})
+//nombre de usuario 
+//borré el addEventListener (DOM) -alexis
 
   const container = document.getElementById("dataUsuario");
   const usuario = localStorage.getItem("username");
+  
+    container.textContent = usuario;
 
-  container.textContent = usuario;
-})
 let cerrar = document.getElementById("cerrarsesion"); //borrar usuario al cerrar sesion
 cerrar.addEventListener("click", function () {
   localStorage.removeItem("username");
 });
+
+//lo he movido del fetch
+function productsDetails(product){
+  document.getElementById("nameProduct").innerText = product.name;
+  document.getElementById("precioProduct").innerText = 'USD ' + product.cost;
+  document.getElementById("descriptionProduct").innerText = product.description;
+  document.getElementById("categoryProduct").innerText = product.category;
+  document.getElementById("soldProduct").innerText = product.soldCount;
+
+  // Itera a través de las imágenes y agrega cada una al HTML
+
+  const container = document.getElementById('carousel');
+  let htmlContentToAppend = ""; 
+  for (let i = 0; i < product.images.length; i++) {
+    const imageUrl = product.images[i];
+    const activeClass = i === 0 ? "active" : "" ;
+    htmlContentToAppend += `
+        <div class="carousel-item ${activeClass}">
+          <img src="${imageUrl}" class="d-flex w-100" alt="Foto ${product.name}">
+        </div>
+     
+    `;
+  }
+
+  container.innerHTML = htmlContentToAppend;
+}
+//carrusel
+
+
+  //relacionados 
+async function showRelated (product){
+const containerCard = document.getElementById('relatedCard');
+
+let htmlRelatedToAppend = "";
+for (let i = 0; i < product.relatedProducts.length; i++) {
+  const imageRelated = product.relatedProducts[i].image;
+  const relatedId = product.relatedProducts[i].id;
+  const relatedName = product.relatedProducts[i].name;
+
+  htmlRelatedToAppend += `
+   <div class="col-md-3">
+    <div class="card" >
+      <a onclick="relatedProducts('${relatedId}')">
+        <div>
+          <img src="${imageRelated}" class="card-img-top" alt="Foto ${relatedName}">
+          <p>${relatedName}</p>
+        </div>
+      </a>
+    </div>
+   </div>
+  `;
+}
+containerCard.innerHTML = htmlRelatedToAppend;
+}
+});
+function relatedProducts(Id){
+  localStorage.setItem('selectedProduct', Id);
+  window.location.href = `product-info.html?productId=${Id}`; 
+}
 
 //Modo Noche
 
@@ -221,11 +261,15 @@ function enableDarkMode() {
   localStorage.setItem('theme', element.dataset.bsTheme);
 }
 
-function loadThemeFromLocalStorage() {  // Función para cargar el tema desde localStorage
+// Función para cargar el tema desde localStorage
+
+function loadThemeFromLocalStorage() {  
   var theme = localStorage.getItem('theme');
   if (theme === "dark") {
     enableDarkMode();
   }
 }
 
-window.addEventListener('DOMContentLoaded', loadThemeFromLocalStorage);  // Cargar el tema desde localStorage al cargar la página
+// Cargar el tema desde localStorage al cargar la página
+
+window.addEventListener('DOMContentLoaded', loadThemeFromLocalStorage);  

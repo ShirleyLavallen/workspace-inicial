@@ -31,17 +31,19 @@
           <li class="nav-item">
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
-          <div class="dropdown"> <!--Dropdown-->
-            <button class="btn btn-secondary dropdown-toggle bg-dark border-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-              <a id="dataUsuario"></a>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li><a class="dropdown-item" href="cart.html"><i class="fa-solid fa-cart-shopping" style="color: #757575;"></i> Carrito</a></li>
-              <li><a class="dropdown-item" href="my-profile.html"><i class="fa-solid fa-user" style="color: #757575;"></i>  Perfil</a></li>
-              <li class="dropdown-item"><i class="fa-solid fa-droplet" style="color: #757575;"></i>  Modo<input type="checkbox" id="darkMode" onclick="enableDarkMode()"></li>
-              <li><a class="dropdown-item" id="cerrarsesion" href="login.html"><i class="fa-solid fa-right-from-bracket" style="color: #757575;"></i> Cerrar sesión</a></li>
-            </ul>
-          </div>
+          <li class="nav-item dropdown"> <!--Dropdown-->
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle bg-dark border-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <a id="dataUsuario"></a>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="cart.html"><i class="fa-solid fa-cart-shopping" style="color: #757575;"></i> Carrito</a></li>
+                <li><a class="dropdown-item" href="my-profile.html"><i class="fa-solid fa-user" style="color: #757575;"></i>  Perfil</a></li>
+                <li class="dropdown-item"><i class="fa-solid fa-droplet" style="color: #757575;"></i>  Modo<input type="checkbox" id="darkMode" onclick="enableDarkMode()"></li>
+                <li><a class="dropdown-item" id="cerrarsesion" href="login.html"><i class="fa-solid fa-right-from-bracket" style="color: #757575;"></i> Cerrar sesión</a></li>
+              </ul>
+            </div>
+          </li>
         </ul>
       </div>
     </div>
@@ -78,14 +80,20 @@
                   <p id="soldProduct"></p>
                 </div>
               </li>
-              <li class="list-group-item d-flex justify-content-between align-items-start">
-                <div class="ms-2 me-auto">
+              <li class="list-group-item justify-content-between align-items-start">
+                <div>
                   <div class="fw-bold">Imágenes ilustrativas</div>
-                  <div class="card">
-                    <div class="card-body">
-                      <div class="row" id="imagen">
+                  <div id="carouselContainer" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner" id ="carousel">
                     </div>
-                  </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselContainer" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselContainer" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>|
+                    </button>
                   </div>
                 </div>
               </li>
@@ -109,9 +117,13 @@
             <option value="5">5</option>
           </select>
           <div>
-            <button id="enviar" class="button">Enviar</button>
+            <button id="enviar" class="regularButton">Enviar</button>
           </div>
         </div>
+      </div>
+      <div class="allRelated conteiner">
+        <h3 class="Related">Productos relacionados</h3>
+        <div id="relatedCard" class="row"></div>
       </div>
     </div>
   </main>
@@ -134,6 +146,7 @@
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/product-info.js"></script>
+  <script src="https://kit.fontawesome.com/8b0c408001.js" crossorigin="anonymous"></script>
 </body>
 
 </html>
