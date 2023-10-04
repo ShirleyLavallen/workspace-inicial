@@ -55,23 +55,32 @@
     </div>
   </nav>
   <main>
-    <div class="container">
+    <div class="container" >
       <h2 id="tituloProducto" class="text-center">Carrito de compras</h2>
-      <p id="subtituloProducto">Artículos a comprar</p>
+      <p id="subtituloProducto" class="h4 font-weight-bold" >Artículos a comprar</p>
       <div class="table-responsive">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>Costo</th>
-              <th>Cantidad</th>
-              <th>Subtotal</th>
-            </tr>
-          </thead>
-        </table>
+          <table class="table">
+              <thead>
+                  <tr>
+                      <th></th>
+                      <th>Nombre</th>
+                      <th>Costo</th>
+                      <th>Cantidad</th>
+                      <th>Subtotal</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr class="producto" id="producto">
+                      <td class="w-25"><img id="imagenProducto" src="imagen1.jpg" alt="Imagen del Producto" class="img-fluid" style="max-width: 50%;"></td>
+                      <td>Producto 1</td>
+                      <td>$20.00</td>
+                      <td><input type="number" id="cantidadProducto" value="2" min="1" ></td>
+                      <td>$40.00</td>
+                  </tr>
+              </tbody>
+          </table>
       </div>
-      <img id="imagenProducto" src="" alt="Imagen del Producto" class="img-fluid mt-3">
-    </div>
+  </div>
   </main>
   <footer class="text-muted">
     <div class="container">
