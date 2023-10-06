@@ -299,3 +299,46 @@ background-color: #6eb6f1;
 #darkMode:checked::before {
 transform: translateX(23px);
 }
+
+/*Dispositivos XS*/
+
+@media only screen and (max-width: 575.98px){
+  .container{
+    width: 100%;
+    height: 100%;
+  }
+  #carouselContainer{
+    width: 100%;
+    height: 100%;
+  }
+  #commentInput{
+    width: 100%;
+    height: 100%;
+  }
+  .jumbotron{ 
+    background-size: 250%;
+    background-position: left;
+    background-position: 19%;
+    height: 35vh;
+  } 
+}
+
+/*Dispositivos MD*/
+
+@media only screen and (min-width: 768px){
+  .jumbotron{ 
+    background-size: 160%;
+    height: 35vh;
+    background-position: left;
+    background-position: 20%;
+  } 
+}
+
+/*Dispositivos LG*/ 
+
+@media only screen and (min-width: 992px){
+  .jumbotron{ 
+    background-size: 100%;
+    height: 50vh;
+  } 
+}

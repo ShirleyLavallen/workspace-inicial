@@ -26,7 +26,7 @@ function showProducts() {
     if (((minPrice == undefined) || (minPrice != undefined && parseInt(product.cost) >= minPrice)) &&
       ((maxPrice == undefined) || (maxPrice != undefined && parseInt(product.cost) <= maxPrice))) {
       htmlContentToAppend += `
-        <div class="col-4">
+        <div class="col-6 col-md-4">
            <div class="card">
              <img src="${product.image}" class="card-img-top" alt="Foto ${product.name}">
              <div class="card-body">
