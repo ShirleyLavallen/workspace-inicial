@@ -50,3 +50,28 @@ function loadThemeFromLocalStorage() {
 // Cargar el tema desde localStorage al cargar la página
 
 window.addEventListener('DOMContentLoaded', loadThemeFromLocalStorage);  
+
+
+//cargar primer elemento del carrito
+
+document.addEventListener('DOMContentLoaded', function() {
+
+  fetch('https://japceibal.github.io/emercado-api/user_cart/25801.json')
+    .then(response => response.json())
+    .then(data => {
+      const productoElement = document.getElementById("producto");
+      const productoData = data.articles[0];
+
+      productoElement.innerHTML = `
+        <td class="w-25"><img id="imagenProducto" src="${productoData.image}" alt="Imagen del Producto" class="img-fluid" style="max-width: 50%;"></td>
+        <td>${productoData.name}</td>
+        <td>$${productoData.unitCost}</td>
+        <td><input type="number" id="cantidadProducto" value="${productoData.count}" min="1" ></td>
+        <td>$${(productoData.unitCost * productoData.count)}</td>
+      `;
+
+    })
+    .catch(error => {
+      console.error('Error al obtener datos del carrito:', error);
+    });
+});
