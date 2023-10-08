@@ -1,13 +1,14 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const logForm = document.getElementById("logForm");
+  const button = document.getElementById("logBtn");
 
-  logForm.addEventListener("submit", function (event) {
+  button.addEventListener("click", function (event) {
     event.preventDefault();
 
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
+    const email = document.getElementById("email").value;
 
-    if (username && password) {
+    if (username && password && email) {
       setSessionData(username);
       window.location.href = "index.html";
     }

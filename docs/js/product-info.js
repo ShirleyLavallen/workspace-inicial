@@ -61,8 +61,8 @@ function bodyComment(id, username, description, dateTime, score) {
                </div>
                <div class="d-flex justify-content-between align-items-center">
                  <p class="small mb-0" style="color: #aaa;">
-                   <a class="link-grey remove" onclick="deleteComment(this);">Eliminar</a> •
-                   <a class="link-grey edit" onclick="showEditCommentForm(this);">Editar</a> 
+                   <a class="link-grey remove" onclick="deleteComment(this);" style= "cursor: pointer">Eliminar</a> •
+                   <a class="link-grey edit" onclick="showEditCommentForm(this);" style= "cursor: pointer">Editar</a> 
                  </p>
                  <div class="d-flex flex-row">
                    ${stars}
@@ -233,7 +233,7 @@ for (let i = 0; i < product.relatedProducts.length; i++) {
   htmlRelatedToAppend += `
    <div class="col-md-3">
     <div class="card" >
-      <a onclick="relatedProducts('${relatedId}')">
+      <a onclick="relatedProducts('${relatedId}')" style= "cursor: pointer">
         <div>
           <img src="${imageRelated}" class="card-img-top" alt="Foto ${relatedName}">
           <p>${relatedName}</p>
