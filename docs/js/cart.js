@@ -52,7 +52,7 @@ function loadThemeFromLocalStorage() {
 window.addEventListener('DOMContentLoaded', loadThemeFromLocalStorage);
 
 
-//cargar primer elemento del carrito
+
 
 document.addEventListener('DOMContentLoaded', function () {
   fetch('https://japceibal.github.io/emercado-api/user_cart/25801.json')
@@ -61,21 +61,6 @@ document.addEventListener('DOMContentLoaded', function () {
       const productoElement = document.getElementById("producto");
       const productoData = data.articles[0];
 
-      // Función para agregar un producto al carrito
-     const agregarAlCarrito = (producto, cantidad) => {
-     const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-
-     // Buscar si el producto ya está en el carrito
-     const productoExistente = carrito.find(item => item.id === producto.id);
-
-     if (productoExistente) {
-      productoExistente.cantidad += cantidad;
-     } else {
-      carrito.push({ id: producto.id, nombre: producto.name, precio: producto.unitCost, cantidad });
-     }
-
-     localStorage.setItem('carrito', JSON.stringify(carrito));
-     };
 
       const updateSubtotal = () => {
         const cantidadInput = document.getElementById("cantidadProducto");
@@ -102,4 +87,44 @@ document.addEventListener('DOMContentLoaded', function () {
     .catch(error => {
       console.error('Error al obtener datos del carrito:', error);
     });
+});
+
+
+/* const cartCount = document.getElementById('cart-count');*/
+/*cartCount.textContent = currentCount + cantidad;*/
+/*
+const currentCount = parseInt(cartCount.textContent) || 0; 
+*/
+
+
+document.addEventListener('DOMContentLoaded', function () {
+
+  var storedProducts = JSON.parse(localStorage.getItem('productosCompras'));
+
+  for (const productAddedId in storedProducts) {
+
+    const productosAdd = document.getElementById("productos-agregados");
+
+    //variable de la cantidad de productos
+    var cantidad = storedProducts[productAddedId];
+    //prueba
+      console.log("Producto ID: " + productAddedId + ", Cantidad: " + cantidad);
+
+  fetch(PRODUCT_INFO_URL + productAddedId + ".json")
+    .then(response => response.json())
+    .then(data => {
+      productosAdd.innerHTML += `
+        <tr class="producto">
+        <td class="w-25"><img src="${data.images[0]}" alt="Imagen del Producto" class="img-fluid" style="max-width: 50%;"></td>
+        <td>${data.name}</td>
+        <td>$${data.cost}</td>
+        <td><input type="number" value="" min="1" ></td>
+        <td id="subtotalProducto"></td>
+        </tr>
+      `;
+    })
+    .catch(error => {
+      console.error('Error al obtener datos del carrito:', error);
+    });
+  }
 });
