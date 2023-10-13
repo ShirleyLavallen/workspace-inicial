@@ -272,3 +272,21 @@ function loadThemeFromLocalStorage() {
 // Cargar el tema desde localStorage al cargar la página
 
 window.addEventListener('DOMContentLoaded', loadThemeFromLocalStorage);  
+
+
+const comprarButton = document.getElementById('comprar-btn');
+
+comprarButton.addEventListener('click', () => {
+  const cantidad = parseInt(cantidadInput.value);
+
+  // Agregar el producto al carrito
+  agregarAlCarrito(productoData, cantidad);
+
+  // Actualizar el contador del carrito
+  const cartCount = document.getElementById('cart-count');
+  const currentCount = parseInt(cartCount.textContent) || 0;
+  cartCount.textContent = currentCount + cantidad;
+
+  // Redirigir al usuario a la página del carrito
+  window.location.href = "cart.html"; //cambiar por url del cart.html
+});

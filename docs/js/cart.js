@@ -61,6 +61,22 @@ document.addEventListener('DOMContentLoaded', function () {
       const productoElement = document.getElementById("producto");
       const productoData = data.articles[0];
 
+      // Función para agregar un producto al carrito
+     const agregarAlCarrito = (producto, cantidad) => {
+     const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+     // Buscar si el producto ya está en el carrito
+     const productoExistente = carrito.find(item => item.id === producto.id);
+
+     if (productoExistente) {
+      productoExistente.cantidad += cantidad;
+     } else {
+      carrito.push({ id: producto.id, nombre: producto.name, precio: producto.unitCost, cantidad });
+     }
+
+     localStorage.setItem('carrito', JSON.stringify(carrito));
+     };
+
       const updateSubtotal = () => {
         const cantidadInput = document.getElementById("cantidadProducto");
         const subtotalElement = document.getElementById("subtotalProducto");
