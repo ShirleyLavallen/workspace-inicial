@@ -53,7 +53,7 @@ window.addEventListener('DOMContentLoaded', loadThemeFromLocalStorage);
 
 
 
-
+//Mostrar producto precargado
 document.addEventListener('DOMContentLoaded', function () {
   fetch('https://japceibal.github.io/emercado-api/user_cart/25801.json')
     .then(response => response.json())
@@ -61,28 +61,15 @@ document.addEventListener('DOMContentLoaded', function () {
       const productoElement = document.getElementById("producto");
       const productoData = data.articles[0];
 
-
-      const updateSubtotal = () => {
-        const cantidadInput = document.getElementById("cantidadProducto");
-        const subtotalElement = document.getElementById("subtotalProducto");
-        const cantidad = parseInt(cantidadInput.value);
-        const unitCost = productoData.unitCost;
-        const subtotal = cantidad * unitCost;
-        subtotalElement.textContent = `$${subtotal.toFixed(2)}`;
-      };
-
       productoElement.innerHTML = `
         <td class="w-25"><img id="imagenProducto" src="${productoData.image}" alt="Imagen del Producto" class="img-fluid" style="max-width: 50%;"></td>
         <td>${productoData.name}</td>
         <td>$${productoData.unitCost}</td>
         <td><input type="number" id="cantidadProducto" value="${productoData.count}" min="1" ></td>
-        <td id="subtotalProducto">$${(productoData.unitCost * productoData.count).toFixed(2)}</td>
+        <td id="subtotalProducto">$${(productoData.unitCost)}</td>
+        <td><a href="#" class="btnEliminar" style= "cursor: pointer">Eliminar</a></td>
       `;
 
-      const cantidadInput = document.getElementById("cantidadProducto");
-      cantidadInput.addEventListener("input", updateSubtotal);
-
-      updateSubtotal();
     })
     .catch(error => {
       console.error('Error al obtener datos del carrito:', error);
@@ -90,12 +77,8 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-/* const cartCount = document.getElementById('cart-count');*/
-/*cartCount.textContent = currentCount + cantidad;*/
-/*
-const currentCount = parseInt(cartCount.textContent) || 0; 
-*/
-
+//Agregar prductos al carrito
+const productosAdd = document.getElementById("productos-agregados");
 
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -103,28 +86,49 @@ document.addEventListener('DOMContentLoaded', function () {
 
   for (const productAddedId in storedProducts) {
 
-    const productosAdd = document.getElementById("productos-agregados");
-
     //variable de la cantidad de productos
     var cantidad = storedProducts[productAddedId];
     //prueba
-      console.log("Producto ID: " + productAddedId + ", Cantidad: " + cantidad);
+    console.log("Producto ID: " + productAddedId + ", Cantidad: " + cantidad);
 
-  fetch(PRODUCT_INFO_URL + productAddedId + ".json")
-    .then(response => response.json())
-    .then(data => {
-      productosAdd.innerHTML += `
+    fetch(PRODUCT_INFO_URL + productAddedId + ".json")
+      .then(response => response.json())
+      .then(data => {
+        productosAdd.innerHTML += `
         <tr class="producto">
         <td class="w-25"><img src="${data.images[0]}" alt="Imagen del Producto" class="img-fluid" style="max-width: 50%;"></td>
         <td>${data.name}</td>
         <td>$${data.cost}</td>
-        <td><input type="number" value="" min="1" ></td>
-        <td id="subtotalProducto"></td>
+        <td><input type="number" value="1" min="1" ></td>
+        <td id="subtotalProducto">$${data.cost}</td>
+        <td><a href="#" class="btnEliminar" style= "cursor: pointer">Eliminar</a></td>
         </tr>
       `;
-    })
-    .catch(error => {
-      console.error('Error al obtener datos del carrito:', error);
-    });
+      })
+      .catch(error => {
+        console.error('Error al obtener datos del carrito:', error);
+      });
+  }
+});
+
+
+//Subtotal (costo del producto * cantidad)
+productosAdd.addEventListener('input', function (event) {
+  if (event.target.type === 'number') {
+    const cantidadInput = event.target;
+    const row = cantidadInput.closest('.producto');
+    const precioUnitario = parseFloat(row.querySelector('td:nth-child(3)').textContent.replace('$', ''));
+    const cantidad = parseInt(cantidadInput.value);
+    const subtotal = row.querySelector('td:nth-child(5)');
+    const nuevoSubtotal = precioUnitario * cantidad;
+    subtotal.textContent = `$${nuevoSubtotal}`;
+  }
+});
+
+//Elimina el producto del carrito
+productosAdd.addEventListener('click', function (event) {
+  if (event.target.classList.contains('btnEliminar')) {
+    const row = event.target.closest('.producto');
+    row.remove();
   }
 });
