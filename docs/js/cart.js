@@ -96,8 +96,8 @@ document.addEventListener('DOMContentLoaded', function () {
       .then(data => {
         productosAdd.innerHTML += `
         <tr class="producto">
-        <td class="w-25"><img src="${data.images[0]}" alt="Imagen del Producto" class="img-fluid" style="max-width: 50%;"></td>
-        <td>${data.name}</td>
+        <td onclick="window.location='product-info.html'; localStorage.setItem('selectedProduct', ${data.id})"style="cursor: pointer" class="w-25"><img src="${data.images[0]}" alt="Imagen del Producto" class="img-fluid" style="max-width: 50%;"></td>
+        <td onclick="window.location='product-info.html'; localStorage.setItem('selectedProduct', ${data.id})"style="cursor: pointer">${data.name}</td>
         <td>$${data.cost}</td>
         <td><input type="number" value="1" min="1" ></td>
         <td id="subtotalProducto">$${data.cost}</td>
