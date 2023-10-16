@@ -64,9 +64,9 @@ document.addEventListener('DOMContentLoaded', function () {
       productoElement.innerHTML = `
         <td class="w-25"><img id="imagenProducto" src="${productoData.image}" alt="Imagen del Producto" class="img-fluid" style="max-width: 50%;"></td>
         <td>${productoData.name}</td>
-        <td>$${productoData.unitCost}</td>
+        <td>USD${productoData.unitCost}</td>
         <td><input type="number" id="cantidadProducto" value="${productoData.count}" min="1" ></td>
-        <td id="subtotalProducto">$${(productoData.unitCost)}</td>
+        <td class="subtotalProducto">USD<span class="subtotalProductoPrecio">${(productoData.unitCost)}</span></td>
         <td><a href="#" class="btnEliminar" style= "cursor: pointer">Eliminar</a></td>
       `;
 
@@ -82,6 +82,16 @@ const productosAdd = document.getElementById("productos-agregados");
 
 document.addEventListener('DOMContentLoaded', function () {
 
+  const shippings = document.getElementsByClassName('radio-shipping');
+
+  /* Evento click de input radio */
+  for (let shipping of shippings) {
+    shipping.addEventListener('click', function(event){
+      const elem = event.target;
+      imprimirPorcentajeDeEnvios(elem.value);
+    });
+  }
+
   var storedProducts = JSON.parse(localStorage.getItem('productosCompras'));
 
   for (const productAddedId in storedProducts) {
@@ -95,15 +105,17 @@ document.addEventListener('DOMContentLoaded', function () {
       .then(response => response.json())
       .then(data => {
         productosAdd.innerHTML += `
-        <tr class="producto">
-        <td onclick="window.location='product-info.html'; localStorage.setItem('selectedProduct', ${data.id})"style="cursor: pointer" class="w-25"><img src="${data.images[0]}" alt="Imagen del Producto" class="img-fluid" style="max-width: 50%;"></td>
-        <td onclick="window.location='product-info.html'; localStorage.setItem('selectedProduct', ${data.id})"style="cursor: pointer">${data.name}</td>
-        <td>$${data.cost}</td>
-        <td><input type="number" value="1" min="1" ></td>
-        <td id="subtotalProducto">$${data.cost}</td>
-        <td><a href="#" class="btnEliminar" style= "cursor: pointer">Eliminar</a></td>
-        </tr>
-      `;
+          <tr class="producto">
+          <td onclick="window.location='product-info.html'; localStorage.setItem('selectedProduct', ${data.id})"style="cursor: pointer" class="w-25"><img src="${data.images[0]}" alt="Imagen del Producto" class="img-fluid" style="max-width: 50%;"></td>
+          <td onclick="window.location='product-info.html'; localStorage.setItem('selectedProduct', ${data.id})"style="cursor: pointer">${data.name}</td>
+          <td>USD${data.cost}</td>
+          <td><input type="number" value="1" min="1" ></td>
+          <td class="subtotalProducto">USD<span class="subtotalProductoPrecio">${data.cost}</span></td>
+          <td><a href="#" class="btnEliminar" style= "cursor: pointer">Eliminar</a></td>
+          </tr>
+        `;
+        subtotalFinal();
+        shippings[0].click();
       })
       .catch(error => {
         console.error('Error al obtener datos del carrito:', error);
@@ -117,11 +129,13 @@ productosAdd.addEventListener('input', function (event) {
   if (event.target.type === 'number') {
     const cantidadInput = event.target;
     const row = cantidadInput.closest('.producto');
-    const precioUnitario = parseFloat(row.querySelector('td:nth-child(3)').textContent.replace('$', ''));
+    const precioUnitario = parseFloat(row.querySelector('td:nth-child(3)').textContent.replace('USD', ''));
     const cantidad = parseInt(cantidadInput.value);
-    const subtotal = row.querySelector('td:nth-child(5)');
     const nuevoSubtotal = precioUnitario * cantidad;
-    subtotal.textContent = `$${nuevoSubtotal}`;
+    const subtotal = row.querySelector('td:nth-child(5)');
+    const subtotalPrecio = subtotal.querySelector('.subtotalProductoPrecio')
+    subtotalPrecio.innerText = nuevoSubtotal;
+    subtotalFinal();
   }
 });
 
@@ -130,5 +144,40 @@ productosAdd.addEventListener('click', function (event) {
   if (event.target.classList.contains('btnEliminar')) {
     const row = event.target.closest('.producto');
     row.remove();
+    subtotalFinal();
   }
 });
+
+//Suma de Subtotales 
+function subtotalFinal() {
+  let sumaSubtotales = document.getElementsByClassName("subtotalProductoPrecio");
+  let suma = 0;
+  for(let i = 0; i < sumaSubtotales.length; i++){
+    sumaSubtotal = sumaSubtotales[i];
+    suma += Number(sumaSubtotal.innerText);
+}
+  document.getElementById('subtotalPrecioFinal').innerHTML = suma;
+  calcularPorcentajeDeEnvios();
+}
+
+/* Porcentajes de envios */
+function imprimirPorcentajeDeEnvios(porcentaje){
+  let sumaSubtotalFinal = document.getElementById('subtotalPrecioFinal');
+  document.getElementById("costo-de-envio").innerText = Math.floor( Number(sumaSubtotalFinal.innerText) * porcentaje );
+  precioTotalAPagar();
+}
+
+function calcularPorcentajeDeEnvios() {
+  const shippings = document.getElementsByClassName('radio-shipping');
+  for(let shipping of shippings){
+    if(shipping.checked){
+      imprimirPorcentajeDeEnvios(shipping.value);
+    }
+  }
+}
+/* Total a pagar */
+function precioTotalAPagar() {
+  let costoSubtotal = document.getElementById('subtotalPrecioFinal');
+  let costoEnvio = document.getElementById('costo-de-envio');
+  document.getElementById('total').innerText = Number(costoSubtotal.innerText) + Number(costoEnvio.innerText);
+}
