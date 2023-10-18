@@ -181,3 +181,22 @@ function precioTotalAPagar() {
   let costoEnvio = document.getElementById('costo-de-envio');
   document.getElementById('total').innerText = Number(costoSubtotal.innerText) + Number(costoEnvio.innerText);
 }
+
+//seleccion para pagar
+
+var seleccion = document.getElementById("seleccion");
+var tarjeta = document.getElementById("tarjeta");
+var transferencia = document.getElementById("transferencia");
+
+tarjeta.addEventListener("change", actualizarSeleccion);
+transferencia.addEventListener("change", actualizarSeleccion);
+
+function actualizarSeleccion() {
+    if (tarjeta.checked) {
+        seleccion.textContent = "Tarjeta de credito";
+    } else if (transferencia.checked) {
+        seleccion.textContent = "Transferencia bancaria";
+    } else {
+        seleccion.textContent = "no ha seleccionado";
+    }
+}
