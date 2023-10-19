@@ -55,11 +55,11 @@
     </div>
   </nav>
   <main>
-    <div class="container" >
-      <h2 id="tituloProducto" class="text-center">Carrito de compras</h2>
+    <div class="container mb-4">
+      <h2 id="tituloProducto" class="text-center mt-4 mb-3">Carrito de compras</h2>
       <p id="subtituloProducto" class="h4 font-weight-bold" >Artículos a comprar</p>
-      <div class="table-responsive">
-          <table class="table">
+      <div class="table-responsive mb-4">
+          <table class="table border rounded">
               <thead>
                   <tr>
                       <th></th>
@@ -74,30 +74,32 @@
               </tbody>
           </table>
       </div>
-      <div class="envio">
-        <p id="subtituloProducto" class="h4 font-weight-bold" >Tipo de envio</p>
-        <div class="form-check">
+      <hr class="w-100 mb-4">
+      <div class="envio mb-5">
+        <p id="subtituloProducto" class="h4 font-weight-bold">Tipo de envio</p>
+        <div class="border rounded mb-5">
+        <div class="form-check m-2">
           <input class="form-check-input radio-shipping" type="radio" name="flexRadioDefault" id="premium" value="0.15">
           <label class="form-check-label" for="premium">
             Premium 2 a 5 días (15%)
           </label>
         </div>
-        <div class="form-check">
+        <div class="form-check m-2">
           <input class="form-check-input radio-shipping" type="radio" name="flexRadioDefault" id="express" value="0.07">
           <label class="form-check-label" for="express">
             Express 5 a 8 días (7%)
           </label>
         </div>
-        <div class="form-check">
+        <div class="form-check m-2">
           <input class="form-check-input radio-shipping" type="radio" name="flexRadioDefault" id="standard" value="0.05" >
           <label class="form-check-label" for="standard">
             Standard 12 a 15 días (5%)
           </label>
         </div>
       </div>
-      <div class="direccion">
-        <p id="subtituloProducto" class="h4 font-weight-bold mt-3" >Dirección de envio</p>
-        <form class="row g-3">
+      <div class="direccion mb-5 m-1">
+        <p id="subtituloProducto" class="h4 font-weight-bold mt-3 mb-4">Dirección de envio</p>
+        <form class="row g-3 pb-3 border rounded">
           <div class="col-md-6">
             <label for="inputEmail4" class="form-label">Calle</label>
             <input type="email" class="form-control" id="inputEmail4">
@@ -112,6 +114,7 @@
           </div>
         </form>
       </div>
+      <hr class="w-100 mb-4">
       <div class="table-responsive">
         <p id="subtituloProducto" class="h4 font-weight-bold mt-3" >Costos</p>
         <ul class="list-group list-group">
@@ -140,13 +143,16 @@
     </div>
    
     <!--Modal-->
-    <div>
+    
       <div class="container">
-        <hr>
+        <hr class="w-100 mb-4">
         <h4>Forma de pago</h4>
-        <span id="seleccion">no ha seleccionado</span>
+        <div>
+        <div class="border rounded pt-2 pb-2">
+        <span id="seleccion">No ha seleccionado</span>
         <a href="#parapagar"  data-bs-toggle="modal" data-bs-target="#parapagar">seleccionar</a>
       </div>
+    </div>
       <div class="container">
       <div class="modal" id="parapagar">
         <div class="modal-dialog">
@@ -158,37 +164,37 @@
             <div class="modal-body">
               
               <form action="metodos-de-pago">
-                <div class="form-group row">
+                <div class="form-group row p-3 pt-1 text-secondary">
                   <div class="form-check">
                     <input class="form-check-input" type="radio" name="formaDePago" id="tarjeta" value="tarjetaCredito" required>
-                    <label class="form-check-label" for="tarjetaCredito">Tarjeta de crédito</label>
+                    <label class="form-check-label mb-3" for="tarjetaCredito">Tarjeta de crédito</label>
                   </div>
                   <hr class="w-100">
   
                  <!-- Campo para el número de tarjeta de crédito -->
-                  <div class="col-sm-6">
+                  <div class="col-6">
                       <label for="numeroTarjeta">Número de tarjeta:</label>
-                      <input type="text" class="form-control" id="tarjeta" name="numeroTarjeta" 
+                      <input type="text" class="form-control mb-3" id="tarjeta" name="numeroTarjeta" 
                           pattern="^\d{13,19}$" required>
                   </div>
-                  <div class="col-sm-4">
+                  <div class="col-4">
                       <label for="codigoSeguridad">Código de seg:</label>
                       <input type="text" class="form-control" id="codigoSeguridad" name="codigoSeguridad" 
                           pattern="^\d{4}$" required>
                   </div>   
-                  <div class="col-sm-6">
+                  <div class="col-6">
                       <label for="fechaVencimiento">Vencimiento (MM/AA):</label>
-                      <input type="text" class="form-control" id="fechaVencimiento" name="fechaVencimiento" 
+                      <input type="text" class="form-control mb-3" id="fechaVencimiento" name="fechaVencimiento" 
                           pattern="^(0[1-9]|1[0-2])/(0[1-9]|[1-9][0-9])$" required>
                   </div>
                   <div class="form-check">
                     <input class="form-check-input" type="radio" name="formaDePago" id="transferencia" value="transferenciaBancaria" required>
-                    <label class="form-check-label" for="transferenciaBancaria">Transferencia bancaria</label>
+                    <label class="form-check-label mb-3" for="transferenciaBancaria">Transferencia bancaria</label>
                   </div>
                   <hr class="w-100">
-                  <div class="col-sm-6">
+                  <div class="col-6">
                     <label for="numeroDeCuenta">Número de cuenta:</label>
-                    <input type="text" class="form-control" id="transferencia" name="numeroCuenta" 
+                    <input type="text" class="form-control mb-1" id="transferencia" name="numeroCuenta" 
                         pattern="^\d{13,19}$" required>
                   </div>
                 </div>
