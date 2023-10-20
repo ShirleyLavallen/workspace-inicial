@@ -200,3 +200,34 @@ function actualizarSeleccion() {
         seleccion.textContent = "no ha seleccionado";
     }
 }
+
+//bloquear campos del otro radio cuando ya hay uno seleccionado
+
+const tarjetaRadio = document.getElementById('tarjeta');
+const transferenciaRadio = document.getElementById('transferencia');
+const numerotarjeta = document.getElementById('numerotarjeta');
+const codigoSeguridad = document.getElementById('codigoSeguridad');
+const fechaVencimiento = document.getElementById('fechaVencimiento');
+const numerocuenta = document.getElementById('numerocuenta');
+
+
+tarjeta.addEventListener("change", bloquearotroradio);
+transferencia.addEventListener("change", bloquearotroradio);
+
+
+function bloquearotroradio() {
+  if(tarjeta.checked){
+    numerocuenta.disabled = true;
+    numerotarjeta.disabled = false;
+    codigoSeguridad.disabled = false;
+    fechaVencimiento.disabled = false;
+  }
+  if (transferencia.checked){
+    numerotarjeta.disabled = true;
+    codigoSeguridad.disabled = true;
+    fechaVencimiento.disabled = true;
+    numerocuenta.disabled = false;
+
+
+  }
+}

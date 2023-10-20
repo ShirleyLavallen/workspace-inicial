@@ -166,7 +166,7 @@
               <form action="metodos-de-pago">
                 <div class="form-group row p-3 pt-1 text-secondary">
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="formaDePago" id="tarjeta" value="tarjetaCredito" required>
+                    <input class="form-check-input" type="radio" name="formaDePago" id="tarjeta" value="tarjetaCredito" class="radio" required>
                     <label class="form-check-label mb-3" for="tarjetaCredito">Tarjeta de crédito</label>
                   </div>
                   <hr class="w-100">
@@ -174,27 +174,27 @@
                  <!-- Campo para el número de tarjeta de crédito -->
                   <div class="col-6">
                       <label for="numeroTarjeta">Número de tarjeta:</label>
-                      <input type="text" class="form-control mb-3" id="tarjeta" name="numeroTarjeta" 
+                      <input type="text" class="form-control mb-3" id="numerotarjeta" class="campotc"  name="numeroTarjeta" 
                           pattern="^\d{13,19}$" required>
                   </div>
                   <div class="col-4">
                       <label for="codigoSeguridad">Código de seg:</label>
-                      <input type="text" class="form-control" id="codigoSeguridad" name="codigoSeguridad" 
+                      <input type="text" class="form-control" id="codigoSeguridad" class="campotc"  name="codigoSeguridad" 
                           pattern="^\d{4}$" required>
                   </div>   
                   <div class="col-6">
                       <label for="fechaVencimiento">Vencimiento (MM/AA):</label>
-                      <input type="text" class="form-control mb-3" id="fechaVencimiento" name="fechaVencimiento" 
+                      <input type="text" class="form-control mb-3" id="fechaVencimiento" class="campotc"  name="fechaVencimiento" 
                           pattern="^(0[1-9]|1[0-2])/(0[1-9]|[1-9][0-9])$" required>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="formaDePago" id="transferencia" value="transferenciaBancaria" required>
+                    <input class="form-check-input" type="radio" name="formaDePago" id="transferencia" value="transferenciaBancaria" class="radio" required>
                     <label class="form-check-label mb-3" for="transferenciaBancaria">Transferencia bancaria</label>
                   </div>
                   <hr class="w-100">
                   <div class="col-6">
                     <label for="numeroDeCuenta">Número de cuenta:</label>
-                    <input type="text" class="form-control mb-1" id="transferencia" name="numeroCuenta" 
+                    <input type="text" class="form-control mb-1" id="numerocuenta"  class="campotb" name="numeroCuenta" 
                         pattern="^\d{13,19}$" required>
                   </div>
                 </div>
