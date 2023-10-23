@@ -54,6 +54,7 @@ window.addEventListener('DOMContentLoaded', loadThemeFromLocalStorage);
 
 
 //Mostrar producto precargado
+
 document.addEventListener('DOMContentLoaded', function () {
   fetch('https://japceibal.github.io/emercado-api/user_cart/25801.json')
     .then(response => response.json())
@@ -231,3 +232,46 @@ function bloquearotroradio() {
 
   }
 }
+
+const finalizarCompra = document.getElementById("comprar");
+const forms = document.querySelectorAll('.needs-validation');
+const productosSelec = localStorage.getItem("selectedProduct");
+
+//Validación campos de formulario//
+(function validarForm () {
+  'use strict'
+
+Array.from(forms).forEach(form =>{
+  finalizarCompra.addEventListener('click', event => {
+
+    if (!form.checkValidity()) {
+      event.preventDefault()
+      event.stopPropagation()
+    }
+
+    if (productosSelec.length > 0 && tarjeta.checked || transferencia.cheked && validarForm()){
+      alert("Compra exitosa!");
+      } else {
+        alert("No funciona :(")
+      }
+
+    form.classList.add('was-validated')
+  }, false)
+})
+})()
+
+// Validar compra //
+
+
+finalizarCompra.addEventListener("click", function (event){
+if (productosSelec.length > 0 && tarjeta.checked || transferencia.cheked && validarForm()){
+alert("Compra exitosa!");
+} else {
+  alert("No funciona :(")
+}
+}) 
+
+
+
+
+
