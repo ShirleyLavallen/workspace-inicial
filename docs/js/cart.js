@@ -260,17 +260,6 @@ Array.from(forms).forEach(form =>{
 })
 })()
 
-// Validar compra //
-
-
-finalizarCompra.addEventListener("click", function (event){
-if (productosSelec.length > 0 && tarjeta.checked || transferencia.cheked && validarForm()){
-alert("Compra exitosa!");
-} else {
-  alert("No funciona :(")
-}
-}) 
-
 
 
 
