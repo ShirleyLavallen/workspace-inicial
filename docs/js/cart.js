@@ -235,6 +235,8 @@ function bloquearotroradio() {
 
 const finalizarCompra = document.getElementById("comprar");
 const forms = document.querySelectorAll('.needs-validation');
+const alertSuccess = document.getElementById("compraExitosa");
+
 
 //Validación campos de formulario//
 (function validarForm () {
@@ -244,13 +246,31 @@ Array.from(forms).forEach(form =>{
   finalizarCompra.addEventListener('click', event => {
 
  const productosSelec = localStorage.getItem("selectedProduct");
+ const tarjeta = document.getElementById("tarjeta");
+ const transferencia= document.getElementById("transferencia");
 
-    if (!form.checkValidity() && (productosSelec.length < 1 && !tarjeta.checked || !transferencia.cheked)) {
+
+    if (!form.checkValidity()) {
       event.preventDefault()
       event.stopPropagation()
-      alert ("¡Debe rellenar todos los campos!")
-    } else {
-      alert("¡Compra exitosa!")
+      
+    } 
+    form.classList.add('was-validated')
+
+    if (productosSelec.length < 1) {
+      event.preventDefault()
+      event.stopPropagation()
+      
+    } 
+
+    if (!tarjeta.checked && !transferencia.cheked) {
+      event.preventDefault()
+      event.stopPropagation()
+      
+    } 
+
+    else {
+      alertSuccess.style.display = 'block';
     }
 
     form.classList.add('was-validated')

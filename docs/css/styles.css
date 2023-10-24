@@ -384,6 +384,6 @@ transform: translateX(23px);
 
 /*Validación de form*/ 
 
-.btn-link.is-invalid {
+.is-invalid {
   color: #e1001f;
 }

@@ -107,7 +107,7 @@
               <label for="inputSAddres" class="form-label">Calle</label>
               <input type="text" class="form-control" id="street" required>
               <div class="invalid-feedback">
-                Por favor, escreiba una dirección valida.
+                Por favor, escriba una dirección valida.
               </div>
             </div>
             <div class="col-md-6">
@@ -160,9 +160,12 @@
         <hr class="w-100 mb-4">
         <h4>Forma de pago</h4>
         <div>
-          <div class="border rounded pt-2 pb-2">
+          <div class="border rounded pt-2 pb-2" id="metodoPago">
             <span id="seleccion">No ha seleccionado</span>
-            <a href="#parapagar" data-bs-toggle="modal" data-bs-target="#parapagar" id="btn-Selec">seleccionar</a>
+            <button class="btn btn-link ps-0" data-bs-toggle="modal" data-bs-target="#parapagar" id="btn-Selec">seleccionar</button>
+            <div class="invalid-feedback">
+              Debe aceptar terminos del servicio.
+            </div>
           </div>
         </div>
         <div class="container">
@@ -226,18 +229,10 @@
         <!-- Button trigger modal -->
         <button id="comprar" type="button" class="btn btn-primary w-100 mt-5 btn-lg">
           Finalizar compra
-        </button>
-
-        <!-- Modal
-<div id="compraExitosa">
-<div class="modal fade" id="alertCompra" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-      <div class="alert alert-success w-100" role="alert">
-        ¡Has comprado con exito!
-      </div>
-  </div>
-</div>
-</div> -->
+        </button> 
+        <div class="alert alert-success text-center" id="compraExitosa" style="position: fixed; top: 40%; display: none;">
+          ¡Compra exitosa!
+        </div>
   </main>
   <footer class="text-muted">
     <div class="container">
