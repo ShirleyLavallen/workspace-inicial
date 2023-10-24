@@ -250,26 +250,11 @@ Array.from(forms).forEach(form =>{
  const transferencia= document.getElementById("transferencia");
 
 
-    if (!form.checkValidity()) {
+    if (!form.checkValidity() && (productosSelec.length < 1 && !tarjeta.checked || !transferencia.cheked)) {
       event.preventDefault()
       event.stopPropagation()
-      
-    } 
-    form.classList.add('was-validated')
-
-    if (productosSelec.length < 1) {
-      event.preventDefault()
-      event.stopPropagation()
-      
-    } 
-
-    if (!tarjeta.checked && !transferencia.cheked) {
-      event.preventDefault()
-      event.stopPropagation()
-      
-    } 
-
-    else {
+      alert ("Debe rellenar los campos!")
+    }  else {
       alertSuccess.style.display = 'block';
     }
 
