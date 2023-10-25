@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
         <td class="w-25"><img id="imagenProducto" src="${productoData.image}" alt="Imagen del Producto" class="img-fluid" style="max-width: 50%;"></td>
         <td>${productoData.name}</td>
         <td>USD${productoData.unitCost}</td>
-        <td><input type="number" id="cantidadProducto" value="${productoData.count}" min="1" ></td>
+        <td><div><input type="number" class="form-control product-amount" id="cantidadProducto" value="${productoData.count}" min="1" ></div></td>
         <td class="subtotalProducto">USD<span class="subtotalProductoPrecio">${(productoData.unitCost)}</span></td>
         <td><a href="#" class="btnEliminar" style= "cursor: pointer">Eliminar</a></td>
       `;
@@ -107,10 +107,10 @@ document.addEventListener('DOMContentLoaded', function () {
       .then(data => {
         productosAdd.innerHTML += `
           <tr class="producto">
-          <td onclick="window.location='product-info.html'; localStorage.setItem('selectedProduct', ${data.id})"style="cursor: pointer" class="w-25"><img src="${data.images[0]}" alt="Imagen del Producto" class="img-fluid" style="max-width: 50%;"></td>
-          <td onclick="window.location='product-info.html'; localStorage.setItem('selectedProduct', ${data.id})"style="cursor: pointer">${data.name}</td>
+          <td onclick="localStorage.setItem('selectedProduct', ${data.id}); window.location='product-info.html';"style="cursor: pointer" class="w-25"><img src="${data.images[0]}" alt="Imagen del Producto" class="img-fluid" style="max-width: 50%;"></td>
+          <td onclick=" localStorage.setItem('selectedProduct', ${data.id}); window.location='product-info.html';"style="cursor: pointer">${data.name}</td>
           <td>USD${data.cost}</td>
-          <td><input type="number" value="1" min="1" ></td>
+          <td><div><input type="number" class="form-control product-amount" value="1" min="1" ></div></td>
           <td class="subtotalProducto">USD<span class="subtotalProductoPrecio">${data.cost}</span></td>
           <td><a href="#" class="btnEliminar" style= "cursor: pointer">Eliminar</a></td>
           </tr>
@@ -218,8 +218,8 @@ transferencia.addEventListener("change", bloquearotroradio);
 
 function bloquearotroradio() {
   if(tarjeta.checked){
-    numerocuenta.disabled = true;
     numerotarjeta.disabled = false;
+    numerocuenta.disabled = true;
     codigoSeguridad.disabled = false;
     fechaVencimiento.disabled = false;
   }
@@ -228,9 +228,13 @@ function bloquearotroradio() {
     codigoSeguridad.disabled = true;
     fechaVencimiento.disabled = true;
     numerocuenta.disabled = false;
-
-
   }
+  //Eliminamos las clases de control de validity en caso de que se cambia el metodo de pago
+  var inputs = document.querySelectorAll('#form_tarjeta .form-control');
+  inputs.forEach( (input) => { input.classList.remove('is-invalid','is-valid')});
+  //Ocultamos el invalid-feedback si se cambia de metodo de pago ya que tiene que validarse de nuevo
+  const feedback = document.querySelector('#payment-feedback');
+  feedback.classList.add('invalid-feedback');
 }
 
 const finalizarCompra = document.getElementById("comprar");
@@ -240,25 +244,95 @@ const alertSuccess = document.getElementById("compraExitosa");
 
 //Validación campos de formulario//
 (function validarForm () {
-  'use strict'
 
-Array.from(forms).forEach(form =>{
   finalizarCompra.addEventListener('click', event => {
-
- const productosSelec = localStorage.getItem("selectedProduct");
- const tarjeta = document.getElementById("tarjeta");
- const transferencia= document.getElementById("transferencia");
-
-
-    if (!form.checkValidity() && (productosSelec.length < 1 && !tarjeta.checked || !transferencia.cheked)) {
-      event.preventDefault()
-      event.stopPropagation()
-      alert ("Debe rellenar los campos!")
-    }  else {
-      alertSuccess.style.display = 'block';
-    }
-
-    form.classList.add('was-validated')
-  }, false)
-})
+      const todo_correcto = validacionDeProductos() && validacionDireccion() && validacionDePago();
+     
+      if(todo_correcto){
+        alertSuccess.style.display = 'block';
+        setTimeout( () => {
+          alertSuccess.style.display = 'none';
+        }, 3000);
+      }
+    }, false)
 })()
+
+function validacionDireccion() {
+  let validado = true;
+  const inputs = document.querySelectorAll('#formDireccion input');
+  inputs.forEach( (input) => {
+    if(input.checkValidity()){
+      input.classList.add('is-valid');
+      input.classList.remove('is-invalid');
+    }
+    else{
+      input.classList.remove('is-valid');
+      input.classList.add('is-invalid');
+    }
+    validado = validado && input.checkValidity();
+  });
+  return validado;
+}
+
+function validacionDeProductos() {
+  const productos = document.querySelectorAll('.product-amount');
+  let validado = true;
+  productos.forEach( (product) => {
+    if(product.checkValidity()){
+      product.classList.add('is-valid');
+      product.classList.remove('is-invalid');
+    }
+    else{
+      product.classList.add('is-invalid');
+      product.classList.remove('is-valid');
+    }
+    validado = validado && product.checkValidity();
+  });
+  return validado;
+}
+
+function validacionDePago() {
+  const tarjeta = document.getElementById("tarjeta");
+  const transferencia= document.getElementById("transferencia");
+  const feedback = document.querySelector('#payment-feedback');
+  feedback.classList.add('invalid-feedback');
+  if(!tarjeta.checked && !transferencia.checked){
+    feedback.classList.remove('invalid-feedback');
+    return false;
+  }
+  let pagoValidado = true;
+  if (tarjeta.checked) {
+    const inputs = document.querySelectorAll('.credit-card.wrapper input');
+    inputs.forEach( (i) => {
+      if(i.checkValidity()){
+        i.classList.add('is-valid');
+        i.classList.remove('is-invalid');
+      }
+      else{
+        i.classList.add('is-invalid');
+        i.classList.remove('is-valid');
+      }
+      pagoValidado = pagoValidado && i.checkValidity();
+    });
+  }
+  
+  if (transferencia.checked) {
+    const inputs = document.querySelectorAll('.transfer.wrapper input');
+    inputs.forEach( (i) => {
+      if(i.checkValidity()){
+        i.classList.add('is-valid');
+        i.classList.remove('is-invalid');
+      }
+      else{
+        i.classList.add('is-invalid');
+        i.classList.remove('is-valid');
+      }
+      pagoValidado = pagoValidado && i.checkValidity();
+    });
+  }
+
+  if(!pagoValidado){
+    feedback.classList.remove('invalid-feedback');
+  }
+  return pagoValidado;
+}
