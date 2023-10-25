@@ -381,3 +381,9 @@ transform: translateX(23px);
     height: 50vh;
   } 
 }
+
+/*Validación de form*/ 
+
+.is-invalid {
+  color: #e1001f;
+}
