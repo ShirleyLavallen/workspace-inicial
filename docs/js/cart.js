@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function () {
         <td>USD${productoData.unitCost}</td>
         <td><div><input type="number" class="form-control product-amount" id="cantidadProducto" value="${productoData.count}" min="1" ></div></td>
         <td class="subtotalProducto">USD<span class="subtotalProductoPrecio">${(productoData.unitCost)}</span></td>
-        <td><a href="#" class="btnEliminar" style= "cursor: pointer">Eliminar</a></td>
+        <td><button class="btnEliminar" style= "cursor: pointer"><i class="fa-regular fa-trash-can fa-lg" style="color: #f55151;"></i></button></td>
       `;
 
     })
@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   /* Evento click de input radio */
   for (let shipping of shippings) {
-    shipping.addEventListener('click', function(event){
+    shipping.addEventListener('click', function (event) {
       const elem = event.target;
       imprimirPorcentajeDeEnvios(elem.value);
     });
@@ -95,12 +95,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   var storedProducts = JSON.parse(localStorage.getItem('productosCompras'));
 
-  for (const productAddedId in storedProducts) {
-
-    //variable de la cantidad de productos
-    var cantidad = storedProducts[productAddedId];
-    //prueba
-    console.log("Producto ID: " + productAddedId + ", Cantidad: " + cantidad);
+  for (const productAddedId of storedProducts) {
 
     fetch(PRODUCT_INFO_URL + productAddedId + ".json")
       .then(response => response.json())
@@ -112,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function () {
           <td>USD${data.cost}</td>
           <td><div><input type="number" class="form-control product-amount" value="1" min="1" ></div></td>
           <td class="subtotalProducto">USD<span class="subtotalProductoPrecio">${data.cost}</span></td>
-          <td><a href="#" class="btnEliminar" style= "cursor: pointer">Eliminar</a></td>
+          <td><button class="btnEliminar" onclick="removeProductFromCart('${data.id}')" style= "cursor: pointer"><i class="fa-regular fa-trash-can fa-lg" style="color: #f55151;"></i></button></td>
           </tr>
         `;
         subtotalFinal();
@@ -140,38 +135,29 @@ productosAdd.addEventListener('input', function (event) {
   }
 });
 
-//Elimina el producto del carrito
-productosAdd.addEventListener('click', function (event) {
-  if (event.target.classList.contains('btnEliminar')) {
-    const row = event.target.closest('.producto');
-    row.remove();
-    subtotalFinal();
-  }
-});
-
 //Suma de Subtotales 
 function subtotalFinal() {
   let sumaSubtotales = document.getElementsByClassName("subtotalProductoPrecio");
   let suma = 0;
-  for(let i = 0; i < sumaSubtotales.length; i++){
+  for (let i = 0; i < sumaSubtotales.length; i++) {
     sumaSubtotal = sumaSubtotales[i];
     suma += Number(sumaSubtotal.innerText);
-}
+  }
   document.getElementById('subtotalPrecioFinal').innerHTML = suma;
   calcularPorcentajeDeEnvios();
 }
 
 /* Porcentajes de envios */
-function imprimirPorcentajeDeEnvios(porcentaje){
+function imprimirPorcentajeDeEnvios(porcentaje) {
   let sumaSubtotalFinal = document.getElementById('subtotalPrecioFinal');
-  document.getElementById("costo-de-envio").innerText = Math.floor( Number(sumaSubtotalFinal.innerText) * porcentaje );
+  document.getElementById("costo-de-envio").innerText = Math.floor(Number(sumaSubtotalFinal.innerText) * porcentaje);
   precioTotalAPagar();
 }
 
 function calcularPorcentajeDeEnvios() {
   const shippings = document.getElementsByClassName('radio-shipping');
-  for(let shipping of shippings){
-    if(shipping.checked){
+  for (let shipping of shippings) {
+    if (shipping.checked) {
       imprimirPorcentajeDeEnvios(shipping.value);
     }
   }
@@ -193,13 +179,13 @@ tarjeta.addEventListener("change", actualizarSeleccion);
 transferencia.addEventListener("change", actualizarSeleccion);
 
 function actualizarSeleccion() {
-    if (tarjeta.checked) {
-        seleccion.textContent = "Tarjeta de credito";
-    } else if (transferencia.checked) {
-        seleccion.textContent = "Transferencia bancaria";
-    } else {
-        seleccion.textContent = "no ha seleccionado";
-    }
+  if (tarjeta.checked) {
+    seleccion.textContent = "Tarjeta de credito";
+  } else if (transferencia.checked) {
+    seleccion.textContent = "Transferencia bancaria";
+  } else {
+    seleccion.textContent = "no ha seleccionado";
+  }
 }
 
 //bloquear campos del otro radio cuando ya hay uno seleccionado
@@ -217,13 +203,13 @@ transferencia.addEventListener("change", bloquearotroradio);
 
 
 function bloquearotroradio() {
-  if(tarjeta.checked){
+  if (tarjeta.checked) {
     numerotarjeta.disabled = false;
     numerocuenta.disabled = true;
     codigoSeguridad.disabled = false;
     fechaVencimiento.disabled = false;
   }
-  if (transferencia.checked){
+  if (transferencia.checked) {
     numerotarjeta.disabled = true;
     codigoSeguridad.disabled = true;
     fechaVencimiento.disabled = true;
@@ -231,7 +217,7 @@ function bloquearotroradio() {
   }
   //Eliminamos las clases de control de validity en caso de que se cambia el metodo de pago
   var inputs = document.querySelectorAll('#form_tarjeta .form-control');
-  inputs.forEach( (input) => { input.classList.remove('is-invalid','is-valid')});
+  inputs.forEach((input) => { input.classList.remove('is-invalid', 'is-valid') });
   //Ocultamos el invalid-feedback si se cambia de metodo de pago ya que tiene que validarse de nuevo
   const feedback = document.querySelector('#payment-feedback');
   feedback.classList.add('invalid-feedback');
@@ -243,29 +229,29 @@ const alertSuccess = document.getElementById("compraExitosa");
 
 
 //Validación campos de formulario//
-(function validarForm () {
+(function validarForm() {
 
   finalizarCompra.addEventListener('click', event => {
-      const todo_correcto = validacionDeProductos() && validacionDireccion() && validacionDePago();
-     
-      if(todo_correcto){
-        alertSuccess.style.display = 'block';
-        setTimeout( () => {
-          alertSuccess.style.display = 'none';
-        }, 3000);
-      }
-    }, false)
+    const todo_correcto = validacionDeProductos() && validacionDireccion() && validacionDePago();
+
+    if (todo_correcto) {
+      alertSuccess.style.display = 'block';
+      setTimeout(() => {
+        alertSuccess.style.display = 'none';
+      }, 3000);
+    }
+  }, false)
 })()
 
 function validacionDireccion() {
   let validado = true;
   const inputs = document.querySelectorAll('#formDireccion input');
-  inputs.forEach( (input) => {
-    if(input.checkValidity()){
+  inputs.forEach((input) => {
+    if (input.checkValidity()) {
       input.classList.add('is-valid');
       input.classList.remove('is-invalid');
     }
-    else{
+    else {
       input.classList.remove('is-valid');
       input.classList.add('is-invalid');
     }
@@ -277,12 +263,12 @@ function validacionDireccion() {
 function validacionDeProductos() {
   const productos = document.querySelectorAll('.product-amount');
   let validado = true;
-  productos.forEach( (product) => {
-    if(product.checkValidity()){
+  productos.forEach((product) => {
+    if (product.checkValidity()) {
       product.classList.add('is-valid');
       product.classList.remove('is-invalid');
     }
-    else{
+    else {
       product.classList.add('is-invalid');
       product.classList.remove('is-valid');
     }
@@ -293,37 +279,22 @@ function validacionDeProductos() {
 
 function validacionDePago() {
   const tarjeta = document.getElementById("tarjeta");
-  const transferencia= document.getElementById("transferencia");
+  const transferencia = document.getElementById("transferencia");
   const feedback = document.querySelector('#payment-feedback');
   feedback.classList.add('invalid-feedback');
-  if(!tarjeta.checked && !transferencia.checked){
+  if (!tarjeta.checked && !transferencia.checked) {
     feedback.classList.remove('invalid-feedback');
     return false;
   }
   let pagoValidado = true;
   if (tarjeta.checked) {
     const inputs = document.querySelectorAll('.credit-card.wrapper input');
-    inputs.forEach( (i) => {
-      if(i.checkValidity()){
+    inputs.forEach((i) => {
+      if (i.checkValidity()) {
         i.classList.add('is-valid');
         i.classList.remove('is-invalid');
       }
-      else{
-        i.classList.add('is-invalid');
-        i.classList.remove('is-valid');
-      }
-      pagoValidado = pagoValidado && i.checkValidity();
-    });
-  }
-  
-  if (transferencia.checked) {
-    const inputs = document.querySelectorAll('.transfer.wrapper input');
-    inputs.forEach( (i) => {
-      if(i.checkValidity()){
-        i.classList.add('is-valid');
-        i.classList.remove('is-invalid');
-      }
-      else{
+      else {
         i.classList.add('is-invalid');
         i.classList.remove('is-valid');
       }
@@ -331,8 +302,41 @@ function validacionDePago() {
     });
   }
 
-  if(!pagoValidado){
+  if (transferencia.checked) {
+    const inputs = document.querySelectorAll('.transfer.wrapper input');
+    inputs.forEach((i) => {
+      if (i.checkValidity()) {
+        i.classList.add('is-valid');
+        i.classList.remove('is-invalid');
+      }
+      else {
+        i.classList.add('is-invalid');
+        i.classList.remove('is-valid');
+      }
+      pagoValidado = pagoValidado && i.checkValidity();
+    });
+  }
+
+  if (!pagoValidado) {
     feedback.classList.remove('invalid-feedback');
   }
   return pagoValidado;
+}
+
+//Elimina el producto del carrito
+productosAdd.addEventListener('click', function (event) {
+  if (event.target.classList.contains('btnEliminar')) {
+    const row = event.target.closest('.producto');
+    row.remove();
+    subtotalFinal();
+  }
+});
+
+//Borra ID del localStorage del producto eliminado
+function removeProductFromCart(productId) {
+  var storedProducts = JSON.parse(localStorage.getItem('productosCompras')) || [];
+  var updatedProducts = storedProducts.filter(function (item) {
+    return item !== productId;
+});
+localStorage.setItem('productosCompras', JSON.stringify(updatedProducts));
 }
