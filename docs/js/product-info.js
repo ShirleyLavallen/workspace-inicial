@@ -277,18 +277,13 @@ window.addEventListener('DOMContentLoaded', loadThemeFromLocalStorage);
 const comprarButton = document.getElementById('comprar-btn');
 
 function addToLocalStorage() {
-  var storedProducts = JSON.parse(localStorage.getItem('productosCompras')) || {};
+  var storedProducts = JSON.parse(localStorage.getItem('productosCompras')) || [];
   const product = getProductId();
 
-  if(storedProducts.hasOwnProperty(product)){
-    storedProducts[product] += 1;
-  }else{
-    storedProducts[product] = 1;
-  }
+  storedProducts.push(product);
 
   localStorage.setItem('productosCompras', JSON.stringify(storedProducts));
   window.location.href = 'cart.html';
 }
 
   comprarButton.addEventListener('click', addToLocalStorage);
-
