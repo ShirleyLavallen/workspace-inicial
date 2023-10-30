@@ -31,7 +31,7 @@
           <li class="nav-item">
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
-          <li class="nav-item dropdown"> <!--Dropdown-->
+          <li class="nav-item dropdown me-3"> <!--Dropdown-->
             <div class="dropdown">
               <button class="btn btn-secondary dropdown-toggle bg-dark border-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                 <a id="dataUsuario"></a>
@@ -49,13 +49,14 @@
     </div>
   </nav>
   <main>
-    <div class="container">
-      <div id="container">
-            <br>
-              <h1 id="nameProduct"></h1> <button id="comprar-btn" class="btn btn-success">Comprar</button>
-            <br>
+    <div class="container m-5">
+      <div id="container row">
+           <div class="d-flex justify-content-between mb-5">
+              <h2 id="nameProduct"></h2> 
+              <button id="comprar-btn" class="btn btn-success me-5">Comprar</button>
+           </div>
             <hr>
-            <ul class="list-group list-group-flush">
+            <ul class="list-group list-group-flush m-3">
               <li class="list-group-item d-flex justify-content-between align-items-start">
                 <div class="ms-2 me-auto">
                   <div class="fw-bold">Precio</div>
@@ -82,7 +83,7 @@
               </li>
               <li class="list-group-item justify-content-between align-items-start">
                 <div>
-                  <div class="fw-bold">Imágenes ilustrativas</div>
+                  <div class="fw-bold mb-5">Imágenes ilustrativas</div>
                   <div id="carouselContainer" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-indicators">
                       <button type="button" data-bs-target="#carouselContainer" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -104,12 +105,10 @@
                 </div>
               </li>
             </ul>
-      <div>
-        <h3 id="tituloComments">Comentarios</h3>
       </div>
-      </div>
+      <h3 id="tituloComments" class="ms-4">Comentarios</h3>
       <div id="comment"></div>
-      <div id="commentBox" class="container">
+      <div id="commentBox" class="container ms-3">
         <h3>Comentar</h3>
         <p>Deja tu opinión:</p>
         <textarea id="commentInput" rows="4" cols="50" class="container"></textarea>

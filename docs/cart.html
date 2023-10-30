@@ -20,8 +20,7 @@
                     <li class="nav-item"> <a class="nav-link" href="index.html">Inicio</a> </li>
                     <li class="nav-item"> <a class="nav-link" href="categories.html">Categorías</a> </li>
                     <li class="nav-item"> <a class="nav-link" href="sell.html">Vender</a> </li>
-                    <li class="nav-item dropdown">
-                        <!--Dropdown-->
+                    <li class="nav-item dropdown me-3"> <!--Dropdown-->
                         <div class="dropdown"> <button class="btn btn-secondary dropdown-toggle bg-dark border-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"> <a id="dataUsuario"></a> </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                 <li><a class="dropdown-item" href="cart.html"><i class="fa-solid fa-cart-shopping" style="color: #757575;"></i> Carrito</a></li>
@@ -39,8 +38,8 @@
         <div class="container mb-4">
             <h2 id="tituloProducto" class="text-center mt-4 mb-3">Carrito de compras</h2>
             <p id="subtituloProducto" class="h4 font-weight-bold">Artículos a comprar</p>
-            <div class="table-responsive mb-4">
-                <table class="table border rounded">
+            <div class="table-responsive mb-4 ">
+                <table class="table border border-2 rounded">
                     <thead>
                         <tr>
                             <th></th>
@@ -58,21 +57,21 @@
             <hr class="w-100 mb-4">
             <div class="envio mb-5">
                 <p id="subtituloProducto" class="h4 font-weight-bold">Tipo de envio</p>
-                <form class="border rounded mb-5">
-                    <div class="form-check m-2"> <input class="form-check-input radio-shipping" type="radio" name="flexRadioDefault" id="premium" value="0.15"> <label class="form-check-label" for="premium"> Premium 2 a 5 días (15%) </label> </div>
-                    <div class="form-check m-2"> <input class="form-check-input radio-shipping" type="radio" name="flexRadioDefault" id="express" value="0.07"> <label class="form-check-label" for="express"> Express 5 a 8 días (7%) </label> </div>
-                    <div class="form-check m-2"> <input class="form-check-input radio-shipping" type="radio" name="flexRadioDefault" id="standard" value="0.05"> <label class="form-check-label" for="standard"> Standard 12 a 15 días (5%) </label> </div>
+                <form class="border border-2 rounded mb-5">
+                    <div class="form-check m-2"> <input class="form-check-input radio-shipping border-secondary" type="radio" name="flexRadioDefault" id="premium" value="0.15"> <label class="form-check-label" for="premium"> Premium 2 a 5 días (15%) </label> </div>
+                    <div class="form-check m-2"> <input class="form-check-input radio-shipping border-secondary" type="radio" name="flexRadioDefault" id="express" value="0.07"> <label class="form-check-label" for="express"> Express 5 a 8 días (7%) </label> </div>
+                    <div class="form-check m-2"> <input class="form-check-input radio-shipping border-secondary" type="radio" name="flexRadioDefault" id="standard" value="0.05"> <label class="form-check-label" for="standard"> Standard 12 a 15 días (5%) </label> </div>
                 </form>
                 <div class="direccion mb-5 m-1">
                     <p id="subtituloProducto" class="h4 font-weight-bold mt-3 mb-4">Dirección de envio</p>
-                    <form class="row g-3 pb-3 border rounded needs-validation" id="formDireccion" novalidate>
-                        <div class="col-md-6"> <label for="inputSAddres" class="form-label">Calle</label> <input type="text" class="form-control" id="street" required>
+                    <form class="row g-3 pb-3 border border-2 rounded needs-validation" id="formDireccion" novalidate>
+                        <div class="col-md-6"> <label for="inputSAddres" class="form-label">Calle</label> <input type="text" class="form-control border-secondary" id="street" required>
                             <div class="invalid-feedback"> Por favor, escriba una dirección valida. </div>
                         </div>
-                        <div class="col-md-6"> <label for="inputJouseNumber" class="form-label">Número</label> <input type="text" class="form-control" id="houseNumber" required>
+                        <div class="col-md-6"> <label for="inputJouseNumber" class="form-label">Número</label> <input type="text" class="form-control border-secondary" id="houseNumber" required>
                             <div class="invalid-feedback"> Complete este campo. </div>
                         </div>
-                        <div class="col-12"> <label for="inputStreet" class="form-label">Esquina</label> <input type="text" class="form-control" id="corner" required>
+                        <div class="col-12"> <label for="inputStreet" class="form-label">Esquina</label> <input type="text" class="form-control border-secondary" id="corner" required>
                             <div class="invalid-feedback"> Complete este campo. </div>
                         </div>
                     </form>
@@ -80,7 +79,7 @@
                 <hr class="w-100 mb-3">
                 <div class="table-responsive">
                     <p id="subtituloProducto" class="h4 font-weight-bold mt-3">Costos</p>
-                    <ul class="list-group list-group">
+                    <ul class="list-group list-group border border-2">
                         <li class="list-group-item d-flex justify-content-between align-items-start">
                             <div class="ms-2 me-auto">
                                 <div class="fw-bold">Subtotal</div> Costo unitario del producto por cantidad.
@@ -106,7 +105,7 @@
                 <hr class="w-100 mb-4">
                 <h4>Forma de pago</h4>
                 <div>
-                    <div class="border rounded pt-2 pb-2" id="metodoPago"> 
+                    <div class="border border-2 rounded pt-2 pb-2 ps-3" id="metodoPago"> 
                         <span id="seleccion">No ha seleccionado</span> <button class="btn btn-link ps-0" data-bs-toggle="modal" data-bs-target="#parapagar" id="btn-Selec">seleccionar</button>
                         <div class="invalid-feedback is-invalid" id="payment-feedback"> Debe seleccionar una forma de pago </div>
                     </div>
@@ -122,27 +121,26 @@
                                     <form class="needs-validation" id="form_tarjeta" novalidate>
                                         <div class="form-group row p-3 pt-1 text-secondary">
                                             <div class="form-check"> 
-                                              <input class="form-check-input" type="radio" name="formaDePago" id="tarjeta" value="tarjetaCredito" class="radio" required>
+                                              <input class="form-check-input border-secondary" type="radio" name="formaDePago" id="tarjeta" value="tarjetaCredito" class="radio" required>
                                               <label class="form-check-label mb-3" for="tarjeta">Tarjeta de crédito</label> 
                                             </div>
                                             <div class="credit-card wrapper row">
                                                 <div class="needs-validation" id="form_credit_card">
                                                     <div class="col-6"> 
                                                       <label for="numeroTarjeta">Número de tarjeta:</label> 
-                                                      <input type="text" class="form-control mb-3" id="numerotarjeta" class="campotc" name="numeroTarjeta" pattern="^\d{13,19}$" required> 
+                                                      <input type="text" class="form-control campotc mb-3 border-secondary" id="numerotarjeta" name="numeroTarjeta" pattern="^\d{13,19}$" required> 
                                                     </div>
-                                                    <div class="col-4"> <label for="codigoSeguridad">Código de seg:</label> <input type="text" class="form-control" id="codigoSeguridad" class="campotc" name="codigoSeguridad" pattern="^\d{4}$" required> </div>
-                                                    <div class="col-6"> <label for="fechaVencimiento">Vencimiento (MM/AA):</label> <input type="text" class="form-control mb-3" id="fechaVencimiento" class="campotc" name="fechaVencimiento" pattern="^(0[1-9]|1[0-2])/(0[1-9]|[1-9][0-9])$" required> </div>
+                                                    <div class="col-4"> <label for="codigoSeguridad">Código de seg:</label> <input type="text" class="form-control campotc border-secondary" id="codigoSeguridad" name="codigoSeguridad" pattern="^\d{4}$" required> </div>
+                                                    <div class="col-6"> <label for="fechaVencimiento">Vencimiento (MM/AA):</label> <input type="text" class="form-control campotc mb-3 border-secondary" id="fechaVencimiento" name="fechaVencimiento" pattern="^(0[1-9]|1[0-2])/(0[1-9]|[1-9][0-9])$" required> </div>
                                                   </div>
                                             </div>
-                                            <div class="form-check"> <input class="form-check-input" type="radio" name="formaDePago" id="transferencia" value="transferenciaBancaria" class="radio" required> <label class="form-check-label mb-3" for="transferencia">Transferencia</label> </div>
+                                            <div class="form-check"> <input class="form-check-input border-secondary" type="radio" name="formaDePago" id="transferencia" value="transferenciaBancaria" class="radio" required> <label class="form-check-label mb-3" for="transferencia">Transferencia</label> </div>
                                             <div class="transfer wrapper row">
                                                 <div class="needs-validation" id="form_transferencia">
                                                     <div class="col-6"> <label for="numeroDeCuenta">Número de cuenta:</label> 
-                                                    <input type="text" class="form-control mb-1" id="numerocuenta" class="campotb" name="numeroCuenta" pattern="^\d{13,19}$" required> </div>
+                                                    <input type="text" class="form-control campotb mb-1 border-secondary" id="numerocuenta" name="numeroCuenta" pattern="^\d{13,19}$" required> </div>
                                                 </div>
                                             </div>
-                                            <hr class="w-100"> <!-- Campo para el número de tarjeta de crédito -->
                                     </form>
                                 </div>
                                 <div class="modal-footer"> <button class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button> </div>
@@ -150,7 +148,8 @@
                         </div>
                     </div>
                 </div>
-            </div> <!-- Button trigger modal --> <button id="comprar" type="button" class="btn btn-primary w-100 mt-5 btn-lg"> Finalizar compra </button>
+            </div> 
+            <button id="comprar" type="button" class="btn btn-primary w-100 mt-5 btn-lg"> Finalizar compra </button>
             <div class="alert alert-success text-center" id="compraExitosa" style="position: fixed; top: 40%; display: none;"> ¡Compra exitosa! </div>
     </main>
     <footer class="text-muted">
