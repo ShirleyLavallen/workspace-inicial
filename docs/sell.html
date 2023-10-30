@@ -31,7 +31,7 @@
             <a class="nav-link active" href="sell.html">Vender</a>
           </li>
           <li class="nav-item dropdown">
-            <div class="dropdown"> <!--Dropdown-->
+            <div class="dropdown me-3"> <!--Dropdown-->
               <button class="btn btn-secondary dropdown-toggle bg-dark border-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                 <a id="dataUsuario"></a>
               </button>
@@ -59,7 +59,7 @@
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="productName">Nombre</label>
-              <input type="text" class="form-control" id="productName" value="" name="productName">
+              <input type="text" class="form-control border-2" id="productName" value="" name="productName">
               <div class="invalid-feedback">
                 Ingresa un nombre
               </div>
@@ -78,13 +78,13 @@
           <div class="row">
             <div class="col-md-12 mb-3">
               <label for="productDescription">Descripción</label>
-              <textarea name="productDescription" class="form-control" id="productDescription"></textarea>
+              <textarea name="productDescription" class="form-control border-2" id="productDescription"></textarea>
             </div>
           </div>
           <div class="row">
             <div class="col-md-3 mb-3">
               <label for="productCostInput">Costo</label>
-              <input type="number" name="productCostInput" class="form-control" id="productCostInput" placeholder="" required="" value="0"
+              <input type="number" name="productCostInput" class="form-control border-2" id="productCostInput" placeholder="" required="" value="0"
                 min="0">
               <div class="invalid-feedback">
                 El costo debe ser mayor que 0.
@@ -92,7 +92,7 @@
             </div>
             <div class="col-md-4 mb-3">
               <label for="productCurrency">Moneda</label>
-              <select name="productCurrency" class="form-select custom-select d-block w-100" id="productCurrency" required>
+              <select name="productCurrency" class="form-select custom-select d-block w-100 border-2" id="productCurrency" required>
                 <option value="" hidden selected>Seleccionar moneda</option>
                 <option>Pesos Uruguayos (UYU)</option>
                 <option>Dólares (USD)</option>
@@ -105,7 +105,7 @@
           <div class="row">
             <div class="col-md-7 mb-3">
               <label for="productCategory">Categoría</label>
-              <select name="productCategory" class="custom-select form-select d-block w-100" id="productCategory">
+              <select name="productCategory" class="custom-select form-select d-block w-100 border-2" id="productCategory">
                 <option value="">Elija la categoría...</option>
                 <option>Autos</option>
                 <option>Juguetes</option>
@@ -122,7 +122,7 @@
           <div class="row">
             <div class="col-md-3 mb-3">
               <label for="productCountInput">Cantidad en stock</label>
-              <input type="number" name="productCountInput" class="form-control" id="productCountInput"  required value="1"
+              <input type="number" name="productCountInput" class="form-control border-2" id="productCountInput"  required value="1"
                 min="0">
               <div class="invalid-feedback">
                 La cantidad es requerida.
@@ -153,7 +153,7 @@
           </div>
           <hr class="mb-4">
           <h4 class="mb-3">Costos</h4>
-          <ul class="list-group mb-3">
+          <ul class="list-group mb-3 border border-2">
             <li class="list-group-item d-flex justify-content-between lh-condensed">
               <div>
                 <h6 class="my-0">Precio</h6>

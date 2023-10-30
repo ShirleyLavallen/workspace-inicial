@@ -302,7 +302,7 @@ transform: translateX(23px);
 
 /*Rediseño Login*/
 
-#logBody{
+.logBody{
   background-image: url("https://getwallpapers.com/wallpaper/full/4/3/1/668659.jpg");
   background-size: auto;
   background-repeat: no-repeat;
@@ -317,16 +317,12 @@ transform: translateX(23px);
     background-color: rgba(255, 255, 255, 0.372);
 
   }
-  
-  .whiteText{
-  color: #fff;
-  }
 
   .blackText{
     color: #1f2483;
     }
 
-  #logBtn{
+  .logBtn{
     background-color: #212529;
     color: white;
     border-radius: 2em;
@@ -335,7 +331,7 @@ transform: translateX(23px);
     margin-top: 10px;
   }
 
-  #logBtn:hover{
+  .logBtn:hover{
     background-color: #485058;
   }
 
