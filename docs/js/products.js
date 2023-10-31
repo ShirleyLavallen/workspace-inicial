@@ -216,9 +216,11 @@ function selectProduct(Id) {
   localStorage.setItem('selectedProduct', Id);
   window.location.href = 'product-info.html'
 }
-let cerrar = document.getElementById("cerrarsesion"); //borrar usuario al cerrar sesion
+let cerrar = document.getElementById("cerrarsesion"); //borrar usuario y email al cerrar sesion
 cerrar.addEventListener("click", function () {
-  localStorage.removeItem("username");
+  localStorage.removeItem("username"); 
+  localStorage.removeItem("email"); 
+
 });
 
 //Modo Noche

@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const userSes = getSessionData("username");
 
   if (!userSes) {
-    alert("Por favor, registrate");
+    alert("Por favor, registrate o inicia sesión para acceder a tu perfil");
     window.location.href = "login.html";
   }
 });
@@ -24,9 +24,11 @@ document.addEventListener("DOMContentLoaded", () => {
   container.textContent = usuario;
 })
 
-let cerrar = document.getElementById("cerrarsesion"); //borrar usuario al cerrar sesion
+let cerrar = document.getElementById("cerrarsesion"); //borrar usuario y email al cerrar sesion
 cerrar.addEventListener("click", function () {
-  localStorage.removeItem("username");
+  localStorage.removeItem("username"); 
+  localStorage.removeItem("email"); 
+
 });
 
 //Modo Noche
@@ -50,3 +52,13 @@ function loadThemeFromLocalStorage() {
 // Cargar el tema desde localStorage al cargar la página
 
 window.addEventListener('DOMContentLoaded', loadThemeFromLocalStorage);  
+
+//campo e-mail del perfil mediante el usado en el login
+
+document.addEventListener("DOMContentLoaded", function () {
+  const email = localStorage.getItem("email"); // Recupera el correo de sessionStorage
+
+  if (email) {
+    document.getElementById("emailprofile").value = email;
+  }
+});

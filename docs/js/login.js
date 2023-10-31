@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const email = document.getElementById("email").value;
 
     if (username && password && email) {
+      localStorage.setItem("email", email);
       setSessionData(username);
       window.location.href = "index.html";
     }
@@ -18,8 +19,10 @@ document.addEventListener("DOMContentLoaded", function () {
 function setSessionData(username) {
   localStorage.setItem("username", username);
 }
- 
-let cerrar = document.getElementById("cerrarsesion"); //borrar usuario al cerrar sesion
+
+let cerrar = document.getElementById("cerrarsesion"); //borrar usuario y email al cerrar sesion
 cerrar.addEventListener("click", function () {
   localStorage.removeItem("username"); 
+  localStorage.removeItem("email"); 
+
 });
