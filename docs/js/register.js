@@ -2,11 +2,11 @@
 
 (function regValidado() {
   const button = document.getElementById("regBtn");
-  const username = document.getElementById("newUsername").value;
+ 
 
   button.addEventListener("click", function (event) {
     event.preventDefault();
-
+    const username = document.getElementById("newUsername").value;
     if (validacionReg()) { 
       setSessionData(username);
       window.location.href = "index.html";
