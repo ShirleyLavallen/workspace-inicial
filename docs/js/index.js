@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
   const user = JSON.parse(localStorage.getItem('login_success')) || false;
   if (!user) {
-    alert('puto el que no se loguea');
+    alert('Debe iniciar sesión para cceder al sitio.');
     window.location.href = "login.html";
   }
 });
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 let cerrar = document.getElementById("cerrarsesion"); //borrar usuario al cerrar sesion
 cerrar.addEventListener("click", function () {
-  localStorage.removeItem("username");
+  localStorage.removeItem("login_success");
 });
 
 //Modo Noche

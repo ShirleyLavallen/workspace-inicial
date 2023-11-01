@@ -84,9 +84,8 @@ document.getElementById("rangeFilterPrice").addEventListener("click", function (
   showProducts();
 });
 
-//verificación del login
+
 document.addEventListener("DOMContentLoaded", function () {
-  const userSes = getSessionData("username");
   const catId = getCategoryId();
   fetch(DATA_URL + catId + '.json')
     .then(response => response.json())
@@ -134,10 +133,6 @@ document.addEventListener("DOMContentLoaded", function () {
     window.location.href = "login.html";
   }
 });
-
-function getSessionData(usrname) {
-  return localStorage.getItem(usrname);
-}
 
 const ORDER_ASC_BY_PRICE = "asc";
 const ORDER_DESC_BY_PRICE = "desc";
@@ -200,27 +195,38 @@ document.addEventListener("DOMContentLoaded", function (e) {
   });
 })
 
-//Usuario en la esquina superior derecha
-
-
-document.addEventListener("DOMContentLoaded", () => {
-
-  const container = document.getElementById("dataUsuario");
-  const usuario = localStorage.getItem("username");
-
-  container.textContent = usuario;
-})
 
 //Se guarda la id de los productos
 function selectProduct(Id) {
   localStorage.setItem('selectedProduct', Id);
   window.location.href = 'product-info.html'
 }
-let cerrar = document.getElementById("cerrarsesion"); //borrar usuario y email al cerrar sesion
-cerrar.addEventListener("click", function () {
-  localStorage.removeItem("username"); 
-  localStorage.removeItem("email"); 
 
+//verificación del login
+
+document.addEventListener("DOMContentLoaded", function () {
+  const user = JSON.parse(localStorage.getItem('login_success')) || false;
+  if (!user) {
+    alert('Debe iniciar sesión para cceder al sitio.');
+    window.location.href = "login.html";
+  }
+});
+
+
+//Usuario en la esquina superior derecha
+
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const container = document.getElementById("dataUsuario");
+  const userData = JSON.parse(localStorage.getItem("login_success"));
+
+  container.textContent = userData.username;
+})
+
+let cerrar = document.getElementById("cerrarsesion"); //borrar usuario al cerrar sesion
+cerrar.addEventListener("click", function () {
+  localStorage.removeItem("login_success");
 });
 
 //Modo Noche

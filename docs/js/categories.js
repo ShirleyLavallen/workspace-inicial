@@ -146,35 +146,29 @@ document.addEventListener("DOMContentLoaded", function (e) {
 //verificación del login
 
 document.addEventListener("DOMContentLoaded", function () {
-    const userSes = getSessionData("username");
-
-    if (!userSes) {
-        alert("Por favor, registrate");
-        window.location.href = "login.html";
+    const user = JSON.parse(localStorage.getItem('login_success')) || false;
+    if (!user) {
+      alert('Debe iniciar sesión para cceder al sitio.');
+      window.location.href = "login.html";
     }
-});
-
-function getSessionData(usrname) {
-    return localStorage.getItem(usrname);
-}
-
-//Usuario en la esquina superior derecha
-
-document.addEventListener("DOMContentLoaded", () => {
-
+  });
+  
+  
+  //Usuario en la esquina superior derecha
+  
+  
+  document.addEventListener("DOMContentLoaded", () => {
+  
     const container = document.getElementById("dataUsuario");
-    const usuario = localStorage.getItem("username");
-
-    container.textContent = usuario;
-})
-
-let cerrar = document.getElementById("cerrarsesion"); //borrar usuario y email al cerrar sesion
-cerrar.addEventListener("click", function () {
-  localStorage.removeItem("username"); 
-  localStorage.removeItem("email"); 
-
-});
-
+    const userData = JSON.parse(localStorage.getItem("login_success"));
+  
+    container.textContent = userData.username;
+  })
+  
+  let cerrar = document.getElementById("cerrarsesion"); //borrar usuario al cerrar sesion
+  cerrar.addEventListener("click", function () {
+    localStorage.removeItem("login_success");
+  });
 
 //Modo Noche
 
