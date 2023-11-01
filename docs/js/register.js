@@ -40,14 +40,18 @@ button.addEventListener('click', (e)=>{
   const username = document.getElementById("newUsername").value;
   const email = document.getElementById("newEmail").value;
   const password = document.getElementById("newPassword").value;
-
   var users = JSON.parse(localStorage.getItem('users')) || [];
+ 
+  const lastUserId = users.length > 0 ? users[users.length - 1].id : 0;
+
+  const uniqueId = lastUserId + 1;
+
   const isUserReg = users.find(user=>user.email === email)
   if(isUserReg){
-    return alert('El usuario ya existe');
+    return alert('Ya existe un usuario con este email ya existe');
   }
 
-  users.push({username: username, email: email, password: password});
+  users.push({id:uniqueId, username: username, email: email, password: password, image: null});
   
   localStorage.setItem('users', JSON.stringify(users))
   window.location.href = 'login.html';

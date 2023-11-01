@@ -56,3 +56,40 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("emailprofile").value = email;
   }
 });
+
+// tomo la id del usuario que inició sesión
+
+const imageInput = document.getElementById('imageInput');
+imageInput.addEventListener('change', function () {
+  const profileImage = document.getElementById('profileImage');
+  const selectedImage = imageInput.files[0];
+
+  if (selectedImage) {
+    const imgRead = new FileReader();
+    imgRead.onload = function (e) {
+      profileImage.src = e.target.result;
+      const users = JSON.parse(localStorage.getItem('users')) || [];
+      const loginSuccess = JSON.parse(localStorage.getItem('login_success'));
+      
+      const userId = loginSuccess.id;
+      const user = users.find(u => u.id === userId);
+
+      // Actualiza la imagen del usuario en login_success
+      loginSuccess.image = e.target.result;
+      localStorage.setItem('login_success', JSON.stringify(loginSuccess));
+
+      // Actualiza la imagen del usuario en users
+      user.image = e.target.result;
+      localStorage.setItem('users', JSON.stringify(users));
+      
+    };
+    imgRead.readAsDataURL(selectedImage);
+  }
+});
+
+// toma la imagen del usuario que inició sesión y actualiza
+const loginSuccess = JSON.parse(localStorage.getItem('login_success'));
+if (loginSuccess && loginSuccess.image) {
+  const profileImage = document.getElementById('profileImage');
+  profileImage.src = loginSuccess.image;
+}

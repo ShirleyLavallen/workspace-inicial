@@ -37,9 +37,8 @@ function validacionReg() {
 
 function logIn(username, email, password) {
   var users = JSON.parse(localStorage.getItem('users')) || [];
-  const validUser = users.find(user => user.username === username && user.email === email && user.password === password);
+  const validUser = users.find(user =>user.email === email && user.password === password);
   if (validUser) {
-    alert(`Bienvenido ${validUser.username}`);
     localStorage.setItem('login_success', JSON.stringify(validUser));
     return true;
   }
