@@ -57,11 +57,12 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-// tomo la id del usuario que inició sesión
 
+const loginSuccess = JSON.parse(localStorage.getItem('login_success'));
 const imageInput = document.getElementById('imageInput');
+const profileImage = document.getElementById('profileImage');
+// Función para cambiar imágen de usuario
 imageInput.addEventListener('change', function () {
-  const profileImage = document.getElementById('profileImage');
   const selectedImage = imageInput.files[0];
 
   if (selectedImage) {
@@ -69,8 +70,7 @@ imageInput.addEventListener('change', function () {
     imgRead.onload = function (e) {
       profileImage.src = e.target.result;
       const users = JSON.parse(localStorage.getItem('users')) || [];
-      const loginSuccess = JSON.parse(localStorage.getItem('login_success'));
-      
+
       const userId = loginSuccess.id;
       const user = users.find(u => u.id === userId);
 
@@ -86,10 +86,5 @@ imageInput.addEventListener('change', function () {
     imgRead.readAsDataURL(selectedImage);
   }
 });
-
-// toma la imagen del usuario que inició sesión y actualiza
-const loginSuccess = JSON.parse(localStorage.getItem('login_success'));
-if (loginSuccess && loginSuccess.image) {
-  const profileImage = document.getElementById('profileImage');
+// Toma la imagen del usuario que inició sesión y actualiza el src
   profileImage.src = loginSuccess.image;
-}
