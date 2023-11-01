@@ -189,10 +189,10 @@ document.addEventListener("DOMContentLoaded", () => {
     container.textContent = usuario;
   })
 
-let cerrar = document.getElementById("cerrarsesion"); //borrar usuario al cerrar sesion
-cerrar.addEventListener("click", function () {
-  localStorage.removeItem("username");
-});
+  let cerrar = document.getElementById("cerrarsesion"); //borrar usuario y email al cerrar sesion
+  cerrar.addEventListener("click", function () {
+    localStorage.removeItem("login_success");  
+  });
 
 //lo he movido del fetch
 function productsDetails(product){
@@ -233,7 +233,7 @@ for (let i = 0; i < product.relatedProducts.length; i++) {
   htmlRelatedToAppend += `
    <div class="col-md-3">
     <div class="card" >
-      <a onclick="relatedProducts('${relatedId}')" style= "cursor: pointer">
+      <a onclick="setRelatedProducts('${relatedId}')" style= "cursor: pointer">
         <div>
           <img src="${imageRelated}" class="card-img-top" alt="Foto ${relatedName}">
           <p>${relatedName}</p>
@@ -246,7 +246,7 @@ for (let i = 0; i < product.relatedProducts.length; i++) {
 containerCard.innerHTML = htmlRelatedToAppend;
 }
 
-function relatedProducts(Id){
+function setRelatedProducts(Id){
   localStorage.setItem('selectedProduct', Id);
   window.location.href = `product-info.html?productId=${Id}`; 
 }
