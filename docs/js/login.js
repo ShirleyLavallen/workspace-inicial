@@ -7,6 +7,7 @@
   button.addEventListener("click", function (event) {
     event.preventDefault();
 
+
     if (validacionReg()) { 
       setSessionData(username);
       window.location.href = "index.html";
@@ -37,10 +38,10 @@ function setSessionData(username) {
   localStorage.setItem("username", username);
 }
 
+
  //Borrar usuario al cerrar sesión
 let cerrar = document.getElementById("cerrarsesion"); 
 cerrar.addEventListener("click", function () {
   localStorage.removeItem("username"); 
 });
-
 

@@ -189,10 +189,12 @@ document.addEventListener("DOMContentLoaded", () => {
     container.textContent = usuario;
   })
 
-let cerrar = document.getElementById("cerrarsesion"); //borrar usuario al cerrar sesion
-cerrar.addEventListener("click", function () {
-  localStorage.removeItem("username");
-});
+  let cerrar = document.getElementById("cerrarsesion"); //borrar usuario y email al cerrar sesion
+  cerrar.addEventListener("click", function () {
+    localStorage.removeItem("username"); 
+    localStorage.removeItem("email"); 
+  
+  });
 
 //lo he movido del fetch
 function productsDetails(product){
