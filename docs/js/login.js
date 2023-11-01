@@ -2,18 +2,20 @@
 
 (function regValidado() {
   const button = document.getElementById("logBtn");
-  const username = document.getElementById("username").value;
 
   button.addEventListener("click", function (event) {
     event.preventDefault();
-
-
-    if (validacionReg()) { 
-      setSessionData(username);
-      window.location.href = "index.html";
+    if (validacionReg()) {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      if (logIn(email, password)) {
+        window.location.href = "index.html";
+      } else {
+        console.log("Inicio de sesión fallido");
+      }
     }
-  }, false)
-})()
+  }, false);
+})();
 
 //Validar campos del form
 function validacionReg() {
@@ -33,15 +35,13 @@ function validacionReg() {
   return validado;
 }
 
-//Setear user en local storage
-function setSessionData(username) {
-  localStorage.setItem("username", username);
+function logIn(email, password) {
+  var users = JSON.parse(localStorage.getItem('users')) || [];
+  const validUser = users.find(user => user.email === email && user.password === password);
+  if (validUser) {
+    alert(`Bienvenido ${validUser.username}`);
+    localStorage.setItem('login_success', JSON.stringify(validUser));
+    return true;
+  }
+  return false;
 }
-
-
- //Borrar usuario al cerrar sesión
-let cerrar = document.getElementById("cerrarsesion"); 
-cerrar.addEventListener("click", function () {
-  localStorage.removeItem("username"); 
-});
-

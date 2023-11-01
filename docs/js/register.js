@@ -8,8 +8,7 @@
     event.preventDefault();
     const username = document.getElementById("newUsername").value;
     if (validacionReg()) { 
-      setSessionData(username);
-      window.location.href = "index.html";
+      setSession(username);
     }
   }, false)
 })()
@@ -32,8 +31,27 @@ function validacionReg() {
   return validado;
 }
 
-//Setear user en local storage
-function setSessionData(username) {
-  localStorage.setItem("username", username);
+
+function setSession(){
+  const button = document.getElementById("regBtn");
+button.addEventListener('click', (e)=>{
+  e.preventDefault()
+
+  const username = document.getElementById("newUsername").value;
+  const email = document.getElementById("newEmail").value;
+  const password = document.getElementById("newPassword").value;
+
+  var users = JSON.parse(localStorage.getItem('users')) || [];
+  const isUserReg = users.find(user=>user.email === email)
+  if(isUserReg){
+    return alert('El usuario ya existe');
+  }
+
+  users.push({username: username, email: email, password: password});
+  
+  localStorage.setItem('users', JSON.stringify(users))
+  window.location.href = 'login.html';
+})
 }
+
 
