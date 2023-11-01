@@ -48,10 +48,10 @@ button.addEventListener('click', (e)=>{
 
   const isUserReg = users.find(user=>user.email === email)
   if(isUserReg){
-    return alert('Ya existe un usuario con este email ya existe');
+    return alert('Ya existe un usuario con este email');
   }
 
-  users.push({id:uniqueId, username: username, email: email, password: password, image: null});
+  users.push({id:uniqueId, username: username, email: email, password: password, image: "https://www.chromethemer.com/backgrounds/google/images/goku-dragon-ball-super-google-background.jpg"});
   
   localStorage.setItem('users', JSON.stringify(users))
   window.location.href = 'login.html';
