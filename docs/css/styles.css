@@ -392,8 +392,16 @@ transform: translateX(23px);
 }
 
 .generalBg{
-/* background-image: url("https://images.pexels.com/photos/933054/pexels-photo-933054.jpeg"); */
+ /*background-image: url("https://images.pexels.com/photos/933054/pexels-photo-933054.jpeg"); */
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
+}
+
+.profilePicture{
+  width: 7rem;
+  height: 7rem;
+  object-fit: cover;
+  border: 2px solid #67676771;
+  border-radius: 100px;
 }
