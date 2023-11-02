@@ -75,43 +75,69 @@
          </div>
         </div>
          <hr class="border-bottom border-gray">
-         <form>
+         <form id="formRegistro" action="#" method="get" novalidate>
            <div class="form-group row pt-1 text-secondary">
              <div class="col-md-6 col-sm-12">
                <label for="primerNombre" class="form-label col-12">Primer nombre:</label>
-               <input type="text" class="form-control" id="primerNombre" name="primerNombre">
+               <input type="text" class="form-control" id="primerNombre" name="primerNombre" required>
+               <div class="invalid-feedback">
+                Debe completar el campo.
+               </div>
              </div>
              <div class="col-md-6 col-sm-12">
                <label for="segundoNombre" class="form-label col-12">Segundo nombre:</label>
-               <input type="text" class="form-control" id="segundoNombre" name="segundoNombre">
+               <input type="text" class="form-control" id="segundoNombre" name="segundoNombre" required>
+               <div class="invalid-feedback">
+                Debe completar el campo.
+               </div>
              </div>
              <div class="col-md-6 col-sm-12">
                <label for="apellido" class="form-label col-6">Apellido:</label>
-               <input type="text" class="form-control" id="apellido" name="apellido">
+               <input type="text" class="form-control" id="apellido" name="apellido" required>
+               <div class="invalid-feedback">
+                Debe completar el campo.
+               </div>
              </div>
              <div class="col-md-6 col-sm-12">
                <label for="segundoApellido" class="form-label col-12">Segundo apellido:</label>
-               <input type="text" class="form-control" id="segundoApellido" name="segundoApellido">
+               <input type="text" class="form-control" id="segundoApellido" name="segundoApellido" required>
+               <div class="invalid-feedback">
+                Debe completar el campo.
+               </div>
              </div>
              <div class="col-md-6 col-sm-12">
                <label for="email" class="form-label col-6">E-mail:</label>
-               <input type="email" class="form-control" id="emailprofile" name="email">
+               <input type="email" class="form-control" id="emailprofile" name="email" required>
+               <div class="invalid-feedback">
+                Debe completar el campo.
+               </div>
              </div>
+        
              <div class="col-md-6 col-sm-12 mb-3">
               <div>
                 <label for="formFileSm" class="form-label text-white text-start ps-1">Seleccione una foto de
                   perfil</label>
                 <input class="form-control form-control-sm" id="imageInput" type="file" accept="image/*">
               </div>
-            </div>
+             </div>
              <div class="col-md-6 col-sm-12">
                <label for="telefono" class="form-label col-12">Teléfono de contacto:</label>
-               <input type="tel" class="form-control" id="telefono" name="telefono">
+               <input type="tel" class="form-control" id="telefono" name="telefono" required>
+               <div class="invalid-feedback">
+                Debe completar el campo.
+               </div>
              </div>
+             <div class="col-md-6 col-sm-12">
+              <label for="nombreUsuario" class="form-label col-12">Nombre de usuario:</label>
+              <input type="text" class="form-control" id="nombreUsuario" name="nombreUsuario" required>
+              <div class="invalid-feedback">
+               Debe completar el campo.
+              </div>
            </div>
+           <hr class="border-bottom border-gray">
+           <button type="submit" class="btn btn-primary" id="cambios-btn">Guardar cambios</button>
           </form>
-          <hr class="border-bottom border-gray">
-          <button type="button" class="btn btn-primary">Guardar cambios</button>
+          
        </div>
      </div>
   </main>
