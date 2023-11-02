@@ -27,8 +27,8 @@ function showProducts() {
       ((maxPrice == undefined) || (maxPrice != undefined && parseInt(product.cost) <= maxPrice))) {
       htmlContentToAppend += `
         <div class="col-6 col-md-4">
-           <div class="card">
-             <img src="${product.image}" class="card-img-top" alt="Foto ${product.name}">
+           <div class="card mb-4">
+             <img src="${product.image}" class="card-img-top p-1" alt="Foto ${product.name}">
              <div class="card-body">
                <h5 class="card-title">${product.name}  USD ${product.cost}</h5>
                <p class="card-text">${product.description}</p>
@@ -229,11 +229,12 @@ cerrar.addEventListener("click", function () {
   localStorage.removeItem("login_success");
 });
 
-//Modo Noche
-
 function enableDarkMode() {
   var element = document.body;
+  var lightBgItem = document.querySelector("div.bg-light");
   element.dataset.bsTheme = element.dataset.bsTheme == "light" ? "dark" : "light";
+  element.classList = element.classList == "lightBg" ? "darkBg" : "lightBg";
+  lightBgItem.classList.toggle("bg-light" ? "bg-dark" : "bg-light");
 
   localStorage.setItem('theme', element.dataset.bsTheme);
 }

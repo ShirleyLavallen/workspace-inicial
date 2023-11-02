@@ -170,18 +170,19 @@ document.addEventListener("DOMContentLoaded", function () {
     localStorage.removeItem("login_success");
   });
 
-//Modo Noche
-
-function enableDarkMode() {
+  function enableDarkMode() {
     var element = document.body;
+    var lightBgItem = document.querySelector("div.bg-light");
     element.dataset.bsTheme = element.dataset.bsTheme == "light" ? "dark" : "light";
-
+    element.classList = element.classList == "lightBg" ? "darkBg" : "lightBg";
+    lightBgItem.classList.toggle("bg-light" ? "bg-dark" : "bg-light");
+  
     localStorage.setItem('theme', element.dataset.bsTheme);
-}
-
-// Función para cargar el tema desde localStorage
-
-function loadThemeFromLocalStorage() {  
+  }
+  
+  // Función para cargar el tema desde localStorage
+  
+  function loadThemeFromLocalStorage() {  
     var theme = localStorage.getItem('theme');
     if (theme === "dark") {
       enableDarkMode();

@@ -27,7 +27,7 @@
   </style>
 </head>
 
-<body data-bs-theme="light" class="generalBg">
+<body data-bs-theme="light" class="lightBg">
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
     <div class="container">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -63,12 +63,12 @@
   </nav>
   <main>
     <!--Formulario para el perfil del usuario-->
-    <div class="container mt-4 ps-5 pe-5">
+    <div class="container bg-light bg-opacity-100 mt-4 pb-5 w-75">
       <div class="row">
         <div class="col-md-10 mx-auto">
-        <div class="d-flex justify-content-between">
-         <h1 class="mt-2">Perfil</h1>
-         <div class="order-1 me-4 mb-3">
+        <div class="d-flex justify-content-between pt-5">
+         <h1 class="mt-4">Perfil</h1>
+         <div class="order-1 me-4 mb-2">
           <div id="profileImageContainer">
             <img id="profileImage" src="" alt="DefaultImg" class="profilePicture">
           </div>
@@ -76,32 +76,32 @@
         </div>
          <hr class="border-bottom border-gray">
          <form>
-           <div class="form-group row pt-1 text-secondary">
+           <div class="form-group row">
              <div class="col-md-6 col-sm-12">
                <label for="primerNombre" class="form-label col-12">Primer nombre:</label>
-               <input type="text" class="form-control" id="primerNombre" name="primerNombre">
+               <input type="text" class="form-control mb-1" id="primerNombre" name="primerNombre">
              </div>
              <div class="col-md-6 col-sm-12">
                <label for="segundoNombre" class="form-label col-12">Segundo nombre:</label>
-               <input type="text" class="form-control" id="segundoNombre" name="segundoNombre">
+               <input type="text" class="form-control mb-1" id="segundoNombre" name="segundoNombre">
              </div>
              <div class="col-md-6 col-sm-12">
                <label for="apellido" class="form-label col-6">Apellido:</label>
-               <input type="text" class="form-control" id="apellido" name="apellido">
+               <input type="text" class="form-control mb-1" id="apellido" name="apellido">
              </div>
              <div class="col-md-6 col-sm-12">
                <label for="segundoApellido" class="form-label col-12">Segundo apellido:</label>
-               <input type="text" class="form-control" id="segundoApellido" name="segundoApellido">
+               <input type="text" class="form-control mb-1" id="segundoApellido" name="segundoApellido">
              </div>
-             <div class="col-md-6 col-sm-12">
+             <div class="col-md-6 col-sm-12 mb-1">
                <label for="email" class="form-label col-6">E-mail:</label>
-               <input type="email" class="form-control" id="emailprofile" name="email">
+               <input type="email" class="form-control mb-1" id="emailprofile" name="email">
              </div>
-             <div class="col-md-6 col-sm-12 mb-3">
+             <div class="col-md-6 col-sm-12 mb-1">
               <div>
-                <label for="formFileSm" class="form-label text-white text-start ps-1">Seleccione una foto de
+                <label for="formFileSm" class="form-label text-start ps-1">Seleccione una foto de
                   perfil</label>
-                <input class="form-control form-control-sm" id="imageInput" type="file" accept="image/*">
+                <input class="form-control form-control-sm mb-1" id="imageInput" type="file" accept="image/*">
               </div>
             </div>
              <div class="col-md-6 col-sm-12">
