@@ -1,6 +1,5 @@
 //Traigo los datos del array de registro guardado en el localStorage 
 let arrayuser = JSON.parse(localStorage.getItem('users'));
-//Usuario loggeado
 let userData = null;
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -15,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
   //Usuario en la esquina superior derecha
   container.textContent = userData.username;
 
-  //El nombre de usuario y el email aparece precargado en mi perfil
+  //El nombre de usuario y el email que aparece precargado en mi perfil
   let user = arrayuser[getIndexOfUser()];
   let userName = document.getElementById("nombreUsuario");
   let userEmail = document.getElementById("emailprofile");
@@ -86,19 +85,19 @@ imageInput.addEventListener('change', function () {
   // Verificacion de formulario del perfil
 
   document.addEventListener("DOMContentLoaded", function () {
-    const formReg = document.getElementById("formRegistro");
+    const formPerfil = document.getElementById("formRegistro");
   
   
-    formReg.addEventListener('submit', event => {
+    formPerfil.addEventListener('submit', event => {
       const btn = document.getElementById('cambios-btn');
       btn.classList.remove('is-invalid');
   
-      if (!formReg.checkValidity()) {
+      if (!formPerfil.checkValidity()) {
         event.preventDefault()
         event.stopPropagation()
       }
 
-      formReg.classList.add('was-validated');
+      formPerfil.classList.add('was-validated');
 
       //Se guardan y actualizan los datos modificados en el array de registro
       let name1 = document.getElementById("primerNombre").value;
@@ -108,7 +107,7 @@ imageInput.addEventListener('change', function () {
       let tel = document.getElementById("telefono").value;
       let userEmail = document.getElementById("emailprofile");
       let userName = document.getElementById("nombreUsuario");
-      
+
       const user = arrayuser[getIndexOfUser()]
 
       user.firstName = name1;
