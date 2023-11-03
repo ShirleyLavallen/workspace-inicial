@@ -28,15 +28,22 @@ function validacionReg() {
     }
     validado = validado && input.checkValidity();
   });
+  const password1 = document.querySelector('#newPassword');
+  const password2 = document.querySelector('#newPassword2');
+        
+  if( password1.value !== password2.value){
+    password2.setCustomValidity("not-equals");
+    validado = false;
+  }else{
+    password2.setCustomValidity("");
+  }
+
+  document.querySelector('#formReg').classList.add('was-validated');
   return validado;
 }
 
 
 function setSession(){
-  const button = document.getElementById("regBtn");
-button.addEventListener('click', (e)=>{
-  e.preventDefault()
-
   const username = document.getElementById("newUsername").value;
   const email = document.getElementById("newEmail").value;
   const password = document.getElementById("newPassword").value;
@@ -55,7 +62,7 @@ button.addEventListener('click', (e)=>{
   
   localStorage.setItem('users', JSON.stringify(users))
   window.location.href = 'login.html';
-})
+
 }
 
 

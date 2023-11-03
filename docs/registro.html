@@ -24,25 +24,30 @@
             <div class="col-md-6">
               <label for="inputUser" class="form-label">Nombre de usuario:</label>
               <input type="text" class="form-control" id="newUsername" required>
+              <div class="invalid-feedback">
+                Debe completar el campo.
+               </div>
             </div>
             <div class="col-md-6">
               <label for="inputEmail" class="form-label">Correo:</label>
               <input type="email" class="form-control" id="newEmail" required>
+              <div class="invalid-feedback">
+                Debe completar el campo.
+               </div>
             </div>
             <div class="col-12">
               <label for="inputPassword" class="form-label password">Contraseña:</label>
-              <input type="password" class="form-control" id="newPassword" required>
+              <input type="password" class="form-control newPassword" id="newPassword" required>
+              <div class="invalid-feedback">
+                Debe completar el campo.
+               </div>
             </div>
             <div class="col-12">
               <label for="inputPassword2" class="form-label">Repetir contraseña:</label>
-              <input type="password" class="form-control password-repeat" id="newPassword2" required>
-            </div>
-            <div class="col-12">
-              <div class="row p-3">
-                <label for="formFileSm" class="form-label text-white text-start ps-1">Seleccione una foto de
-                  perfil</label>
-                <input class="form-control form-control-sm w-75" id="formFileSm" type="file">
-              </div>
+              <input type="password" class="form-control password-repeat newPassword2" id="newPassword2" required>
+              <div class="invalid-feedback">
+                Las contraseñas deben coincidir.
+               </div>
             </div>
             <div>
               <button type="submit" class="btn btn-light logBtn mb-3" id="regBtn"> Registrarme</button>
