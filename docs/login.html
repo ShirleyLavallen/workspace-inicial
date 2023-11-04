@@ -24,17 +24,26 @@
             <div class="form-floating mb-3 blackText">
               <input type="text" class="form-control" id="username" placeholder="" required>
               <label for="floatingInputGroup1">Usuario</label>
+              <div class="invalid-feedback">
+                Debe completar el campo.
+              </div>
             </div>
             <div class="form-floating mb-3 blackText">
               <input type="email" class="form-control" id="email" placeholder="" required>
               <label for="floatingEmail">Correo</label>
+              <div class="invalid-feedback">
+                Debe completar el campo.
+              </div>
             </div>
             <div class="form-floating mb-2 blackText">
               <input type="password" class="form-control mb-4" id="password" placeholder="" required>
               <label for="floatingPassword">Contraseña</label>
+              <div class="invalid-feedback">
+                Debe completar el campo.
+              </div>
               <button type="submit" id="logBtn" class="btn logBtn mb-1 w-50"> Iniciar sesión</button>
-              <div class="alert alert-danger text-center" id="relleneCampos" style="position: fixed; top: 10%; display: none;"> <use xlink:href="#exclamation-triangle-fill"/>
-                ¡Debe rellenar los campos! 
+              <div class="alert alert-danger text-center" id="debeRegistrarse" style="position: fixed; top: 10%; display: none;"> <use xlink:href="#exclamation-triangle-fill"/>
+                ¡Para ingresar debe registrarse! 
               </div>
             </div>
           </form>

@@ -5,11 +5,13 @@ let userData = null;
 document.addEventListener("DOMContentLoaded", () => {
   
  //El nombre de usuario y el email que aparece precargado en mi perfil
+  userData = JSON.parse(localStorage.getItem('login_success'));
   let user = arrayuser[getIndexOfUser()];
   let userName = document.getElementById("nombreUsuario");
   let userEmail = document.getElementById("emailprofile");
   userName.value = user.username;
   userEmail.value = user.email;
+  
 }) 
 
 const loginSuccess = JSON.parse(localStorage.getItem('login_success'));
@@ -83,6 +85,7 @@ imageInput.addEventListener('change', function () {
 
       arrayuser[getIndexOfUser()] = user; 
       localStorage.setItem('users', JSON.stringify(arrayuser));
+      localStorage.setItem('login_success', JSON.stringify(user));
     })
   });
 

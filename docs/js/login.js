@@ -11,13 +11,14 @@
     const password = document.getElementById("password").value;
 
     if (username.trim() === '' || email.trim() === '' || password.trim() === '') {
-      // Muestra la alerta si algún campo está vacío
-      relleneCampos.style.display = "block";
+      validacionReg();
     } else {
       // Si no hay campos vacíos, verifica las demás condiciones
       if (validacionReg() && logIn(username, email, password)) {
         window.location.href = "index.html";
       } else {
+        // Muestra la alerta si algún campo está vacío
+        debeRegistrarse.style.display = "block";
         console.log("Inicio de sesión fallido");
       }
     }
