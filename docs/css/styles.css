@@ -391,8 +391,17 @@ transform: translateX(23px);
   padding: 5px 8px;
 }
 
-.generalBg{
- /*background-image: url("https://images.pexels.com/photos/933054/pexels-photo-933054.jpeg"); */
+.lightBg{
+  background-image: url("https://images.unsplash.com/photo-1541075217473-93119871682d?auto=format&fit=crop&q=80&w=1759&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+  color:#212529;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.darkBg{
+  background-image: url("https://images.pexels.com/photos/933054/pexels-photo-933054.jpeg");
+  color: white;
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -405,3 +414,4 @@ transform: translateX(23px);
   border: 2px solid #67676771;
   border-radius: 100px;
 }
+

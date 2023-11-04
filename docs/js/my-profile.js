@@ -3,51 +3,16 @@ let arrayuser = JSON.parse(localStorage.getItem('users'));
 let userData = null;
 
 document.addEventListener("DOMContentLoaded", () => {
-  //verificación del login
+  
+ //El nombre de usuario y el email que aparece precargado en mi perfil
   userData = JSON.parse(localStorage.getItem('login_success'));
-  if (!userData) {
-    alert('Debe iniciar sesión para acceder al sitio.');
-    window.location.href = "login.html";
-  }
-
-  const container = document.getElementById("dataUsuario");
-  //Usuario en la esquina superior derecha
-  container.textContent = userData.username;
-
-  //El nombre de usuario y el email que aparece precargado en mi perfil
   let user = arrayuser[getIndexOfUser()];
   let userName = document.getElementById("nombreUsuario");
   let userEmail = document.getElementById("emailprofile");
   userName.value = user.username;
   userEmail.value = user.email;
-})
-
-let cerrar = document.getElementById("cerrarsesion"); //borrar usuario al cerrar sesion
-cerrar.addEventListener("click", function () {
-  localStorage.removeItem("login_success");
-});
-
-//Modo Noche
-
-function enableDarkMode() {
-  var element = document.body;
-  element.dataset.bsTheme = element.dataset.bsTheme == "light" ? "dark" : "light";
-
-  localStorage.setItem('theme', element.dataset.bsTheme);
-}
-
-// Función para cargar el tema desde localStorage
-
-function loadThemeFromLocalStorage() {  
-  var theme = localStorage.getItem('theme');
-  if (theme === "dark") {
-    enableDarkMode();
-  }
-}
-
-// Cargar el tema desde localStorage al cargar la página
-
-window.addEventListener('DOMContentLoaded', loadThemeFromLocalStorage);  
+  
+}) 
 
 const loginSuccess = JSON.parse(localStorage.getItem('login_success'));
 const imageInput = document.getElementById('imageInput');
@@ -120,6 +85,7 @@ imageInput.addEventListener('change', function () {
 
       arrayuser[getIndexOfUser()] = user; 
       localStorage.setItem('users', JSON.stringify(arrayuser));
+      localStorage.setItem('login_success', JSON.stringify(user));
     })
   });
 
