@@ -180,19 +180,7 @@ document.addEventListener("DOMContentLoaded",
 
   
 })
-//nombre de usuario 
-document.addEventListener("DOMContentLoaded", () => {
 
-  const container = document.getElementById("dataUsuario");
-  const usuario = localStorage.getItem("username");
-  
-    container.textContent = usuario;
-  })
-
-  let cerrar = document.getElementById("cerrarsesion"); //borrar usuario y email al cerrar sesion
-  cerrar.addEventListener("click", function () {
-    localStorage.removeItem("login_success");  
-  });
 
 //lo he movido del fetch
 function productsDetails(product){
@@ -250,28 +238,6 @@ function setRelatedProducts(Id){
   localStorage.setItem('selectedProduct', Id);
   window.location.href = `product-info.html?productId=${Id}`; 
 }
-
-function enableDarkMode() {
-  var element = document.body;
-  var lightBgItem = document.querySelector("div.bg-light");
-  element.dataset.bsTheme = element.dataset.bsTheme == "light" ? "dark" : "light";
-  element.classList = element.classList == "lightBg" ? "darkBg" : "lightBg";
-  lightBgItem.classList.toggle("bg-light" ? "bg-dark" : "bg-light");
-
-  localStorage.setItem('theme', element.dataset.bsTheme);
-}
-
-// Función para cargar el tema desde localStorage
-
-function loadThemeFromLocalStorage() {  
-  var theme = localStorage.getItem('theme');
-  if (theme === "dark") {
-    enableDarkMode();
-  }
-}
-// Cargar el tema desde localStorage al cargar la página
-
-window.addEventListener('DOMContentLoaded', loadThemeFromLocalStorage);  
 
 
 const comprarButton = document.getElementById('comprar-btn');
