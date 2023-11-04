@@ -251,11 +251,12 @@ function setRelatedProducts(Id){
   window.location.href = `product-info.html?productId=${Id}`; 
 }
 
-//Modo Noche
-
 function enableDarkMode() {
   var element = document.body;
+  var lightBgItem = document.querySelector("div.bg-light");
   element.dataset.bsTheme = element.dataset.bsTheme == "light" ? "dark" : "light";
+  element.classList = element.classList == "lightBg" ? "darkBg" : "lightBg";
+  lightBgItem.classList.toggle("bg-light" ? "bg-dark" : "bg-light");
 
   localStorage.setItem('theme', element.dataset.bsTheme);
 }
@@ -268,7 +269,6 @@ function loadThemeFromLocalStorage() {
     enableDarkMode();
   }
 }
-
 // Cargar el tema desde localStorage al cargar la página
 
 window.addEventListener('DOMContentLoaded', loadThemeFromLocalStorage);  

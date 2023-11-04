@@ -27,8 +27,8 @@ function showProducts() {
       ((maxPrice == undefined) || (maxPrice != undefined && parseInt(product.cost) <= maxPrice))) {
       htmlContentToAppend += `
         <div class="col-6 col-md-4">
-           <div class="card">
-             <img src="${product.image}" class="card-img-top" alt="Foto ${product.name}">
+           <div class="card mb-4">
+             <img src="${product.image}" class="card-img-top p-1" alt="Foto ${product.name}">
              <div class="card-body">
                <h5 class="card-title">${product.name}  USD ${product.cost}</h5>
                <p class="card-text">${product.description}</p>
@@ -201,52 +201,3 @@ function selectProduct(Id) {
   localStorage.setItem('selectedProduct', Id);
   window.location.href = 'product-info.html'
 }
-
-//verificación del login
-
-document.addEventListener("DOMContentLoaded", function () {
-  const user = JSON.parse(localStorage.getItem('login_success')) || false;
-  if (!user) {
-    alert('Debe iniciar sesión para cceder al sitio.');
-    window.location.href = "login.html";
-  }
-});
-
-
-//Usuario en la esquina superior derecha
-
-
-document.addEventListener("DOMContentLoaded", () => {
-
-  const container = document.getElementById("dataUsuario");
-  const userData = JSON.parse(localStorage.getItem("login_success"));
-
-  container.textContent = userData.username;
-})
-
-let cerrar = document.getElementById("cerrarsesion"); //borrar usuario al cerrar sesion
-cerrar.addEventListener("click", function () {
-  localStorage.removeItem("login_success");
-});
-
-//Modo Noche
-
-function enableDarkMode() {
-  var element = document.body;
-  element.dataset.bsTheme = element.dataset.bsTheme == "light" ? "dark" : "light";
-
-  localStorage.setItem('theme', element.dataset.bsTheme);
-}
-
-// Función para cargar el tema desde localStorage
-
-function loadThemeFromLocalStorage() {  
-  var theme = localStorage.getItem('theme');
-  if (theme === "dark") {
-    enableDarkMode();
-  }
-}
-
-// Cargar el tema desde localStorage al cargar la página
-
-window.addEventListener('DOMContentLoaded', loadThemeFromLocalStorage);  

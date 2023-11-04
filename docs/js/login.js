@@ -1,14 +1,21 @@
 // Función registro validado
 (function regValidado() {
   const button = document.getElementById("logBtn");
+  const relleneCampos = document.getElementById("relleneCampos");
 
   button.addEventListener("click", function (event) {
     event.preventDefault();
-    if (validacionReg()) {
-      const username = document.getElementById("username").value;
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
-      if (logIn(username, email, password)) {
+
+    const username = document.getElementById("username").value;
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    if (username.trim() === '' || email.trim() === '' || password.trim() === '') {
+      // Muestra la alerta si algún campo está vacío
+      relleneCampos.style.display = "block";
+    } else {
+      // Si no hay campos vacíos, verifica las demás condiciones
+      if (validacionReg() && logIn(username, email, password)) {
         window.location.href = "index.html";
       } else {
         console.log("Inicio de sesión fallido");

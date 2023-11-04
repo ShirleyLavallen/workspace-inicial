@@ -22,32 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
   userEmail.value = user.email;
 })
 
-let cerrar = document.getElementById("cerrarsesion"); //borrar usuario al cerrar sesion
-cerrar.addEventListener("click", function () {
-  localStorage.removeItem("login_success");
-});
-
-//Modo Noche
-
-function enableDarkMode() {
-  var element = document.body;
-  element.dataset.bsTheme = element.dataset.bsTheme == "light" ? "dark" : "light";
-
-  localStorage.setItem('theme', element.dataset.bsTheme);
-}
-
-// Función para cargar el tema desde localStorage
-
-function loadThemeFromLocalStorage() {  
-  var theme = localStorage.getItem('theme');
-  if (theme === "dark") {
-    enableDarkMode();
-  }
-}
-
-// Cargar el tema desde localStorage al cargar la página
-
-window.addEventListener('DOMContentLoaded', loadThemeFromLocalStorage);  
 
 const loginSuccess = JSON.parse(localStorage.getItem('login_success'));
 const imageInput = document.getElementById('imageInput');
