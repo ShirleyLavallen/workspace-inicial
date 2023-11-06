@@ -3,16 +3,36 @@ let arrayuser = JSON.parse(localStorage.getItem('users'));
 let userData = null;
 
 document.addEventListener("DOMContentLoaded", () => {
-  
- //El nombre de usuario y el email que aparece precargado en mi perfil
+
+  //Datos precargados en mi perfil
   userData = JSON.parse(localStorage.getItem('login_success'));
   let user = arrayuser[getIndexOfUser()];
-  let userName = document.getElementById("nombreUsuario");
+  let userName1 = document.getElementById("primerNombre");
+  let userName2 = document.getElementById("segundoNombre");
+  let userLastname1 = document.getElementById("apellido");
+  let userLastname2 = document.getElementById("segundoApellido");
   let userEmail = document.getElementById("emailprofile");
-  userName.value = user.username;
-  userEmail.value = user.email;
-  
-}) 
+  let userTel = document.getElementById("telefono");
+  let userName = document.getElementById("nombreUsuario");
+ 
+  if (user) {
+     userName1.value = user.firstName || "";
+     userName2.value = user.secondName || "";
+     userLastname1.value = user.firstLastname || "";
+     userLastname2.value = user.secondLastname || "";
+     userEmail.value = user.email || "";
+     userTel.value = user.telephone || "";
+     userName.value = user.username || "";
+  } else {
+     userName1.value = "";
+     userName2.value = "";
+     userLastname1.value = "";
+     userLastname2.value = "";
+     userEmail.value = "";
+     userTel.value = "";
+     userName.value = "";
+  }
+ })
 
 const loginSuccess = JSON.parse(localStorage.getItem('login_success'));
 const imageInput = document.getElementById('imageInput');
@@ -38,61 +58,61 @@ imageInput.addEventListener('change', function () {
       // Actualiza la imagen del usuario en users
       user.image = e.target.result;
       localStorage.setItem('users', JSON.stringify(users));
-      
+
     };
     imgRead.readAsDataURL(selectedImage);
   }
 });
 // Toma la imagen del usuario que inició sesión y actualiza el src
-  profileImage.src = loginSuccess.image;
+profileImage.src = loginSuccess.image;
 
 
-  // Verificacion de formulario del perfil
+// Verificacion de formulario del perfil
 
-  document.addEventListener("DOMContentLoaded", function () {
-    const formPerfil = document.getElementById("formRegistro");
-  
-  
-    formPerfil.addEventListener('submit', event => {
-      const btn = document.getElementById('cambios-btn');
-      btn.classList.remove('is-invalid');
-  
-      if (!formPerfil.checkValidity()) {
-        event.preventDefault()
-        event.stopPropagation()
-      }
+document.addEventListener("DOMContentLoaded", function () {
+  const formPerfil = document.getElementById("formRegistro");
 
-      formPerfil.classList.add('was-validated');
 
-      //Se guardan y actualizan los datos modificados en el array de registro
-      let name1 = document.getElementById("primerNombre").value;
-      let name2 = document.getElementById("segundoNombre").value;
-      let lastname1 = document.getElementById("apellido").value;
-      let lastname2 = document.getElementById("segundoApellido").value;
-      let tel = document.getElementById("telefono").value;
-      let userEmail = document.getElementById("emailprofile");
-      let userName = document.getElementById("nombreUsuario");
+  formPerfil.addEventListener('submit', event => {
+    const btn = document.getElementById('cambios-btn');
+    btn.classList.remove('is-invalid');
 
-      const user = arrayuser[getIndexOfUser()]
+    if (!formPerfil.checkValidity()) {
+      event.preventDefault()
+      event.stopPropagation()
+    }
 
-      user.firstName = name1;
-      user.secondName = name2;
-      user.firstLastname = lastname1;
-      user.secondLastname = lastname2;
-      user.telephone = tel;
-      user.username = userName.value;
-      user.email = userEmail.value;
+    formPerfil.classList.add('was-validated');
 
-      arrayuser[getIndexOfUser()] = user; 
-      localStorage.setItem('users', JSON.stringify(arrayuser));
-      localStorage.setItem('login_success', JSON.stringify(user));
-    })
-  });
+    //Se guardan y actualizan los datos modificados en el array de registro
+    let name1 = document.getElementById("primerNombre").value;
+    let name2 = document.getElementById("segundoNombre").value;
+    let lastname1 = document.getElementById("apellido").value;
+    let lastname2 = document.getElementById("segundoApellido").value;
+    let tel = document.getElementById("telefono").value;
+    let userEmail = document.getElementById("emailprofile");
+    let userName = document.getElementById("nombreUsuario");
 
-  function getIndexOfUser(){
-    //filtro el indice del usuario que esta registrado
-    let indexUser = arrayuser.findIndex(function(user, i) { 
-      return user.username === userData.username
-    })
-    return indexUser;
-  }
+    const user = arrayuser[getIndexOfUser()]
+
+    user.firstName = name1;
+    user.secondName = name2;
+    user.firstLastname = lastname1;
+    user.secondLastname = lastname2;
+    user.telephone = tel;
+    user.username = userName.value;
+    user.email = userEmail.value;
+
+    arrayuser[getIndexOfUser()] = user;
+    localStorage.setItem('users', JSON.stringify(arrayuser));
+    localStorage.setItem('login_success', JSON.stringify(user));
+  })
+});
+
+function getIndexOfUser() {
+  //filtro el indice del usuario que esta registrado
+  let indexUser = arrayuser.findIndex(function (user, i) {
+    return user.username === userData.username
+  })
+  return indexUser;
+}
