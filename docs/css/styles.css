@@ -400,7 +400,9 @@ transform: translateX(23px);
 }
 
 .darkBg{
+
   background-image: url("https://img.freepik.com/premium-photo/realistic-haunted-forest-landscape-night-fantasy-halloween-forest-background-3d-illustration_598586-1340.jpg?w=1060");
+
   color: white;
   background-size: cover;
   background-repeat: no-repeat;
@@ -414,3 +416,4 @@ transform: translateX(23px);
   border: 2px solid #67676771;
   border-radius: 40px;
 }
+

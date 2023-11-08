@@ -3,7 +3,8 @@
 document.addEventListener("DOMContentLoaded", function () {
     const user = JSON.parse(localStorage.getItem('login_success')) || false;
     if (!user) {
-      alert('Debe iniciar sesión para cceder al sitio.');
+      alert('Debe iniciar sesión para acceder al sitio.');
+>>>>>>> registro-v2000
       window.location.href = "login.html";
     }
   });

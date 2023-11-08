@@ -181,7 +181,6 @@ document.addEventListener("DOMContentLoaded",
   
 })
 
-
 //lo he movido del fetch
 function productsDetails(product){
   document.getElementById("nameProduct").innerText = product.name;
