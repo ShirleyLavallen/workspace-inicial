@@ -46,20 +46,11 @@ imageInput.addEventListener('change', function () {
     const imgRead = new FileReader();
     imgRead.onload = function (e) {
       profileImage.src = e.target.result;
-      const users = JSON.parse(localStorage.getItem('users')) || [];
-
-      const userId = loginSuccess.id;
-      const user = users.find(u => u.id === userId);
-
-      // Actualiza la imagen del usuario en login_success
-      loginSuccess.image = e.target.result;
-      localStorage.setItem('login_success', JSON.stringify(loginSuccess));
-
-      // Actualiza la imagen del usuario en users
-      user.image = e.target.result;
-      localStorage.setItem('users', JSON.stringify(users));
-
-    };
+      const imageSrc = e.target.result;
+      loginSuccess.image = imageSrc;
+      const user = arrayuser[getIndexOfUser()];
+      user.image = imageSrc;
+    }
     imgRead.readAsDataURL(selectedImage);
   }
 });
