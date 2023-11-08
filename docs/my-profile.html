@@ -61,60 +61,74 @@
       </div>
     </div>
   </nav>
-  <main>
-    <!--Formulario para el perfil del usuario-->
-    <div class="container bg-light bg-opacity-100 mt-4 pb-5 w-75">
-      <div class="row">
-        <div class="col-md-10 mx-auto">
-        <div class="d-flex justify-content-between pt-5">
-         <h1 class="mt-4">Perfil</h1>
-         <div class="order-1 me-4 mb-2">
-          <div id="profileImageContainer">
+    <main class="pb-5">
+      <div class="text-right mt-4 mb-4 ms-3 me-3 d-flex justify-content-around">
+        <div class="mt-4">  
+        <h2>Perfil</h2>
+          <p class="lead">Aquí puede completar sus datos personales.</p>
+          </div>
+          <div id="profileImageContainer" >
             <img id="profileImage" src="" alt="DefaultImg" class="profilePicture">
           </div>
-         </div>
-        </div>
-         <hr class="border-bottom border-gray">
+        </div> 
+        
+    <div class="container pb-5">
+      <div class="row">
+        <div class="col-md-10 mx-auto">
+        <div class="d-flex justify-content-between">
+         <div class="bg-light p-5 border-1 rounded">
          <form id="formRegistro" action="#" method="get" novalidate>
-           <div class="form-group row pt-1 text-secondary">
+           <div class="form-group row text-secondary">
              <div class="col-md-6 col-sm-12">
                <label for="primerNombre" class="form-label col-12">Primer nombre:</label>
-               <input type="text" class="form-control" id="primerNombre" name="primerNombre" required>
+               <input type="text" class="form-control mb-3" id="primerNombre" name="primerNombre" required>
                <div class="invalid-feedback">
                 Debe completar el campo.
                </div>
              </div>
              <div class="col-md-6 col-sm-12">
                <label for="segundoNombre" class="form-label col-12">Segundo nombre:</label>
-               <input type="text" class="form-control" id="segundoNombre" name="segundoNombre" required>
+               <input type="text" class="form-control mb-3" id="segundoNombre" name="segundoNombre" required>
                <div class="invalid-feedback">
                 Debe completar el campo.
                </div>
              </div>
              <div class="col-md-6 col-sm-12">
                <label for="apellido" class="form-label col-6">Apellido:</label>
-               <input type="text" class="form-control" id="apellido" name="apellido" required>
+               <input type="text" class="form-control mb-3" id="apellido" name="apellido" required>
                <div class="invalid-feedback">
                 Debe completar el campo.
                </div>
              </div>
              <div class="col-md-6 col-sm-12">
                <label for="segundoApellido" class="form-label col-12">Segundo apellido:</label>
-               <input type="text" class="form-control" id="segundoApellido" name="segundoApellido" required>
+               <input type="text" class="form-control mb-3" id="segundoApellido" name="segundoApellido" required>
                <div class="invalid-feedback">
                 Debe completar el campo.
                </div>
               
              </div>
+             <div class="col-md-6 col-sm-12">
+              <label for="nombreUsuario" class="form-label col-12">Nombre de usuario:</label>
+              <input type="text" class="form-control mb-3" id="nombreUsuario" name="nombreUsuario" required>
+              <div class="invalid-feedback">
+               Debe completar el campo.
+              </div>
+            </div>
              <div class="col-md-6 col-sm-12 mb-1">
                <label for="email" class="form-label col-6">E-mail:</label>
-
-               <input type="email" class="form-control" id="emailprofile" name="email" required>
+               <input type="email" class="form-control mb-3" id="emailprofile" name="email" required>
                <div class="invalid-feedback">
                 Debe completar el campo.
                </div>
              </div>
-        
+             <div class="col-md-6 col-sm-12">
+              <label for="telefono" class="form-label col-12">Teléfono de contacto:</label>
+              <input type="tel" class="form-control mb-4" id="telefono" name="telefono" required>
+              <div class="invalid-feedback">
+               Debe completar el campo.
+              </div>
+            </div>
              <div class="col-md-6 col-sm-12 mb-3">
               <div>
                 <div class="form-label text-start ps-1">Seleccione una foto de
@@ -122,24 +136,11 @@
                 <input class="form-control form-control-sm mb-1" id="imageInput" type="file" accept="image/*">
               </div>
              </div>
-             <div class="col-md-6 col-sm-12">
-               <label for="telefono" class="form-label col-12">Teléfono de contacto:</label>
-               <input type="tel" class="form-control" id="telefono" name="telefono" required>
-               <div class="invalid-feedback">
-                Debe completar el campo.
-               </div>
-             </div>
-             <div class="col-md-6 col-sm-12">
-              <label for="nombreUsuario" class="form-label col-12">Nombre de usuario:</label>
-              <input type="text" class="form-control" id="nombreUsuario" name="nombreUsuario" required>
-              <div class="invalid-feedback">
-               Debe completar el campo.
-              </div>
-           </div>
-           <hr class="border-bottom border-gray">
+            
+           <hr class="border-bottom border-gray mb-4">
            <button type="submit" class="btn btn-primary" id="cambios-btn">Guardar cambios</button>
           </form>
-          
+         </div>
        </div>
      </div>
   </main>
