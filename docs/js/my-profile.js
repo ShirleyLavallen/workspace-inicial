@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
      userName.value = "";
   }
  })
+>>>>>>> registro-v2000
 
 const loginSuccess = JSON.parse(localStorage.getItem('login_success'));
 const imageInput = document.getElementById('imageInput');

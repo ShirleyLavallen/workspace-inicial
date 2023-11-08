@@ -400,7 +400,9 @@ transform: translateX(23px);
 }
 
 .darkBg{
-  background-image: url("https://images.pexels.com/photos/933054/pexels-photo-933054.jpeg");
+
+  background-image: url("https://img.freepik.com/premium-photo/realistic-haunted-forest-landscape-night-fantasy-halloween-forest-background-3d-illustration_598586-1340.jpg?w=1060");
+
   color: white;
   background-size: cover;
   background-repeat: no-repeat;
@@ -412,6 +414,6 @@ transform: translateX(23px);
   height: 7rem;
   object-fit: cover;
   border: 2px solid #67676771;
-  border-radius: 100px;
+  border-radius: 40px;
 }
 

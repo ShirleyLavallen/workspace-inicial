@@ -200,4 +200,4 @@ document.addEventListener("DOMContentLoaded", function (e) {
 function selectProduct(Id) {
   localStorage.setItem('selectedProduct', Id);
   window.location.href = 'product-info.html'
-}
+
