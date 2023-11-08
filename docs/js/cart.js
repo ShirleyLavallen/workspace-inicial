@@ -38,9 +38,10 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  var storedProducts = JSON.parse(localStorage.getItem('productosCompras'));
+  var userP = JSON.parse(localStorage.getItem('login_success'));
+  var productosCompras = userP.productosCompras;
 
-  for (const productAddedId of storedProducts) {
+  for (const productAddedId of productosCompras) {
 
     fetch(PRODUCT_INFO_URL + productAddedId + ".json")
       .then(response => response.json())
@@ -279,9 +280,21 @@ productosAdd.addEventListener('click', function (event) {
 
 //Borra ID del localStorage del producto eliminado
 function removeProductFromCart(productId) {
-  var storedProducts = JSON.parse(localStorage.getItem('productosCompras')) || [];
-  var updatedProducts = storedProducts.filter(function (item) {
+  var userP = JSON.parse(localStorage.getItem('login_success'));
+  var users = JSON.parse(localStorage.getItem('users'));
+
+  var productsCompras = userP.productosCompras;
+
+  var updatedProducts = productsCompras.filter(function(item) {
     return item !== productId;
-});
-localStorage.setItem('productosCompras', JSON.stringify(updatedProducts));
+  });
+
+    userP.productosCompras = updatedProducts;
+    localStorage.setItem('login_success', JSON.stringify(userP));
+
+  var userId = userP.id;
+  var userToUpdate = users.find(user => user.id === userId);
+  
+    userToUpdate.productosCompras = updatedProducts;
+    localStorage.setItem('users', JSON.stringify(users));
 }
