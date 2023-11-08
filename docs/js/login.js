@@ -6,15 +6,14 @@
   button.addEventListener("click", function (event) {
     event.preventDefault();
 
-    const username = document.getElementById("username").value;
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
-    if (username.trim() === '' || email.trim() === '' || password.trim() === '') {
+    if (email.trim() === '' || password.trim() === '') {
       validacionReg();
     } else {
       // Si no hay campos vacíos, verifica las demás condiciones
-      if (validacionReg() && logIn(username, email, password)) {
+      if (validacionReg() && logIn(email, password)) {
         window.location.href = "index.html";
       } else {
         // Muestra la alerta si algún campo está vacío
@@ -43,7 +42,7 @@ function validacionReg() {
   return validado;
 }
 
-function logIn(username, email, password) {
+function logIn(email, password) {
   var users = JSON.parse(localStorage.getItem('users')) || [];
   const validUser = users.find(user =>user.email === email && user.password === password);
   if (validUser) {

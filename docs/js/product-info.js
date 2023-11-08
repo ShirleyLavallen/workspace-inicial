@@ -148,8 +148,8 @@ function getCurrentDateTime() {
 
 document.addEventListener("DOMContentLoaded",
   function newComment() {
-
-    let actualUsername = localStorage.getItem("username");
+    var userP = JSON.parse(localStorage.getItem('login_success'));
+    let actualUsername = userP.username;
     let newCommDescription = document.getElementById("commentInput").value;
     let dateTime = getCurrentDateTime();
     let newCommScore = document.getElementById("puntaje").value;
@@ -242,13 +242,34 @@ function setRelatedProducts(Id){
 const comprarButton = document.getElementById('comprar-btn');
 
 function addToLocalStorage() {
-  var storedProducts = JSON.parse(localStorage.getItem('productosCompras')) || [];
-  const product = getProductId();
+  var loginSuccess = JSON.parse(localStorage.getItem('login_success'));
+  var users = JSON.parse(localStorage.getItem('users'));
 
-  storedProducts.push(product);
+    const productsCompras = loginSuccess.productosCompras || [];
+    const productId = getProductId();
 
-  localStorage.setItem('productosCompras', JSON.stringify(storedProducts));
-  window.location.href = 'cart.html';
+    // Comprueba si la id ya existe
+    const productExists = productsCompras.some(product => product === productId);
+    if(!productExists){
+    productsCompras.push(productId);
+    loginSuccess.productosCompras = productsCompras;
+
+    // Busca la id del usuario en users
+    const userId = loginSuccess.id;
+    const userToUpdate = users.find(user => user.id === userId);
+
+    userToUpdate.productosCompras = productsCompras;
+
+    // Actualiza ambos datos
+    localStorage.setItem('login_success', JSON.stringify(loginSuccess));
+    localStorage.setItem('users', JSON.stringify(users));
+
+    window.location.href = 'cart.html';
+    }
+    else
+    {
+      alert('Este producto ya fue añadido al carrito!');
+    }
 }
 
   comprarButton.addEventListener('click', addToLocalStorage);
