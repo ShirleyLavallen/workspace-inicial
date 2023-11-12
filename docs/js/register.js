@@ -17,17 +17,12 @@
 function validacionReg() {
   let validado = true;
   const inputs = document.querySelectorAll('#formReg input');
-  inputs.forEach((input) => {
-    if (input.checkValidity()) {
-      input.classList.add('is-valid');
-      input.classList.remove('is-invalid');
-    }
-    else {
-      input.classList.remove('is-valid');
-      input.classList.add('is-invalid');
-    }
-    validado = validado && input.checkValidity();
-  });
+  validado = validacionGeneral(inputs);
+  if( !validado ){
+    document.querySelector('#formReg').classList.add('was-validated');
+    return; 
+  }
+  
   const password1 = document.querySelector('#newPassword');
   const password2 = document.querySelector('#newPassword2');
         

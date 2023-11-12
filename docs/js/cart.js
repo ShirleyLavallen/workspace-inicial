@@ -48,8 +48,8 @@ document.addEventListener('DOMContentLoaded', function () {
       .then(data => {
         productosAdd.innerHTML += `
           <tr class="producto">
-          <td onclick="localStorage.setItem('selectedProduct', ${data.id}); window.location='product-info.html';"style="cursor: pointer" class="w-25"><img src="${data.images[0]}" alt="Imagen del Producto" class="img-fluid" style="max-width: 50%;"></td>
-          <td onclick=" localStorage.setItem('selectedProduct', ${data.id}); window.location='product-info.html';"style="cursor: pointer">${data.name}</td>
+          <td onclick="saveProductIdSelected(${data.id}); window.location='product-info.html';"style="cursor: pointer" class="w-25"><img src="${data.images[0]}" alt="Imagen del Producto" class="img-fluid" style="max-width: 50%;"></td>
+          <td onclick="saveProductIdSelected(${data.id}); window.location='product-info.html';"style="cursor: pointer">${data.name}</td>
           <td>USD${data.cost}</td>
           <td><div><input type="number" class="form-control product-amount" value="1" min="1" ></div></td>
           <td class="subtotalProducto">USD<span class="subtotalProductoPrecio">${data.cost}</span></td>

@@ -127,11 +127,6 @@ document.addEventListener("DOMContentLoaded", function () {
     .catch(error => {
       console.error("Error:", error);
     });
-
-  if (!userSes) {
-    alert("Por favor, registrate");
-    window.location.href = "login.html";
-  }
 });
 
 const ORDER_ASC_BY_PRICE = "asc";
@@ -141,6 +136,7 @@ const ORDER_BY_PROD_COUNT = "Cant.";
 
 function sortProducts(criteria, array) {
   let result = [];
+  //Mejorar con switch case
   if (criteria === ORDER_ASC_BY_PRICE) {
     result = array.sort(function (a, b) {
       if (a.cost < b.cost) { return -1; }
@@ -198,6 +194,6 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
 //Se guarda la id de los productos
 function selectProduct(Id) {
-  localStorage.setItem('selectedProduct', Id);
+  saveProductIdSelected(Id);
   window.location.href = 'product-info.html'
 }
