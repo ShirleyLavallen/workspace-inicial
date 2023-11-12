@@ -192,35 +192,13 @@ const alertSuccess = document.getElementById("compraExitosa");
 function validacionDireccion() {
   let validado = true;
   const inputs = document.querySelectorAll('#formDireccion input');
-  inputs.forEach((input) => {
-    if (input.checkValidity()) {
-      input.classList.add('is-valid');
-      input.classList.remove('is-invalid');
-    }
-    else {
-      input.classList.remove('is-valid');
-      input.classList.add('is-invalid');
-    }
-    validado = validado && input.checkValidity();
-  });
-  return validado;
+  return validacionGeneral(inputs);
 }
 
 function validacionDeProductos() {
-  const productos = document.querySelectorAll('.product-amount');
   let validado = true;
-  productos.forEach((product) => {
-    if (product.checkValidity()) {
-      product.classList.add('is-valid');
-      product.classList.remove('is-invalid');
-    }
-    else {
-      product.classList.add('is-invalid');
-      product.classList.remove('is-valid');
-    }
-    validado = validado && product.checkValidity();
-  });
-  return validado;
+  const productos = document.querySelectorAll('.product-amount');
+  return validacionGeneral(productos);
 }
 
 function validacionDePago() {
@@ -235,32 +213,12 @@ function validacionDePago() {
   let pagoValidado = true;
   if (tarjeta.checked) {
     const inputs = document.querySelectorAll('.credit-card.wrapper input');
-    inputs.forEach((i) => {
-      if (i.checkValidity()) {
-        i.classList.add('is-valid');
-        i.classList.remove('is-invalid');
-      }
-      else {
-        i.classList.add('is-invalid');
-        i.classList.remove('is-valid');
-      }
-      pagoValidado = pagoValidado && i.checkValidity();
-    });
+    return validacionGeneral(inputs);
   }
 
   if (transferencia.checked) {
     const inputs = document.querySelectorAll('.transfer.wrapper input');
-    inputs.forEach((i) => {
-      if (i.checkValidity()) {
-        i.classList.add('is-valid');
-        i.classList.remove('is-invalid');
-      }
-      else {
-        i.classList.add('is-invalid');
-        i.classList.remove('is-valid');
-      }
-      pagoValidado = pagoValidado && i.checkValidity();
-    });
+    return validacionGeneral(inputs);
   }
 
   if (!pagoValidado) {
