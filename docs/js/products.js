@@ -31,7 +31,7 @@ function showProducts() {
              <img src="${product.image}" class="card-img-top p-1" alt="Foto ${product.name}">
              <div class="card-body">
                <h5 class="card-title">${product.name}  USD ${product.cost}</h5>
-               <p class="card-text">${product.description}</p>
+               <p class="card-text ellipsis">${product.description}</p>
                <p class="soldCount">Vendidos ${product.soldCount}</p>
                <a href="#" class="btn btn-primary"  onclick="selectProduct('${product.id}')">Ver Detalles</a>
              </div>
@@ -135,32 +135,31 @@ const ORDER_BY_PROD_COUNT = "Cant.";
 
 
 function sortProducts(criteria, array) {
-  let result = [];
-  //Mejorar con switch case
-  if (criteria === ORDER_ASC_BY_PRICE) {
-    result = array.sort(function (a, b) {
-      if (a.cost < b.cost) { return -1; }
-      if (a.cost > b.cost) { return 1; }
-      return 0;
-    });
-  } else if (criteria === ORDER_DESC_BY_PRICE) {
-    result = array.sort(function (a, b) {
-      if (a.cost > b.cost) { return -1; }
-      if (a.cost < b.cost) { return 1; }
-      return 0;
-    });
-  } else if (criteria === ORDER_BY_PROD_COUNT) {
-    result = array.sort(function (a, b) {
-      let aCount = parseInt(a.soldCount);
-      let bCount = parseInt(b.soldCount);
-
-      if (aCount > bCount) { return -1; }
-      if (aCount < bCount) { return 1; }
-      return 0;
-    });
+  switch(criteria){
+    case ORDER_ASC_BY_PRICE:
+      return array.sort(function (a, b) {
+        if (a.cost < b.cost) { return -1; }
+        if (a.cost > b.cost) { return 1; }
+        return 0;
+      });
+    break;
+    case ORDER_DESC_BY_PRICE:
+      return array.sort(function (a, b) {
+        if (a.cost > b.cost) { return -1; }
+        if (a.cost < b.cost) { return 1; }
+        return 0;
+      });
+      break;
+    case ORDER_BY_PROD_COUNT:
+      result = array.sort(function (a, b) {
+        let aCount = parseInt(a.soldCount);
+        let bCount = parseInt(b.soldCount);
+  
+        if (aCount > bCount) { return -1; }
+        if (aCount < bCount) { return 1; }
+        return 0;
+      });
   }
-
-  return result;
 }
 
 function sortAndShowProducts(sortCriteria, productsArray) {
