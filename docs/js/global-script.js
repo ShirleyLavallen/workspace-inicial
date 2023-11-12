@@ -8,9 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
   
-  
   //Usuario en la esquina superior derecha
-  
   
   document.addEventListener("DOMContentLoaded", () => {
   
@@ -34,8 +32,6 @@ document.addEventListener("DOMContentLoaded", function () {
       container.textContent = userData.username;
     }
   }
-  
-  
   //Modo oscuro
   
   function enableDarkMode() {
