@@ -1,11 +1,7 @@
 const commentsContainer = document.getElementById("comment")
 
-function getProductId() {
-  return localStorage.getItem('selectedProduct');
-}
-
 document.addEventListener("DOMContentLoaded", function () {
-  const productId = getProductId();
+  const productId = getProductIdSelected();
 
   fetch(PRODUCT_INFO_URL + productId + ".json")
     .then(response => response.json())
@@ -242,34 +238,40 @@ function setRelatedProducts(Id){
 const comprarButton = document.getElementById('comprar-btn');
 
 function addToLocalStorage() {
-  var loginSuccess = JSON.parse(localStorage.getItem('login_success'));
-  var users = JSON.parse(localStorage.getItem('users'));
-
-    const productsCompras = loginSuccess.productosCompras || [];
-    const productId = getProductId();
-
-    // Comprueba si la id ya existe
-    const productExists = productsCompras.some(product => product === productId);
-    if(!productExists){
-    productsCompras.push(productId);
-    loginSuccess.productosCompras = productsCompras;
-
-    // Busca la id del usuario en users
-    const userId = loginSuccess.id;
-    const userToUpdate = users.find(user => user.id === userId);
-
-    userToUpdate.productosCompras = productsCompras;
-
+  if(!productExists()){
+    let userData = getLoggedInUser();
+    const productId = getProductIdSelected();
+    userData = updateShoppingList(productId);
+    
     // Actualiza ambos datos
-    localStorage.setItem('login_success', JSON.stringify(loginSuccess));
-    localStorage.setItem('users', JSON.stringify(users));
+    updateUser(userData);
+    updateUsersList(userData);
 
     window.location.href = 'cart.html';
-    }
-    else
-    {
-      alert('Este producto ya fue añadido al carrito!');
-    }
+  }
+  else
+  {
+    alert('Este producto ya fue añadido al carrito!');
+  }
 }
 
+function updateShoppingList(productId){
+  const userData = getLoggedInUser();
+  if (!userData.productosCompras){
+    userData.productosCompras = [];
+  }
+  let list = userData.productosCompras;
+  list.push(productId);
+  userData.productosCompras = list;
+  return userData;
+}
+
+function productExists(){
+  const userData = getLoggedInUser();
+  const productsCompras = userData.productosCompras || [];
+  const productId = getProductIdSelected();
+
+  // Comprueba si la id ya existe
+  return productsCompras.some(product => product === productId);
+}
   comprarButton.addEventListener('click', addToLocalStorage);
